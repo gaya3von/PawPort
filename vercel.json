@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/testing%20copy.html"
+    }
+  ]
+}

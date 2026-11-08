@@ -1225,6 +1225,32 @@
     .creative-shell[hidden] { display: none; }
     .creative-heading { margin: 0 0 5px !important; color: #ffd84c !important; font: 700 clamp(25px, 5vw, 34px)/1.08 "Fredoka",sans-serif !important; -webkit-text-stroke: 2px #0f172a !important; paint-order: stroke fill; text-shadow: 2px 3px #0f172a !important; }
     .creative-subtitle { margin: 0; color: #cbd5e1; font-size: 12px; font-weight: 800; line-height: 1.5; }
+    .study-shell { display: grid; gap: 12px; }
+    .study-shell[hidden], .study-summary[hidden], .study-quiz[hidden] { display: none; }
+    .study-card { padding: 14px; border: 1px solid rgba(56,189,248,.55); border-radius: 14px; background: linear-gradient(145deg,rgba(15,23,42,.97),rgba(30,41,74,.97)); color: #e2e8f0; }
+    .study-card h3 { margin: 0 0 8px; color: #fcd34d; font: 700 17px "Fredoka",sans-serif; }
+    .study-card p { margin: 0; color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.6; }
+    .study-select-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 9px; align-items: end; }
+    .study-status { min-height: 1.4em; color: #0369a1 !important; font-size: 11px !important; font-weight: 800 !important; }
+    .study-quiz { display: grid; gap: 10px; }
+    .study-question { margin: 0; padding: 13px; border: 1px solid #38bdf8; border-radius: 12px; color: #172033; background: #f8fafc; }
+    .study-question legend { padding: 0 5px; color: #172033; font: 800 12px "Nunito",sans-serif; }
+    .study-question-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; margin-bottom: 10px; color: #075985; font: 800 9px var(--mono); text-transform: uppercase; }
+    .study-options { display: grid; gap: 7px; }
+    .study-option { display: flex; align-items: flex-start; gap: 8px; padding: 9px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; color: #172033; cursor: pointer; font-size: 12px; font-weight: 700; }
+    .study-option:has(input:checked) { border-color: #0284c7; background: #e0f2fe; }
+    .study-option input { margin-top: 3px; accent-color: #0284c7; }
+    .study-result { min-height: 1.5em; color: #075985 !important; font-weight: 900 !important; }
+    @media (max-width: 580px) { .study-select-row { grid-template-columns: 1fr; } }
+    .ar-tools { display: grid; gap: 10px; padding: 13px; border: 1px solid rgba(56,189,248,.58); border-radius: 13px; background: rgba(15,23,42,.95); }
+    .ar-tools[hidden], #ar-preview[hidden], #ar-video[hidden] { display: none; }
+    .ar-tools h3 { margin: 0; color: #fcd34d; font: 700 16px "Fredoka",sans-serif; }
+    .ar-tools p { margin: 0; color: #cbd5e1; font-size: 11px; font-weight: 700; line-height: 1.5; }
+    .ar-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+    #ar-preview { position: relative; width: 100%; aspect-ratio: 16 / 9; min-height: 200px; max-height: 420px; overflow: hidden; border: 2px solid #38bdf8; border-radius: 12px; background: #0f172a; }
+    #ar-video, #ar-preview canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #ar-video { object-fit: cover; }
+    #ar-preview canvas { z-index: 1; min-height: 0; display: block; }
     .creative-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 5px; border: 1px solid rgba(56,189,248,.58); border-radius: 13px; background: rgba(15,23,42,.95); }
     .creative-tab { min-height: 44px; padding: 8px 10px; border: 1px solid transparent; border-radius: 9px; background: transparent; color: #cbd5e1; cursor: pointer; font: 800 10px var(--mono); transition: transform .16s ease, box-shadow .16s ease, background .16s ease; }
     .creative-tab:hover { transform: translateY(-1px); color: #fff; }
@@ -1971,12 +1997,57 @@
             <p class="modal-copy" id="hub-pet-tip"></p>
             <button class="modal-action" id="hub-action" type="button">Add to quest log · +25 XP</button>
           </div>
+          <section class="study-shell" id="study-content" hidden aria-labelledby="study-title">
+            <header>
+              <p class="dashboard-kicker">AI-powered landmark field guide</p>
+              <h2 id="study-title">STUDY HUB</h2>
+              <p class="creative-subtitle">Explore one of the New 7 Wonders, then test your knowledge to earn local treats.</p>
+            </header>
+            <div class="study-card">
+              <label class="creative-field" for="study-landmark">Choose or enter a New 7 Wonder
+                <input class="creative-input" id="study-landmark" list="study-landmark-options" maxlength="60" autocomplete="off" placeholder="e.g. Petra">
+                <datalist id="study-landmark-options"></datalist>
+              </label>
+              <div class="study-select-row creative-spaced">
+                <p class="study-status" id="study-status" aria-live="polite">Choose a landmark to generate its field guide and quiz.</p>
+                <button class="creative-action" id="study-generate" type="button">✨ Generate study guide</button>
+              </div>
+            </div>
+            <section class="study-card study-summary" id="study-summary" hidden aria-labelledby="study-summary-title">
+              <h3 id="study-summary-title"></h3>
+              <p id="study-summary-text"></p>
+              <p class="creative-note creative-spaced">Read the guide first. Then answer five questions; each correct answer earns its listed snack reward.</p>
+              <button class="creative-action creative-spaced" id="study-start-quiz" type="button">Start the 5-question quiz</button>
+            </section>
+            <section class="study-card study-quiz" id="study-quiz" hidden aria-labelledby="study-question">
+              <div class="study-question-meta"><span id="study-progress"></span><span id="study-reward"></span></div>
+              <fieldset class="study-question">
+                <legend id="study-question" tabindex="-1"></legend>
+                <div class="study-options" id="study-options"></div>
+              </fieldset>
+              <p class="study-result" id="study-feedback" aria-live="polite"></p>
+              <button class="creative-action" id="study-quiz-action" type="button">Check answer</button>
+            </section>
+          </section>
           <section class="creative-shell" id="creative-content" hidden aria-labelledby="creative-title">
             <header>
               <p class="dashboard-kicker">Memory maker · travel scrapbook + pet socials</p>
               <h2 class="creative-heading" id="creative-title">CREATIVE HUB</h2>
               <p class="creative-subtitle">Turn your discoveries into a keepsake, then let your companion write the caption.</p>
             </header>
+            <section class="ar-tools" aria-labelledby="ar-title">
+              <h3 id="ar-title">📸 AR Camera Memories</h3>
+              <p>Bring your animated companion into a live camera view and save a snapshot.</p>
+              <div class="ar-actions">
+                <button class="creative-action" id="ar-toggle" type="button">AR Camera Mode</button>
+                <button class="creative-action" id="ar-exit" type="button" hidden>Exit AR Mode</button>
+                <button class="creative-action" id="ar-snapshot" type="button" hidden>Snap AR Photo 📸</button>
+              </div>
+              <p id="ar-status" aria-live="polite"></p>
+              <div id="ar-preview" hidden>
+                <video id="ar-video" autoplay muted playsinline aria-hidden="true" hidden></video>
+              </div>
+            </section>
             <div class="creative-tabs" role="tablist" aria-label="Creative Hub tools">
               <button class="creative-tab" id="scrapbook-tab" type="button" role="tab" aria-selected="true" aria-controls="scrapbook-panel" data-creative-tab="scrapbook">🎨 Scrapbook Studio</button>
               <button class="creative-tab" id="social-tab" type="button" role="tab" aria-selected="false" aria-controls="social-panel" data-creative-tab="social" tabindex="-1">📱 Social Assistant</button>
@@ -2379,6 +2450,11 @@
     let toastTimer;
     let activeHub = null;
     let petScene, petCamera, petRenderer, petControls, petRig, petPedestal;
+    let arStream = null;
+    let arModeActive = false;
+    let studyQuizState = null;
+    let studyRequestId = 0;
+    let studyAbortController = null;
     const petSparkles = [];
     let petHopStart = 0;
     let petPointerDown = null;
@@ -2498,6 +2574,17 @@
       { id: "mexico-city", name: "Mexico City", country: "Mexico", code: "MX", latitude: 19.4326, longitude: -99.1332, snack: { id: "tacos", name: "Street-style tacos", emoji: "🌮" }, quest: "Find three historic-center details, then answer a Mexico City geography question.", checkpoints: ["Spot a plaza or public square", "Find a historic stone façade", "Notice a street-food stand"], trivia: "Mexico City was built on an island city founded by which people?", choices: ["The Mexica (Aztec)", "The Inca", "The Zapotec"], answer: 0, funFact: "Mexico City grew from Tenochtitlan, founded on an island in Lake Texcoco.", tip: "Use licensed transport, stay aware in crowds, and follow current local advice." }
     ];
     const landmarkById = Object.fromEntries(landmarkData.map((landmark) => [landmark.id, landmark]));
+    const studyWonders = [
+      { id: "great-wall", name: "Great Wall of China" },
+      { id: "petra", name: "Petra" },
+      { id: "christ-redeemer", name: "Christ the Redeemer" },
+      { id: "machu-picchu", name: "Machu Picchu" },
+      { id: "chichen-itza", name: "Chichén Itzá" },
+      { id: "colosseum", name: "Colosseum" },
+      { id: "taj-mahal", name: "Taj Mahal" }
+    ];
+    const studyDifficulty = ["Very Easy", "Easy", "Medium", "Hard", "Very Hard"];
+    const studyRewards = [1, 2, 3, 4, 5];
     const phraseTranslations = {
       ja: {
         "i need help": ["助けてください", "Tasukete kudasai"],
@@ -3205,6 +3292,13 @@
     }
 
     function closeModal(modal, returnFocus) {
+      if (modal === ui.hubModal) {
+        stopARMode();
+        studyRequestId += 1;
+        studyAbortController?.abort();
+        studyAbortController = null;
+        el("study-generate").disabled = false;
+      }
       modal.classList.remove("active");
       modal.setAttribute("aria-hidden", "true");
       modal.inert = true;
@@ -3224,6 +3318,13 @@
       const hub = card.dataset.hub;
       const title = card.querySelector(".hub-card-title").textContent;
       const copy = card.querySelector("p").textContent;
+      stopARMode();
+      if (hub !== "study") {
+        studyRequestId += 1;
+        studyAbortController?.abort();
+        studyAbortController = null;
+        el("study-generate").disabled = false;
+      }
       activeHub = hub;
       ui.hubKicker.textContent = `${currentPet || "Your companion"}'s quest recommendation`;
       ui.hubTitle.textContent = title;
@@ -3243,14 +3344,17 @@
       ui.hubAction.textContent = complete ? "Quest logged ✓" : "Add to quest log · +25 XP";
       el("creative-log-quest").disabled = complete;
       el("creative-log-quest").textContent = complete ? "Creative Quest logged ✓" : "Log Creative Quest · +25 XP";
-      el("hub-modal-context").textContent = hub === "creative" ? "Creative workshop · memory makers" : "Quest board · new activity";
+      el("hub-modal-context").textContent = hub === "creative" ? "Creative workshop · memory makers"
+        : hub === "study" ? "Study Hub · landmark field guide"
+          : "Quest board · new activity";
       if (hub === "lingo") {
         el("lingo-log-quest").disabled = complete;
         el("lingo-log-quest").textContent = complete ? "Safety shield logged ✓" : "Add safety shield to quest log · +25 XP";
       }
-      el("generic-hub-content").hidden = hub === "lingo" || hub === "destination" || hub === "creative";
+      el("generic-hub-content").hidden = hub === "lingo" || hub === "destination" || hub === "creative" || hub === "study";
       el("lingo-content").hidden = hub !== "lingo";
       el("creative-content").hidden = hub !== "creative";
+      el("study-content").hidden = hub !== "study";
       el("destination-quest-content").hidden = hub !== "destination";
       ui.hubModal.querySelector(".rpg-modal").classList.toggle("creative-modal", hub === "creative");
       ui.hubModal.querySelector('[role="dialog"]').setAttribute(
@@ -3258,8 +3362,19 @@
         hub === "lingo" ? "lingo-title"
           : hub === "destination" ? "destination-quest-title"
             : hub === "creative" ? "creative-title"
+              : hub === "study" ? "study-title"
               : "hub-modal-title"
       );
+      if (hub === "study") {
+        const options = el("study-landmark-options");
+        if (!options.options.length) {
+          options.replaceChildren(...studyWonders.map((wonder) => {
+            const option = document.createElement("option");
+            option.value = wonder.name;
+            return option;
+          }));
+        }
+      }
       if (hub === "lingo") {
         initializeLingo();
       }
@@ -3318,6 +3433,7 @@
       el("generic-hub-content").hidden = true;
       el("lingo-content").hidden = true;
       el("creative-content").hidden = true;
+      el("study-content").hidden = true;
       el("destination-quest-content").hidden = false;
       ui.hubModal.querySelector(".rpg-modal").classList.remove("creative-modal");
       el("hub-modal-context").textContent = "Globe discovery · landmark side quest";
@@ -4199,6 +4315,323 @@
       toastTimer = window.setTimeout(() => ui.toast.classList.remove("show"), 2800);
     }
 
+    function normalizeStudyLandmark(value) {
+      return value.trim().normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase();
+    }
+
+    function selectedStudyWonder() {
+      const value = normalizeStudyLandmark(el("study-landmark").value);
+      return studyWonders.find((wonder) => normalizeStudyLandmark(wonder.name) === value) || null;
+    }
+
+    function isValidStudyGuide(data) {
+      return Boolean(
+        data &&
+        typeof data.landmarkSummary === "string" &&
+        data.landmarkSummary.trim() &&
+        Array.isArray(data.quiz) &&
+        data.quiz.length === 5 &&
+        data.quiz.every((question, index) =>
+          question &&
+          question.id === index + 1 &&
+          question.difficulty === studyDifficulty[index] &&
+          typeof question.question === "string" &&
+          question.question.trim() &&
+          Array.isArray(question.options) &&
+          question.options.length === 4 &&
+          question.options.every((option) => typeof option === "string" && option.trim()) &&
+          Number.isInteger(question.correctAnswerIndex) &&
+          question.correctAnswerIndex >= 0 &&
+          question.correctAnswerIndex <= 3 &&
+          question.snackReward === studyRewards[index]
+        )
+      );
+    }
+
+    async function generateStudyGuide() {
+      const wonder = selectedStudyWonder();
+      const status = el("study-status");
+      const button = el("study-generate");
+      const requestId = ++studyRequestId;
+      if (!wonder) {
+        status.textContent = "Choose or enter one of the New 7 Wonders from the list.";
+        el("study-landmark").focus();
+        return;
+      }
+
+      studyAbortController?.abort();
+      studyAbortController = new AbortController();
+      button.disabled = true;
+      el("study-summary").hidden = true;
+      el("study-quiz").hidden = true;
+      status.textContent = `Gathering field notes for ${wonder.name}…`;
+      studyQuizState = null;
+      try {
+        const response = await fetch("/api/study-landmark", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ landmark: wonder.name }),
+          signal: studyAbortController.signal
+        });
+        const responseText = await response.text();
+        let data;
+        try {
+          data = JSON.parse(responseText);
+        } catch {
+          const responseType = response.headers.get("content-type") || "unknown content type";
+          console.error("PawPort study API returned a non-JSON response.", {
+            status: response.status,
+            contentType: responseType,
+            responseText
+          });
+          throw new Error(
+            `Study guide API returned HTTP ${response.status} (${responseType}). ` +
+            "The API server is not available on this origin. Start PawPort with `node --experimental-strip-types server.mjs`; " +
+            `server response: ${responseText.slice(0, 200) || "(empty response)"}`
+          );
+        }
+        if (!response.ok) {
+          const errorMessage = typeof data.error === "string"
+            ? data.error
+            : `Study guide request failed with HTTP ${response.status}.`;
+          console.error("PawPort study API request failed.", {
+            status: response.status,
+            error: errorMessage
+          });
+          throw new Error(errorMessage);
+        }
+        if (!isValidStudyGuide(data)) {
+          throw new TypeError("The study guide service returned an invalid guide or quiz.");
+        }
+        if (requestId !== studyRequestId) return;
+
+        studyQuizState = { wonder, quiz: data.quiz, index: 0, earnedSnacks: 0, answered: false, finished: false };
+        el("study-summary-title").textContent = wonder.name;
+        el("study-summary-text").textContent = data.landmarkSummary;
+        el("study-start-quiz").hidden = false;
+        el("study-summary").hidden = false;
+        status.textContent = "Field guide ready. Read the summary, then start the five-question quiz.";
+      } catch (error) {
+        if (error.name === "AbortError") return;
+        if (requestId !== studyRequestId) return;
+        console.error("Could not generate the PawPort landmark study guide.", error);
+        status.textContent = error instanceof TypeError && error.message.includes("invalid guide")
+          ? "The study service returned an unexpected response. Please try again."
+          : error.message || "Could not load the study guide. Please try again.";
+      } finally {
+        if (requestId === studyRequestId) {
+          button.disabled = false;
+          studyAbortController = null;
+        }
+      }
+    }
+
+    function renderStudyQuestion() {
+      if (!studyQuizState || studyQuizState.finished) return;
+      const question = studyQuizState.quiz[studyQuizState.index];
+      el("study-quiz").hidden = false;
+      el("study-progress").textContent = `Question ${question.id} of 5 · ${question.difficulty}`;
+      el("study-reward").textContent = `Reward: ${question.snackReward} ${question.snackReward === 1 ? "snack" : "snacks"}`;
+      el("study-question").textContent = question.question;
+      el("study-feedback").textContent = "";
+      el("study-quiz-action").textContent = "Check answer";
+      el("study-quiz-action").hidden = false;
+      studyQuizState.answered = false;
+
+      const options = question.options.map((option, index) => {
+        const label = document.createElement("label");
+        label.className = "study-option";
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = "study-answer";
+        input.value = String(index);
+        const text = document.createElement("span");
+        text.textContent = option;
+        label.append(input, text);
+        return label;
+      });
+      el("study-options").replaceChildren(...options);
+    }
+
+    function finishStudyQuiz() {
+      if (!studyQuizState || studyQuizState.finished) return;
+      studyQuizState.finished = true;
+      const wonder = studyQuizState.wonder;
+      const snack = landmarkById[wonder.id].snack;
+      const totalSnacks = studyQuizState.earnedSnacks;
+      const xpEarned = totalSnacks * 5;
+
+      for (let count = 0; count < totalSnacks; count += 1) addSnack(snack);
+      appState.xp += xpEarned;
+      renderAdventureWidgets();
+      updateXPDisplay();
+      persistAdventureState();
+      if (petRig) petHopStart = performance.now();
+
+      el("study-options").replaceChildren();
+      el("study-progress").textContent = "Quiz complete!";
+      el("study-reward").textContent = `${totalSnacks} ${totalSnacks === 1 ? "snack" : "snacks"} earned`;
+      el("study-question").textContent = `Great exploring, ${appState.travelerName}!`;
+      el("study-feedback").textContent = totalSnacks
+        ? `${currentPet || "Your companion"} earned ${totalSnacks} ${snack.emoji} ${snack.name} ${totalSnacks === 1 ? "snack" : "snacks"} and +${xpEarned} XP.`
+        : "No correct answers this time, so no snacks were added. Read the guide and try another quiz!";
+      el("study-quiz-action").hidden = true;
+      el("study-start-quiz").hidden = true;
+      el("study-status").textContent = "Study session complete. Your snack pouch and XP have been updated.";
+      showToast(totalSnacks
+        ? `${snack.emoji} ${totalSnacks} ${snack.name} ${totalSnacks === 1 ? "snack" : "snacks"} earned · +${xpEarned} XP`
+        : "Study quiz complete. Keep exploring to earn snacks!");
+    }
+
+    function handleStudyQuizAction() {
+      if (!studyQuizState || studyQuizState.finished) return;
+      if (!studyQuizState.answered) {
+        const selected = el("study-options").querySelector('input[name="study-answer"]:checked');
+        if (!selected) {
+          el("study-feedback").textContent = "Choose an answer before continuing.";
+          return;
+        }
+
+        const question = studyQuizState.quiz[studyQuizState.index];
+        const correct = Number(selected.value) === question.correctAnswerIndex;
+        if (correct) studyQuizState.earnedSnacks += question.snackReward;
+        el("study-options").querySelectorAll("input").forEach((input) => { input.disabled = true; });
+        el("study-feedback").textContent = correct
+          ? `Correct! ${currentPet || "Your companion"} is cheering — ${question.snackReward} ${question.snackReward === 1 ? "snack" : "snacks"} added to your quiz rewards.`
+          : `Not quite. The correct answer was: ${question.options[question.correctAnswerIndex]}.`;
+        studyQuizState.answered = true;
+        el("study-quiz-action").textContent = studyQuizState.index === studyQuizState.quiz.length - 1
+          ? "Finish quiz"
+          : "Next question";
+        return;
+      }
+
+      if (studyQuizState.index === studyQuizState.quiz.length - 1) {
+        finishStudyQuiz();
+        return;
+      }
+      studyQuizState.index += 1;
+      renderStudyQuestion();
+    }
+
+    function resizePetRenderer(host) {
+      if (!petRenderer || !petCamera || !host) return;
+      const width = host.clientWidth;
+      const height = host.clientHeight;
+      if (!width || !height) return;
+      petRenderer.setSize(width, height);
+      petCamera.aspect = width / height;
+      petCamera.updateProjectionMatrix();
+    }
+
+    async function startARMode() {
+      const video = el("ar-video");
+      const preview = el("ar-preview");
+      const button = el("ar-toggle");
+
+      if (arStream || arModeActive) return;
+      if (!navigator.mediaDevices?.getUserMedia) {
+        el("ar-status").textContent = "Camera access requires a supported browser and a secure connection (HTTPS or localhost).";
+        showToast("Camera access is unavailable in this browser or connection.");
+        return;
+      }
+      if (!petRenderer?.domElement || !petScene || !petCamera) {
+        showToast("The 3D companion is not ready yet. Try again in a moment.");
+        return;
+      }
+
+      button.disabled = true;
+      try {
+        arStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        video.srcObject = arStream;
+        video.hidden = false;
+        preview.hidden = false;
+        await video.play();
+
+        preview.appendChild(petRenderer.domElement);
+        resizePetRenderer(preview);
+        arModeActive = true;
+        el("ar-exit").hidden = false;
+        el("ar-snapshot").hidden = false;
+        button.hidden = true;
+        el("ar-status").textContent = "Camera is on. Your pet is ready for a photo!";
+      } catch (error) {
+        stopARMode();
+        console.error("Could not start PawPort AR camera mode.", error);
+        el("ar-status").textContent = "Camera access failed. Check camera permissions and try again.";
+        showToast("Could not start the camera. Check browser permissions and try again.");
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    function stopARMode() {
+      if (!arStream && !arModeActive) return;
+
+      if (arStream) {
+        arStream.getTracks().forEach((track) => track.stop());
+        arStream = null;
+      }
+
+      const video = el("ar-video");
+      video.pause();
+      video.srcObject = null;
+      video.hidden = true;
+
+      const canvas = petRenderer?.domElement;
+      if (canvas) el("pet-scene").prepend(canvas);
+      el("ar-preview").hidden = true;
+      arModeActive = false;
+      el("ar-toggle").hidden = false;
+      el("ar-exit").hidden = true;
+      el("ar-snapshot").hidden = true;
+      el("ar-status").textContent = "Camera off.";
+      resizePetRenderer(el("pet-scene"));
+    }
+
+    function snapARPhoto() {
+      const video = el("ar-video");
+      const petCanvas = petRenderer?.domElement;
+      if (!arModeActive || !arStream || video.readyState < HTMLMediaElement.HAVE_CURRENT_DATA || !petCanvas) {
+        showToast("Start AR Camera Mode before taking a photo.");
+        return;
+      }
+
+      const photoCanvas = document.createElement("canvas");
+      photoCanvas.width = petCanvas.width;
+      photoCanvas.height = petCanvas.height;
+      const context = photoCanvas.getContext("2d");
+      if (!context) {
+        console.error("Could not create a 2D context for the PawPort AR photo.");
+        showToast("Could not create the AR photo.");
+        return;
+      }
+
+      const scale = Math.max(photoCanvas.width / video.videoWidth, photoCanvas.height / video.videoHeight);
+      const sourceWidth = photoCanvas.width / scale;
+      const sourceHeight = photoCanvas.height / scale;
+      const sourceX = (video.videoWidth - sourceWidth) / 2;
+      const sourceY = (video.videoHeight - sourceHeight) / 2;
+      petRenderer.render(petScene, petCamera);
+      context.drawImage(video, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, photoCanvas.width, photoCanvas.height);
+      context.drawImage(petCanvas, 0, 0, photoCanvas.width, photoCanvas.height);
+
+      photoCanvas.toBlob((blob) => {
+        if (!blob) {
+          console.error("Could not encode the PawPort AR photo as PNG.");
+          showToast("Could not save the AR photo.");
+          return;
+        }
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "PawPort_AR_Memory.png";
+        link.click();
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+        showToast("AR memory saved as PawPort_AR_Memory.png");
+      }, "image/png");
+    }
+
     function closeWelcome() {
       if (onboardingState !== "intro") return;
       returnToLanding();
@@ -4312,6 +4745,30 @@
       const card = event.target.closest("[data-hub]");
       if (card) openHub(card);
     });
+    el("study-generate").addEventListener("click", generateStudyGuide);
+    el("study-landmark").addEventListener("input", () => {
+      if (studyAbortController) {
+        studyRequestId += 1;
+        studyAbortController.abort();
+        studyAbortController = null;
+        el("study-generate").disabled = false;
+      }
+      studyQuizState = null;
+      el("study-summary").hidden = true;
+      el("study-quiz").hidden = true;
+      el("study-status").textContent = "Generate a new guide for the selected landmark.";
+    });
+    el("study-start-quiz").addEventListener("click", () => {
+      if (!studyQuizState || studyQuizState.finished) return;
+      renderStudyQuestion();
+      el("study-quiz").scrollIntoView({ behavior: "smooth", block: "nearest" });
+      el("study-question").focus?.({ preventScroll: true });
+    });
+    el("study-quiz-action").addEventListener("click", handleStudyQuizAction);
+    el("ar-toggle").addEventListener("click", startARMode);
+    el("ar-exit").addEventListener("click", stopARMode);
+    el("ar-snapshot").addEventListener("click", snapARPhoto);
+    window.addEventListener("pagehide", stopARMode);
     document.querySelector(".creative-tabs").addEventListener("click", (event) => {
       const tab = event.target.closest("[data-creative-tab]");
       if (tab) setCreativeTab(tab.dataset.creativeTab);
@@ -4989,14 +5446,14 @@
         renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
       }
       if (petRenderer && petCamera) {
-        const host = el("pet-scene");
-        petRenderer.setSize(host.clientWidth, host.clientHeight);
-        petCamera.aspect = host.clientWidth / host.clientHeight;
-        petCamera.updateProjectionMatrix();
+        resizePetRenderer(petRenderer.domElement.parentElement);
       }
     });
 
     initThree();
   </script>
+  <!-- Inside index.html, near the bottom of <body> -->
+<script src="api.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

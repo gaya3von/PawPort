@@ -3,5 +3,10 @@
   "type": "module",
   "dependencies": {
     "@vercel/speed-insights": "^2.1.0"
-  }
+  },
+  "scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview"
+}
 }

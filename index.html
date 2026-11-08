@@ -1117,6 +1117,21 @@
     .quest-modal-title { margin: 0 0 6px; color: #ffd84c; font: 700 clamp(24px,5vw,34px)/1.08 "Fredoka",sans-serif; -webkit-text-stroke: 2px #0f172a; paint-order: stroke fill; }
     .quest-meta { margin: 0 0 14px; color: #475569; font: 9px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
     .quest-challenge { padding: 12px; border: 1px solid #38bdf8; border-radius: 12px; background: rgba(15,23,42,.95); color: #e2e8f0; font-size: 12px; font-weight: 800; line-height: 1.5; }
+    .side-quest-control { margin: 12px 0; padding: 12px; border: 2px solid #ffee55; border-radius: 10px; background: rgba(15,23,42,.85); box-shadow: 0 4px 0 #111827; }
+    .side-quest-control[hidden], .side-quest-panel[hidden] { display: none; }
+    .side-quest-control label { display: block; margin-bottom: 7px; color: #ffee55; font: 9px var(--mono); text-transform: uppercase; }
+    .side-quest-select { width: 100%; padding: 9px; border: 2px solid #ff8800; border-radius: 6px; background: #0b0f19; color: #fff; font: 700 12px "Nunito",sans-serif; }
+    .side-quest-status { margin: 8px 0 0; color: #cbd5e1; font-size: 11px; font-weight: 700; }
+    .side-quest-panel { margin: 12px 0; padding: 12px; border: 3px solid #ff8800; border-radius: 9px; background: rgba(15,23,42,.85); box-shadow: 0 5px 0 #070b13, inset 0 0 0 2px rgba(255,238,85,.18); }
+    .side-quest-panel h3 { margin: 0 0 9px; color: #ffee55; font: 700 14px "Press Start 2P",var(--mono); line-height: 1.6; }
+    .side-quest-speech { display: grid; grid-template-columns: 58px minmax(0,1fr); align-items: center; gap: 10px; margin-bottom: 10px; }
+    .side-quest-avatar { display: grid; width: 56px; height: 56px; place-items: center; overflow: hidden; border: 2px solid #ffee55; border-radius: 8px; background: rgba(11,15,25,.9); }
+    .side-quest-avatar .pet-avatar { width: 60px; height: 60px; }
+    .side-quest-bubble { margin: 0; padding: 10px; border: 2px solid #ffee55; border-radius: 8px; background: #0b0f19; color: #fff7b2; font-size: 11px; font-weight: 800; line-height: 1.5; }
+    .side-quest-detail { margin: 7px 0; color: #e2e8f0; font-size: 11px; font-weight: 700; line-height: 1.5; }
+    .side-quest-map { display: inline-block; margin: 4px 0 10px; color: #ffd166; font: 9px var(--mono); }
+    .side-quest-arrive { width: 100%; min-height: 40px; padding: 9px; border: 2px solid #ffee55; border-radius: 6px; background: linear-gradient(180deg,#ffb347,#ff8800); box-shadow: 0 3px 0 #8a3c00; color: #0b0f19; cursor: pointer; font: 800 10px var(--mono); }
+    .side-quest-arrive:disabled { opacity: .58; cursor: not-allowed; }
     .quest-checkpoints { display: grid; gap: 8px; margin: 12px 0; }
     .quest-checkpoint { display: flex; align-items: center; gap: 9px; padding: 9px; border: 1px solid #cbd5e1; border-radius: 9px; background: #f1f5f9; color: #334155; font-size: 11px; font-weight: 800; text-align: left; cursor: pointer; }
     .quest-checkpoint.done { border-color: #34d399; background: #d1fae5; color: #065f46; }
@@ -1225,23 +1240,44 @@
     .creative-shell[hidden] { display: none; }
     .creative-heading { margin: 0 0 5px !important; color: #ffd84c !important; font: 700 clamp(25px, 5vw, 34px)/1.08 "Fredoka",sans-serif !important; -webkit-text-stroke: 2px #0f172a !important; paint-order: stroke fill; text-shadow: 2px 3px #0f172a !important; }
     .creative-subtitle { margin: 0; color: #cbd5e1; font-size: 12px; font-weight: 800; line-height: 1.5; }
-    .study-shell { display: grid; gap: 12px; }
-    .study-shell[hidden], .study-summary[hidden], .study-quiz[hidden] { display: none; }
-    .study-card { padding: 14px; border: 1px solid rgba(56,189,248,.55); border-radius: 14px; background: linear-gradient(145deg,rgba(15,23,42,.97),rgba(30,41,74,.97)); color: #e2e8f0; }
-    .study-card h3 { margin: 0 0 8px; color: #fcd34d; font: 700 17px "Fredoka",sans-serif; }
+    .study-shell { display: grid; max-height: min(78vh, 760px); gap: 12px; min-width: 0; overflow-y: auto; overscroll-behavior: contain; }
+    .study-shell[hidden] { display: none; }
+    .study-tabs { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; padding: 5px; border: 1px solid #1e293b; border-radius: 12px; background: rgba(15,23,42,.92); }
+    .study-tab { min-height: 42px; padding: 8px; border: 2px solid #1e293b; border-radius: 8px; background: #111827; color: #cbd5e1; cursor: pointer; font: 800 10px "Nunito",sans-serif; }
+    .study-tab[aria-selected="true"] { border-color: #ffee55; background: linear-gradient(135deg,#ffee55,#ff8800); box-shadow: 0 3px 0 #7c2d12; color: #0b0f19; }
+    .study-tab-panel[hidden] { display: none; }
+    .study-readiness-list { display: grid; gap: 9px; }
+    .study-readiness-row { display: grid; grid-template-columns: 42px minmax(0,1fr) auto; align-items: center; gap: 10px; padding: 10px; border: 1px solid #1e293b; border-radius: 10px; background: rgba(15,23,42,.9); }
+    .study-readiness-icon { font-size: 27px; text-align: center; }
+    .study-readiness-row h4 { margin: 0 0 3px; color: #ffee55; font: 800 13px "Nunito",sans-serif; }
+    .study-readiness-row p { margin: 0; color: #cbd5e1; font-size: 11px; font-weight: 700; }
+    .study-readiness-row .creative-action { min-height: 34px; padding: 0 9px; }
+    .study-card { min-width: 0; padding: 14px; border: 1px solid #1e293b; border-radius: 14px; background: rgba(15,23,42,.92); color: #e2e8f0; }
+    .study-card h3 { margin: 0 0 8px; color: #ffee55; font: 800 17px "Nunito",sans-serif; }
     .study-card p { margin: 0; color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.6; }
-    .study-select-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 9px; align-items: end; }
-    .study-status { min-height: 1.4em; color: #0369a1 !important; font-size: 11px !important; font-weight: 800 !important; }
-    .study-quiz { display: grid; gap: 10px; }
-    .study-question { margin: 0; padding: 13px; border: 1px solid #38bdf8; border-radius: 12px; color: #172033; background: #f8fafc; }
-    .study-question legend { padding: 0 5px; color: #172033; font: 800 12px "Nunito",sans-serif; }
-    .study-question-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; margin-bottom: 10px; color: #075985; font: 800 9px var(--mono); text-transform: uppercase; }
-    .study-options { display: grid; gap: 7px; }
-    .study-option { display: flex; align-items: flex-start; gap: 8px; padding: 9px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; color: #172033; cursor: pointer; font-size: 12px; font-weight: 700; }
-    .study-option:has(input:checked) { border-color: #0284c7; background: #e0f2fe; }
-    .study-option input { margin-top: 3px; accent-color: #0284c7; }
-    .study-result { min-height: 1.5em; color: #075985 !important; font-weight: 900 !important; }
-    @media (max-width: 580px) { .study-select-row { grid-template-columns: 1fr; } }
+    .study-hero { display: grid; grid-template-columns: auto minmax(0,1fr); align-items: center; gap: 13px; }
+    .study-hero-art { display: grid; width: 76px; height: 76px; place-items: center; border: 2px solid #ffee55; border-radius: 14px; background: linear-gradient(145deg,#172554,#0b0f19); font-size: 42px; }
+    .study-hero h3 { margin-bottom: 4px; font-size: 20px; }
+    .study-toolbar { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 10px; }
+    .study-progress { color: #ffee55 !important; font: 800 11px var(--mono); text-align: right; }
+    .study-dialogue { margin-top: 10px !important; padding: 9px 11px; border-left: 3px solid #ff8800; border-radius: 7px; background: rgba(255,136,0,.1); color: #fef3c7 !important; }
+    .study-lessons { display: grid; gap: 10px; }
+    .study-lesson { display: grid; grid-template-columns: 62px minmax(0,1fr); align-items: center; gap: 12px; padding: 12px; border: 1px solid #1e293b; border-radius: 12px; background: rgba(15,23,42,.9); color: #e2e8f0; }
+    .study-lesson-art { display: grid; width: 58px; height: 58px; place-items: center; border: 1px solid rgba(255,238,85,.6); border-radius: 11px; background: linear-gradient(145deg,#172554,#0b0f19); font-size: 30px; }
+    .study-lesson h4 { margin: 0 0 4px; color: #ffee55; font: 800 15px "Nunito",sans-serif; }
+    .study-lesson p { margin: 0; color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.5; }
+    .study-lesson .creative-action { grid-column: 1 / -1; justify-self: start; min-height: 38px; border: 0; background: linear-gradient(180deg,#22c55e,#16a34a); box-shadow: 0 4px 0 #14532d; color: #052e16; font: 800 12px "Nunito",sans-serif; }
+    .study-lesson .creative-action:hover { filter: brightness(1.08); }
+    .study-lesson .creative-action:disabled { background: #166534; box-shadow: none; color: #dcfce7; cursor: default; }
+    .study-lesson.is-explored { border-color: #22c55e; }
+    .study-reward { color: #bbf7d0 !important; font-weight: 800 !important; }
+    @media (max-width: 420px) {
+      .study-toolbar { grid-template-columns: 1fr; }
+      .study-progress { text-align: left; }
+      .study-hero-art { width: 62px; height: 62px; font-size: 34px; }
+      .study-lesson { grid-template-columns: 48px minmax(0,1fr); gap: 9px; padding: 10px; }
+      .study-lesson-art { width: 46px; height: 46px; font-size: 24px; }
+    }
     .ar-tools { display: grid; gap: 10px; padding: 13px; border: 1px solid rgba(56,189,248,.58); border-radius: 13px; background: rgba(15,23,42,.95); }
     .ar-tools[hidden], #ar-preview[hidden], #ar-video[hidden] { display: none; }
     .ar-tools h3 { margin: 0; color: #fcd34d; font: 700 16px "Fredoka",sans-serif; }
@@ -1596,6 +1632,45 @@
     .safety-alert.caution { border-color: rgba(245, 158, 11, .5); color: #fde68a; animation: alertPulse 2.4s ease-in-out infinite; }
     .safety-alert.safe { border-color: rgba(52, 211, 153, .42); color: #a7f3d0; }
     .safety-alert strong { flex: 0 0 auto; }
+    .guardian-panel { border-color: #1e293b; background: rgba(15, 23, 42, .85); font-family: "Nunito", sans-serif; }
+    .guardian-heading { margin: 0 0 10px !important; color: #ffee55 !important; background: linear-gradient(90deg,#ffee55,#ff8800); background-clip: text; -webkit-text-fill-color: transparent; font: 900 18px "Nunito",sans-serif !important; }
+    .guardian-demo-banner, .guardian-safety-notice { margin: 0 0 10px; padding: 9px 10px; border: 1px solid #1e293b; border-radius: 8px; background: rgba(11,15,25,.9); color: #fef3c7; font: 800 11px/1.5 "Nunito",sans-serif; }
+    .guardian-safety-notice { border-color: #ff8800; color: #fff7cc; }
+    .guardian-controls { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+    .guardian-controls > div { min-width: 0; }
+    .guardian-state-row { display: flex; align-items: center; gap: 12px; margin: 12px 0; padding: 10px; border: 1px solid #1e293b; border-radius: 10px; background: rgba(11,15,25,.72); }
+    .guardian-pet-button { position: relative; display: grid; flex: 0 0 72px; width: 72px; height: 72px; place-items: center; padding: 0; overflow: hidden; border: 2px solid #ffee55; border-radius: 12px; background: #0b0f19; cursor: pointer; }
+    .guardian-pet-button .pet-avatar { width: 74px; height: 74px; }
+    .guardian-accessory { position: absolute; top: -1px; right: 0; display: none; padding: 2px 4px; border: 1px solid #ffee55; border-radius: 5px; background: #0b0f19; font: 800 13px "Nunito",sans-serif; }
+    .guardian-state-alert .guardian-accessory, .guardian-state-help .guardian-accessory { display: block; }
+    .guardian-state-alert .guardian-accessory { color: #ffee55; }
+    .guardian-state-help .guardian-accessory { color: #86efac; }
+    .guardian-state-copy { min-width: 0; color: #e2e8f0; font-size: 12px; font-weight: 800; line-height: 1.45; }
+    .guardian-state-copy strong { display: block; color: #ffee55; font-size: 14px; }
+    .guardian-controls-actions, .guardian-tip-actions, .guardian-emergency-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .guardian-action { min-height: 40px; padding: 8px 12px; border: 1px solid #14532d; border-radius: 8px; background: linear-gradient(180deg,#22c55e,#16a34a); box-shadow: 0 4px 0 #14532d; color: #052e16; cursor: pointer; font: 900 11px "Nunito",sans-serif; }
+    .guardian-action:hover:not(:disabled) { filter: brightness(1.08); transform: translateY(-1px); }
+    .guardian-action:disabled { opacity: .48; cursor: not-allowed; }
+    .guardian-action-shield { border-color: #854d0e; background: linear-gradient(180deg,#ffee55,#ff8800); box-shadow: 0 4px 0 #7c2d12; color: #0b0f19; }
+    .guardian-radar-scroll, .guardian-phrase-scroll, .guardian-emergency-scroll { max-height: 300px; overflow-y: auto; overscroll-behavior: contain; scrollbar-color: #ff8800 #0b0f19; }
+    .guardian-tip-card { margin: 10px 0; padding: 12px; border: 2px solid #1e293b; border-radius: 9px; background: rgba(11,15,25,.9); color: #f8fafc; }
+    .guardian-tip-intro { margin: 0 0 7px; color: #ffee55; font-size: 12px; font-weight: 900; }
+    .guardian-tip-fact { margin: 0; color: #f8fafc; font-size: 14px; font-weight: 800; line-height: 1.55; }
+    .guardian-tip-count, .guardian-status { margin: 7px 0 0; color: #cbd5e1; font-size: 11px; font-weight: 800; }
+    .guardian-badge { display: inline-flex; margin: 6px 6px 0 0; padding: 6px 9px; border: 1px solid #ffee55; border-radius: 7px; background: rgba(255,136,0,.15); color: #fff2a6; font-size: 10px; font-weight: 900; }
+    .guardian-about { color: #cbd5e1; font-size: 11px; font-weight: 700; line-height: 1.55; }
+    .guardian-phrase-card { min-width: 0; padding: 10px; border: 1px solid #1e293b; border-radius: 9px; background: rgba(11,15,25,.92); }
+    .guardian-phrase-card h4 { margin: 0 0 5px; color: #ffee55; font: 900 10px "Nunito",sans-serif; }
+    .guardian-phrase-local { margin: 4px 0; color: #fff; font: 900 20px/1.35 "Nunito",sans-serif; overflow-wrap: anywhere; }
+    .guardian-phrase-meaning, .guardian-phrase-pronunciation { margin: 4px 0; color: #dbeafe; font: 700 10px/1.45 "Nunito",sans-serif; overflow-wrap: anywhere; }
+    .guardian-phrase-scroll { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; padding: 1px; }
+    .guardian-audio-status { min-height: 18px; margin: 8px 0 0; color: #fde68a; font-size: 11px; font-weight: 800; }
+    .guardian-emergency-notice { margin: 12px 0; padding: 10px; border: 2px solid #ff8800; border-radius: 9px; background: #0b0f19; color: #fff; font-size: 13px; font-weight: 900; line-height: 1.5; }
+    .guardian-number-list { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+    .guardian-number-list li { padding: 8px; border: 1px solid #1e293b; border-radius: 7px; background: rgba(11,15,25,.82); color: #f8fafc; font: 800 13px "Nunito",sans-serif; }
+    .guardian-number-list strong { color: #ffee55; }
+    .guardian-emergency-plain { color: #e2e8f0; font-size: 13px; font-weight: 800; }
+    .guardian-about-panel { margin-top: 10px; }
     .emergency-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
     .emergency-quick {
       display: grid;
@@ -1625,6 +1700,7 @@
       inset: 0;
       display: grid;
       place-items: center;
+      overflow-y: auto;
       padding: 18px;
       background: rgba(2, 6, 23, .95);
       opacity: 0;
@@ -1635,6 +1711,8 @@
     .emergency-card {
       position: relative;
       width: min(760px, 100%);
+      max-height: calc(100dvh - 36px);
+      overflow-y: auto;
       padding: clamp(24px, 6vw, 58px) 20px;
       border: 4px solid #f59e0b;
       border-radius: 24px;
@@ -1769,7 +1847,9 @@
       .modal-layer { padding: 10px; }
       .rpg-modal { max-height: 92vh; }
       .lingo-controls, .destination-context { grid-template-columns: 1fr; }
-      .emergency-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .emergency-grid { grid-template-columns: 1fr; max-height: 300px; overflow-y: auto; overscroll-behavior: contain; }
+      .guardian-controls, .guardian-phrase-scroll { grid-template-columns: 1fr; }
+      .emergency-card { max-height: calc(100dvh - 20px); }
       .lingo-panel { padding: 11px; }
       .world-activity-grid, .destination-context-grid { grid-template-columns: 1fr; }
       .activity-panel { padding: 12px; }
@@ -1823,7 +1903,7 @@
             <span class="companion-tile">?</span><span class="companion-tile">?</span>
             <span class="companion-tile">?</span>
           </div>
-          <p class="welcome-copy" id="welcome-copy">Welcome to <strong>PawPort!</strong> Every legendary traveler needs a trusted partner. Answer these <strong>4 quick personality questions</strong> to pair with your ideal travel pet! Your pet will tailor your itineraries, unlock location quizzes, and help you build travel scrapbooks!</p>
+          <p class="welcome-copy" id="welcome-copy">Welcome to <strong>PawPort!</strong> Every legendary traveler needs a trusted partner. Answer these <strong>4 quick personality questions</strong> to pair with your ideal travel pet! Your pet will tailor your itineraries, guide you through visual etiquette lessons, and help you build travel scrapbooks!</p>
           <div class="welcome-features" aria-label="Your pet partner features">
             <span class="welcome-feature">Tailored itineraries</span>
             <span class="welcome-feature">Location quizzes</span>
@@ -1909,7 +1989,7 @@
         <h2 class="hub-heading">Choose your next quest</h2>
         <div class="hub-grid" id="hub-grid">
           <button class="hub-card" type="button" data-hub="study">
-            <span class="hub-icon" aria-hidden="true">📚</span><span><span class="hub-card-title">Study Hub</span><p>Explore famous tourist destinations (Great Wall of China, Petra, Taj Mahal, etc.), complete location quizzes to earn pet food snacks, and snap AR photo memories!</p></span><span class="hub-arrow" aria-hidden="true">›</span>
+            <span class="hub-icon" aria-hidden="true">📚</span><span><span class="hub-card-title">Study Hub</span><p>Explore illustrated etiquette lessons at six famous landmarks, earn a readiness stamp and pet food, and snap AR photo memories!</p></span><span class="hub-arrow" aria-hidden="true">›</span>
           </button>
           <button class="hub-card" type="button" data-hub="itinerary">
             <span class="hub-icon" aria-hidden="true">🗺️</span><span><span class="hub-card-title">Itinerary Builder</span><p>Generate custom day-by-day travel schedules or trigger a “Mystery Trip” curated specifically by your pet companion's personality!</p></span><span class="hub-arrow" aria-hidden="true">›</span>
@@ -1918,7 +1998,7 @@
             <span class="hub-icon" aria-hidden="true">🎨</span><span><span class="hub-card-title">Creative Hub</span><p>Design custom travel scrapbooks (exportable as JPG, PNG, PDF) and share them with the PawPort community in the Social Media Hub!</p></span><span class="hub-arrow" aria-hidden="true">›</span>
           </button>
           <button class="hub-card" type="button" data-hub="lingo">
-            <span class="hub-icon" aria-hidden="true">🗣️</span><span><span class="hub-card-title">Companion Lingo &amp; Safety Assistant</span><p>Real-time speech translation into animated RPG speech bubbles, pet-curated local slang tips, AND an interactive “Pet Safety &amp; Emergency Shield” giving destination safety tips, scam alerts, and emergency contact phrases personalized by your pet!</p></span><span class="hub-arrow" aria-hidden="true">›</span>
+            <span class="hub-icon" aria-hidden="true">🗣️</span><span><span class="hub-card-title">Companion Lingo &amp; Safety Assistant</span><p>Travel phrases, general preparation tips, and curated emergency information. Demo controls are not live location data, and PawPort cannot monitor real-world safety.</p></span><span class="hub-arrow" aria-hidden="true">›</span>
           </button>
         </div>
         <h2 class="hub-heading">Campfire &amp; field notes</h2>
@@ -1999,34 +2079,41 @@
           </div>
           <section class="study-shell" id="study-content" hidden aria-labelledby="study-title">
             <header>
-              <p class="dashboard-kicker">AI-powered landmark field guide</p>
+              <p class="dashboard-kicker">Local visual etiquette field guide</p>
               <h2 id="study-title">STUDY HUB</h2>
-              <p class="creative-subtitle">Explore one of the New 7 Wonders, then test your knowledge to earn local treats.</p>
+              <p class="creative-subtitle">Explore three illustrated etiquette lessons at each landmark. No quizzes—just learn at your own pace.</p>
             </header>
-            <div class="study-card">
-              <label class="creative-field" for="study-landmark">Choose or enter a New 7 Wonder
-                <input class="creative-input" id="study-landmark" list="study-landmark-options" maxlength="60" autocomplete="off" placeholder="e.g. Petra">
-                <datalist id="study-landmark-options"></datalist>
-              </label>
-              <div class="study-select-row creative-spaced">
-                <p class="study-status" id="study-status" aria-live="polite">Choose a landmark to generate its field guide and quiz.</p>
-                <button class="creative-action" id="study-generate" type="button">✨ Generate study guide</button>
-              </div>
+            <div class="study-tabs" role="tablist" aria-label="Study Hub sections">
+              <button class="study-tab" id="study-etiquette-tab" type="button" role="tab" data-study-tab="etiquette" aria-selected="true" aria-controls="study-etiquette-panel" tabindex="0">📖 Etiquette Lessons</button>
+              <button class="study-tab" id="study-readiness-tab" type="button" role="tab" data-study-tab="readiness" aria-selected="false" aria-controls="study-readiness-panel" tabindex="-1">🏅 Readiness Log</button>
             </div>
-            <section class="study-card study-summary" id="study-summary" hidden aria-labelledby="study-summary-title">
-              <h3 id="study-summary-title"></h3>
-              <p id="study-summary-text"></p>
-              <p class="creative-note creative-spaced">Read the guide first. Then answer five questions; each correct answer earns its listed snack reward.</p>
-              <button class="creative-action creative-spaced" id="study-start-quiz" type="button">Start the 5-question quiz</button>
+            <section class="study-tab-panel" id="study-etiquette-panel" role="tabpanel" aria-labelledby="study-etiquette-tab">
+            <section class="study-card study-hero" aria-live="polite">
+              <div class="study-hero-art" id="study-hero-art" role="img" aria-label="Landmark illustration">🏛️</div>
+              <div>
+                <h3 id="study-landmark-title">Taj Mahal</h3>
+                <p id="study-landmark-location">Agra, India</p>
+                <p id="study-landmark-intro">Explore local etiquette through three short visual lessons.</p>
+              </div>
             </section>
-            <section class="study-card study-quiz" id="study-quiz" hidden aria-labelledby="study-question">
-              <div class="study-question-meta"><span id="study-progress"></span><span id="study-reward"></span></div>
-              <fieldset class="study-question">
-                <legend id="study-question" tabindex="-1"></legend>
-                <div class="study-options" id="study-options"></div>
-              </fieldset>
-              <p class="study-result" id="study-feedback" aria-live="polite"></p>
-              <button class="creative-action" id="study-quiz-action" type="button">Check answer</button>
+            <section class="study-card" aria-label="Landmark selection and progress">
+              <div class="study-toolbar">
+                <label class="creative-field" for="study-landmark">Choose a landmark
+                  <select class="creative-select" id="study-landmark"></select>
+                </label>
+                <p class="study-progress" id="study-progress" aria-live="polite"></p>
+              </div>
+              <p class="study-dialogue" id="study-dialogue" aria-live="polite"></p>
+              <p class="study-reward" id="study-reward" aria-live="polite"></p>
+            </section>
+            <section class="study-lessons" id="study-lessons" aria-label="Etiquette lessons"></section>
+            </section>
+            <section class="study-tab-panel" id="study-readiness-panel" role="tabpanel" aria-labelledby="study-readiness-tab" hidden>
+              <section class="study-card">
+                <h3>Your Readiness Log</h3>
+                <p>Track explored lessons at each landmark. Complete all three lessons in one place to claim its one-time stamp and pet food reward.</p>
+              </section>
+              <section class="study-readiness-list" id="study-readiness-list" aria-label="Landmark readiness progress"></section>
             </section>
           </section>
           <section class="creative-shell" id="creative-content" hidden aria-labelledby="creative-title">
@@ -2136,6 +2223,25 @@
             <h2 class="quest-modal-title" id="destination-quest-title"></h2>
             <p class="quest-meta" id="destination-quest-meta"></p>
             <p class="quest-challenge" id="destination-quest-challenge"></p>
+            <section class="side-quest-control" id="side-quest-control" hidden aria-label="Crowd-aware migration path">
+              <label for="side-quest-crowd">Popular landmark crowd check-in</label>
+              <select class="side-quest-select" id="side-quest-crowd">
+                <option value="low">Low crowds · stay on the main quest</option>
+                <option value="medium">Medium crowds · find a quieter route</option>
+                <option value="high">High crowds · find a quieter route</option>
+              </select>
+              <p class="side-quest-status" id="side-quest-status" aria-live="polite">Low crowds: no migration quest needed.</p>
+            </section>
+            <section class="side-quest-panel" id="side-quest-panel" hidden aria-labelledby="side-quest-title">
+              <div class="side-quest-speech">
+                <div class="side-quest-avatar" id="side-quest-avatar" aria-hidden="true"></div>
+                <p class="side-quest-bubble" id="side-quest-dialogue" aria-live="polite"></p>
+              </div>
+              <h3 id="side-quest-title"></h3>
+              <p class="side-quest-detail" id="side-quest-details"></p>
+              <a class="side-quest-map" id="side-quest-map" target="_blank" rel="noopener noreferrer">Open alternative in Google Maps ↗</a>
+              <button class="side-quest-arrive" id="side-quest-arrive" type="button">Arrive and claim reward</button>
+            </section>
             <div class="destination-context-grid">
               <div class="destination-context-card" id="destination-quest-travel-tip"></div>
               <div class="destination-context-card" id="destination-quest-snack"></div>
@@ -2153,7 +2259,7 @@
             <div>
               <p class="dashboard-kicker">Companion field guide · translation &amp; safety</p>
               <h2 class="lingo-heading" id="lingo-title">LINGO &amp; SAFETY SHIELD</h2>
-              <p class="lingo-subtitle">A pocket phrasebook, culture guide, and safety companion for your next stop.</p>
+              <p class="lingo-subtitle">An offline phrasebook, general preparation tips, and curated emergency references for your next stop.</p>
             </div>
             <section class="lingo-panel" aria-labelledby="translator-heading">
               <div class="lingo-panel-head">
@@ -2162,7 +2268,7 @@
               </div>
               <div class="lingo-controls">
                 <div><label class="lingo-label" for="lingo-destination">Destination</label><select class="lingo-select" id="lingo-destination"></select></div>
-                <div><label class="lingo-label" for="lingo-language">Travel language</label><select class="lingo-select" id="lingo-language"><option value="ja">Japanese · 日本語</option><option value="es">Spanish · Español</option><option value="it">Italian · Italiano</option><option value="fr">French · Français</option><option value="zh">Mandarin · 中文</option></select></div>
+                <div><label class="lingo-label" for="lingo-language">Travel language</label><select class="lingo-select" id="lingo-language"><option value="ja">Japanese · 日本語</option><option value="es">Spanish · Español</option><option value="it">Italian · Italiano</option><option value="fr">French · Français</option><option value="zh">Mandarin · 中文</option><option value="hi">Hindi · हिन्दी</option><option value="ar">Arabic · العربية</option><option value="pt">Brazilian Portuguese · Português</option></select></div>
               </div>
               <div class="lingo-input-row">
                 <div><label class="lingo-label" for="phrase-input">What would you like to say?</label><input class="lingo-input" id="phrase-input" maxlength="240" autocomplete="off" placeholder="Type a travel phrase, e.g. “I need help”"></div>
@@ -2173,12 +2279,63 @@
                 <div class="speech-bubble" id="speech-bubble" aria-live="polite" aria-atomic="true">
                   <span class="speech-bubble-text" id="translated-text">Your phrase will appear here!</span>
                   <span class="speech-pronunciation" id="translated-pronunciation">Pick a destination and try a common travel phrase.</span>
-                  <span class="speech-status" id="translated-status">Only curated offline phrases are available unless your app connects a translation provider.</span>
+                  <span class="speech-status" id="translated-status">Only curated offline phrases are available; translations stay on this device.</span>
                 </div>
               </div>
               <div class="phrase-tools">
                 <button class="lingo-action pet-voice" id="speak-translation" type="button">🔊 Hear phrase</button>
                 <span class="voice-note">Uses your device's speech synthesis when available.</span>
+              </div>
+            </section>
+            <section class="lingo-panel guardian-panel" aria-labelledby="guardian-radar-heading">
+              <h3 class="guardian-heading" id="guardian-radar-heading">🛡️ Guardian Companion Radar</h3>
+              <p class="guardian-demo-banner">Demo controls — simulated situations, not live location or safety data.</p>
+              <div class="guardian-controls">
+                <div>
+                  <label class="lingo-label" for="guardian-time">Demo time</label>
+                  <select class="lingo-select" id="guardian-time">
+                    <option value="daytime">Daytime</option>
+                    <option value="evening">Evening</option>
+                    <option value="late-night">Late night</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="lingo-label" for="guardian-setting">Simulated situation</label>
+                  <select class="lingo-select" id="guardian-setting">
+                    <option value="tourist-site">Tourist site</option>
+                    <option value="public-transport">Public transport</option>
+                    <option value="walking-at-night">Walking at night</option>
+                    <option value="taxi-ride">Taxi or ride app</option>
+                    <option value="atm-cash">ATM or cash</option>
+                    <option value="meeting-people">Meeting new people</option>
+                  </select>
+                </div>
+              </div>
+              <div class="guardian-state-row">
+                <button class="guardian-pet-button" id="guardian-pet" type="button" aria-label="Companion is calm. Double-tap to open emergency information.">
+                  <span id="guardian-pet-avatar" aria-hidden="true"></span>
+                  <span class="guardian-accessory" id="guardian-pet-accessory" aria-hidden="true"></span>
+                </button>
+                <p class="guardian-state-copy"><strong id="guardian-state-label">Calm</strong><span id="guardian-state-message">Choose demo controls and scan to see general preparation tips. This companion does not monitor surroundings.</span></p>
+              </div>
+              <div class="guardian-controls-actions">
+                <button class="guardian-action" id="guardian-simulate" type="button">Simulate selected situation</button>
+                <button class="guardian-action guardian-action-shield" id="guardian-emergency-open" type="button">🛡️ Emergency information</button>
+              </div>
+              <div class="guardian-radar-scroll" id="guardian-radar-scroll" aria-live="polite">
+                <section class="guardian-tip-card" id="guardian-tip-panel" hidden aria-labelledby="guardian-tip-title">
+                  <h4 id="guardian-tip-title" class="guardian-tip-intro"></h4>
+                  <p class="guardian-tip-fact" id="guardian-tip-fact"></p>
+                  <p class="guardian-tip-count" id="guardian-tip-count"></p>
+                  <div class="guardian-tip-actions">
+                    <button class="guardian-action" id="guardian-tip-previous" type="button">Previous</button>
+                    <button class="guardian-action" id="guardian-tip-next" type="button">Next</button>
+                    <button class="guardian-action" id="guardian-tip-got-it" type="button">Got it</button>
+                  </div>
+                </section>
+                <p class="guardian-status" id="guardian-status" aria-live="polite">Calm state: no tips are available until you run a demo simulation.</p>
+                <p class="guardian-safety-notice">General tips only. This companion cannot tell you whether a place is safe. If you feel in danger, call the local emergency number.</p>
+                <div id="guardian-prepared-badges" aria-label="Prepared badges"></div>
               </div>
             </section>
             <div class="destination-context">
@@ -2187,13 +2344,19 @@
                 <ul class="tip-list" id="culture-tips"></ul>
               </section>
               <section class="lingo-panel" aria-labelledby="safety-heading">
-                <h3 class="safety-title" id="safety-heading"><span class="status-chip">SHIELD ON</span> Pet safety watch</h3>
+                <h3 class="safety-title" id="safety-heading"><span class="status-chip">GENERAL TIPS</span> Pet preparation tips</h3>
                 <ul class="alert-list" id="safety-alerts"></ul>
+                <p class="guardian-safety-notice">General tips only. This companion cannot tell you whether a place is safe. If you feel in danger, call the local emergency number.</p>
               </section>
             </div>
             <section class="lingo-panel" aria-labelledby="emergency-heading">
               <h3 id="emergency-heading">🛡️ Emergency phrase quick-cast</h3>
               <div class="emergency-grid" id="emergency-grid"></div>
+              <p class="guardian-audio-status" id="guardian-audio-status" aria-live="polite"></p>
+            </section>
+            <section class="lingo-panel guardian-panel guardian-about-panel" aria-labelledby="guardian-about-heading">
+              <h3 class="guardian-heading" id="guardian-about-heading">ℹ️ About Guardian Radar</h3>
+              <p class="guardian-about">Radar situations are local demo controls, not live location data. Safety tips are general preparation guidance only; they do not rate places or monitor real-world safety. Emergency numbers are a curated reference and can change, so confirm them through official sources before travel.</p>
             </section>
             <section class="lingo-panel" aria-labelledby="comfort-heading">
               <div class="comfort-row">
@@ -2211,9 +2374,18 @@
       <article class="emergency-card" role="dialog" aria-modal="true" aria-labelledby="emergency-translation">
         <button class="modal-close emergency-close" id="emergency-close" type="button" aria-label="Close emergency phrase">×</button>
         <p class="emergency-kicker" id="emergency-language"></p>
+        <p class="guardian-emergency-notice" id="guardian-emergency-notice">In immediate danger? Call the local emergency number now.<br>Confirm emergency numbers before travel through official sources; numbers can change.</p>
+        <div class="guardian-emergency-scroll" id="guardian-emergency-scroll">
+          <h3 class="guardian-heading">Local emergency numbers</h3>
+          <ul class="guardian-number-list" id="guardian-emergency-numbers"></ul>
+          <p class="guardian-safety-notice">General tips only. This companion cannot tell you whether a place is safe. If you feel in danger, call the local emergency number.</p>
+          <p class="guardian-emergency-plain" id="guardian-emergency-plain" hidden></p>
+        </div>
+        <p class="emergency-original" id="emergency-category"></p>
         <p class="emergency-original" id="emergency-original"></p>
         <h2 class="emergency-translation" id="emergency-translation"></h2>
         <p class="emergency-pronunciation" id="emergency-pronunciation"></p>
+        <p class="guardian-audio-status" id="emergency-audio-status" aria-live="polite"></p>
         <button class="lingo-action" id="speak-emergency" type="button">🔊 Play pronunciation</button>
       </article>
     </section>
@@ -2452,17 +2624,24 @@
     let petScene, petCamera, petRenderer, petControls, petRig, petPedestal;
     let arStream = null;
     let arModeActive = false;
-    let studyQuizState = null;
-    let studyRequestId = 0;
-    let studyAbortController = null;
+    let etiquetteState = { explored: {}, rewarded: [], readinessStamps: 0 };
+    let selectedEtiquetteLandmarkId = "taj-mahal";
+    let etiquetteLoaded = false;
+    let activeStudyTab = "etiquette";
     const petSparkles = [];
     let petHopStart = 0;
     let petPointerDown = null;
     let translationTimer;
-    let translationRequest = 0;
     let activeEmergencyPhrase = null;
+    let guardianSafetyState = { time: "daytime", settingId: "tourist-site", preparedSettings: [], companionState: "calm" };
+    let guardianTips = [];
+    let guardianTipIndex = 0;
+    let guardianWakeLock = null;
     let comfortActive = false;
     let activeDestinationQuest = null;
+    let activeSideQuest = null;
+    const completedSideQuestIds = new Set();
+    let currentSideQuestPlaceId = null;
     let questProgress = null;
     let currentDestinationId = null;
     let dashboardMapOpen = false;
@@ -2492,7 +2671,7 @@
         ],
         alerts: [
           { type: "caution", icon: "⚠️", title: "Taxi check", detail: "Use clearly marked, licensed taxis or a trusted ride app; confirm the destination before setting off." },
-          { type: "safe", icon: "🟢", title: "Night walks", detail: "Stay on well-lit main streets, keep your phone charged, and check current local guidance." }
+          { type: "info", icon: "ℹ️", title: "Night walks", detail: "Stay on well-lit main streets, keep your phone charged, and check current local guidance." }
         ]
       },
       madrid: {
@@ -2505,7 +2684,7 @@
         ],
         alerts: [
           { type: "caution", icon: "⚠️", title: "Crowded-place awareness", detail: "Keep valuables secure in busy plazas, markets, and transit; be alert to distractions." },
-          { type: "safe", icon: "🟢", title: "Getting around", detail: "Use official transit information and licensed taxis; check service updates before travelling." }
+          { type: "info", icon: "ℹ️", title: "Getting around", detail: "Use official transit information and licensed taxis; check service updates before travelling." }
         ]
       },
       rome: {
@@ -2518,7 +2697,7 @@
         ],
         alerts: [
           { type: "caution", icon: "⚠️", title: "Unofficial offers", detail: "Agree on taxi fares or use licensed metered services; decline unsolicited ticket offers." },
-          { type: "safe", icon: "🟢", title: "Plan the route", detail: "Use official transit and attraction channels, especially around major landmarks." }
+          { type: "info", icon: "ℹ️", title: "Plan the route", detail: "Use official transit and attraction channels, especially around major landmarks." }
         ]
       },
       paris: {
@@ -2531,7 +2710,7 @@
         ],
         alerts: [
           { type: "caution", icon: "⚠️", title: "Distraction awareness", detail: "Keep belongings secure around busy stations and tourist sites; ignore pressure tactics." },
-          { type: "safe", icon: "🟢", title: "Official transport", detail: "Use marked taxi stands or official transit apps and verify the route before boarding." }
+          { type: "info", icon: "ℹ️", title: "Official transport", detail: "Use marked taxi stands or official transit apps and verify the route before boarding." }
         ]
       },
       beijing: {
@@ -2544,7 +2723,7 @@
         ],
         alerts: [
           { type: "caution", icon: "⚠️", title: "Agree on the ride", detail: "Use official taxi queues or trusted apps; avoid unsolicited rides and confirm your destination." },
-          { type: "safe", icon: "🟢", title: "Stay connected", detail: "Save your hotel address offline and check current local transport and entry guidance." }
+          { type: "info", icon: "ℹ️", title: "Stay connected", detail: "Save your hotel address offline and check current local transport and entry guidance." }
         ]
       },
       mexicoCity: {
@@ -2557,7 +2736,62 @@
         ],
         alerts: [
           { type: "caution", icon: "⚠️", title: "Use trusted transport", detail: "Choose authorized taxi stands or trusted ride services and check current local advice." },
-          { type: "safe", icon: "🟢", title: "Plan your route", detail: "Check transit service updates and keep your destination details available." }
+          { type: "info", icon: "ℹ️", title: "Plan your route", detail: "Check transit service updates and keep your destination details available." }
+        ]
+      },
+      agra: {
+        name: "Agra, India",
+        language: "hi",
+        tips: [
+          { phrase: "Namaste", meaning: "Hello / greetings.", note: "A polite greeting is a friendly way to begin a conversation." },
+          { phrase: "Dhanyavaad", meaning: "Thank you.", note: "Use a courteous thank-you when someone assists you." }
+        ],
+        alerts: [
+          { type: "caution", icon: "ℹ️", title: "General preparation", detail: "Check current official visitor information and keep your planned transport details available." }
+        ]
+      },
+      petra: {
+        name: "Petra, Jordan",
+        language: "ar",
+        tips: [
+          { phrase: "Marhaba", meaning: "Hello.", note: "A courteous greeting can help start a conversation." },
+          { phrase: "Shukran", meaning: "Thank you.", note: "Use a polite thank-you when someone assists you." }
+        ],
+        alerts: [
+          { type: "caution", icon: "ℹ️", title: "General preparation", detail: "Check current official visitor information and plan water and transport needs ahead." }
+        ]
+      },
+      machuPicchu: {
+        name: "Machu Picchu, Peru",
+        language: "es",
+        tips: [
+          { phrase: "Buenos días", meaning: "Good morning.", note: "A friendly greeting before asking a question." },
+          { phrase: "¿Me puede ayudar?", meaning: "Can you help me?", note: "A polite way to ask for assistance." }
+        ],
+        alerts: [
+          { type: "caution", icon: "ℹ️", title: "General preparation", detail: "Check current official entry requirements, route guidance, and transport information." }
+        ]
+      },
+      chichenItza: {
+        name: "Chichén Itzá, Mexico",
+        language: "es",
+        tips: [
+          { phrase: "Buenos días", meaning: "Good morning.", note: "A friendly greeting before asking a question." },
+          { phrase: "¿Dónde está la entrada?", meaning: "Where is the entrance?", note: "Ask staff for directions and follow posted visitor instructions." }
+        ],
+        alerts: [
+          { type: "caution", icon: "ℹ️", title: "General preparation", detail: "Check current official visitor information and plan water and transport needs ahead." }
+        ]
+      },
+      rio: {
+        name: "Rio de Janeiro, Brazil",
+        language: "pt",
+        tips: [
+          { phrase: "Olá", meaning: "Hello.", note: "A friendly greeting before asking a question." },
+          { phrase: "Obrigado / obrigada", meaning: "Thank you.", note: "Choose the form that fits how you refer to yourself." }
+        ],
+        alerts: [
+          { type: "caution", icon: "ℹ️", title: "General preparation", detail: "Check current official visitor and transport information before setting out." }
         ]
       }
     };
@@ -2574,17 +2808,109 @@
       { id: "mexico-city", name: "Mexico City", country: "Mexico", code: "MX", latitude: 19.4326, longitude: -99.1332, snack: { id: "tacos", name: "Street-style tacos", emoji: "🌮" }, quest: "Find three historic-center details, then answer a Mexico City geography question.", checkpoints: ["Spot a plaza or public square", "Find a historic stone façade", "Notice a street-food stand"], trivia: "Mexico City was built on an island city founded by which people?", choices: ["The Mexica (Aztec)", "The Inca", "The Zapotec"], answer: 0, funFact: "Mexico City grew from Tenochtitlan, founded on an island in Lake Texcoco.", tip: "Use licensed transport, stay aware in crowds, and follow current local advice." }
     ];
     const landmarkById = Object.fromEntries(landmarkData.map((landmark) => [landmark.id, landmark]));
+    const CONFIG = {
+      landmarks: [
+        { id: "taj-mahal", name: "Taj Mahal", location: "Agra", alternatives: [
+          { id: "mehtab-bagh", name: "Mehtab Bagh", mapsQuery: "Mehtab Bagh, Agra, India", travelTime: null, mode: null, note: "Demo suggestion — details not fully verified." },
+          { id: "itimad-ud-daulah", name: "Itimad-ud-Daulah (Baby Taj)", mapsQuery: "Itimad-ud-Daulah (Baby Taj), Agra, India", travelTime: null, mode: null, note: "Demo suggestion — details not fully verified." }
+        ] },
+        { id: "petra", name: "Petra", location: "Wadi Musa", alternatives: [
+          { id: "little-petra", name: "Little Petra (Siq al-Barid)", mapsQuery: "Little Petra (Siq al-Barid), Wadi Musa, Jordan", travelTime: null, mode: null, note: "Demo suggestion — details not fully verified." },
+          { id: "petra-museum", name: "Petra Museum", mapsQuery: "Petra Museum, Wadi Musa, Jordan", travelTime: null, mode: null, note: "Demo suggestion — details not fully verified." }
+        ] },
+        { id: "machu-picchu", name: "Machu Picchu", location: "Aguas Calientes", alternatives: [
+          { id: "huchuy-picchu", name: "Huchuy Picchu", mapsQuery: "Huchuy Picchu, Aguas Calientes, Peru", travelTime: null, mode: null, note: "Demo suggestion — details not fully verified." },
+          { id: "sun-gate", name: "Sun Gate (Intipunku)", mapsQuery: "Sun Gate (Intipunku), Machu Picchu, Peru", travelTime: null, mode: null, note: "Demo suggestion — details not fully verified." }
+        ] },
+        { id: "chichen-itza", name: "Chichén Itzá", location: "Yucatán", alternatives: [
+          { id: "ek-balam", name: "Ek Balam", mapsQuery: "Ek Balam, Yucatán, Mexico", travelTime: null, mode: null, note: "Demo suggestion — details not fully verified." },
+          { id: "yokdzonot-cenote", name: "Yokdzonot Cenote", mapsQuery: "Yokdzonot Cenote, Yucatán, Mexico", travelTime: null, mode: null, note: "Demo suggestion — details not fully verified." }
+        ] },
+        { id: "christ-redeemer", name: "Christ the Redeemer", location: "Rio de Janeiro", alternatives: [
+          { id: "parque-lage", name: "Parque Lage", mapsQuery: "Parque Lage, Rio de Janeiro, Brazil", travelTime: null, mode: null, note: "Demo suggestion — details not fully verified." },
+          { id: "mirante-dona-marta", name: "Mirante Dona Marta", mapsQuery: "Mirante Dona Marta, Rio de Janeiro, Brazil", travelTime: null, mode: null, note: "Demo suggestion — details not fully verified." }
+        ] },
+        { id: "colosseum", name: "Colosseum", location: "Rome", alternatives: [
+          { id: "baths-of-caracalla", name: "Baths of Caracalla", mapsQuery: "Baths of Caracalla, Rome, Italy", travelTime: null, mode: null, note: "Demo suggestion — details not fully verified." },
+          { id: "circus-maximus", name: "Circus Maximus", mapsQuery: "Circus Maximus, Rome, Italy", travelTime: null, mode: null, note: "Demo suggestion — details not fully verified." }
+        ] }
+      ]
+    };
+    const sideQuestConfigById = Object.fromEntries(CONFIG.landmarks.map((landmark) => [landmark.id, landmark]));
+    const sideQuestPets = {
+      zuri: { trait: "Responsible planner", dialogue: (landmark, alternative) => `Checklist time! ${landmark} is getting busy, so let's stick to the plan and explore ${alternative}.`, reward: { id: "checklist-chops", name: "Checklist Chops", icon: "🥩" } },
+      momo: { trait: "Sleepy foodie", dialogue: (landmark, alternative) => `Mmm... ${landmark} feels a little busy. Let's napwalk over to ${alternative} — maybe there's a snack break.`, reward: { id: "bamboo-latte-bun", name: "Bamboo Latte Bun", icon: "🥐" } },
+      skye: { trait: "Strategic / Actually...", dialogue: (landmark, alternative) => `Actually... the smarter route is ${alternative}. We can skip the crowd at ${landmark} and optimize our adventure.`, reward: { id: "actually-salmon", name: "Actually Salmon", icon: "🐟" } },
+      pudding: { trait: "Relaxed", dialogue: (landmark, alternative) => `No rush, friend. ${landmark} is a bit busy, so let's take it easy at ${alternative}.`, reward: { id: "chill-melon-slice", name: "Chill Melon Slice", icon: "🍉" } },
+      hazel: { trait: "Nature lover", dialogue: (landmark, alternative) => `Let's trade the bustle at ${landmark} for a gentler visit to ${alternative}. I bet we'll find a lovely little moment there.`, reward: { id: "blessing-berry-tart", name: "Blessing Berry Tart", icon: "🍓" } },
+      kiki: { trait: "Energetic / LET'S GOOOO!", dialogue: (landmark, alternative) => `LET'S GOOOO! Crowd dodge! ${alternative} is our next victory stop!`, reward: { id: "victory-hop-bar", name: "Victory Hop Bar", icon: "🌾" } },
+      frosty: { trait: "Clumsy and brave (she/her)", dialogue: (landmark, alternative) => `I almost tripped at ${landmark}, but I'm okay! Let's bravely try ${alternative} together.`, reward: { id: "brave-krill-bites", name: "Brave Krill Bites", icon: "🦐" } }
+    };
+    const etiquettePets = {
+      zuri: { name: "Zuri", intro: "Checklist time! Let's explore these lessons one by one.", food: { id: "etiquette-checklist-chops", name: "Checklist Chops", icon: "🥩" } },
+      momo: { name: "Momo", intro: "Mmm... three little lessons, then we can take a cozy snack break.", food: { id: "etiquette-bamboo-latte-bun", name: "Bamboo Latte Bun", icon: "🥐" } },
+      skye: { name: "Skye", intro: "Actually... knowing local etiquette makes for a more thoughtful visit.", food: { id: "etiquette-actually-salmon", name: "Actually Salmon", icon: "🐟" } },
+      pudding: { name: "Pudding", intro: "No rush, friend. Let's explore each lesson at our own pace.", food: { id: "etiquette-chill-melon-slice", name: "Chill Melon Slice", icon: "🍉" } },
+      hazel: { name: "Hazel", intro: "Let's learn how to show care for the places and people we visit.", food: { id: "etiquette-blossom-berry-tart", name: "Blossom Berry Tart", icon: "🍓" } },
+      kiki: { name: "Kiki", intro: "LET'S GOOOO! Three lessons, three discoveries!", food: { id: "etiquette-victory-hop-bar", name: "Victory Hop Bar", icon: "🌾" } },
+      frosty: { name: "Frosty", intro: "I'm ready to bravely explore these lessons with you!", food: { id: "etiquette-brave-krill-bites", name: "Brave Krill Bites", icon: "🦐" } }
+    };
     const studyWonders = [
-      { id: "great-wall", name: "Great Wall of China" },
-      { id: "petra", name: "Petra" },
-      { id: "christ-redeemer", name: "Christ the Redeemer" },
-      { id: "machu-picchu", name: "Machu Picchu" },
-      { id: "chichen-itza", name: "Chichén Itzá" },
-      { id: "colosseum", name: "Colosseum" },
-      { id: "taj-mahal", name: "Taj Mahal" }
+      {
+        id: "taj-mahal", name: "Taj Mahal", location: "Agra, India", icon: "🕌",
+        intro: "A few thoughtful choices help keep the mausoleum experience respectful.",
+        lessons: [
+          { id: "shoe-covers", title: "Shoe Covers", icon: "👟", explanation: "Remove shoes or wear shoe covers before entering the main mausoleum." },
+          { id: "photography", title: "Photography", icon: "📷", explanation: "Photography is prohibited inside the main mausoleum. Visitors can take pictures outside." },
+          { id: "quiet-voices", title: "Quiet Voices", icon: "🤫", explanation: "Keep voices low inside the main chamber." }
+        ]
+      },
+      {
+        id: "petra", name: "Petra", location: "Jordan", icon: "🏜️",
+        intro: "Explore Petra with consideration for local people, customs, and site guidance.",
+        lessons: [
+          { id: "appropriate-clothing", title: "Appropriate Clothing", icon: "🧣", explanation: "Follow recommended clothing guidelines and dress respectfully." },
+          { id: "photography", title: "Photography", icon: "📷", explanation: "Ask permission before photographing local people." },
+          { id: "official-guides", title: "Official Guides", icon: "🧭", explanation: "Arrange guides through the Visitor Center, hotel desk, or a registered agency." }
+        ]
+      },
+      {
+        id: "machu-picchu", name: "Machu Picchu", location: "Peru", icon: "⛰️",
+        intro: "Help preserve this historic site by following its visitor rules.",
+        lessons: [
+          { id: "drone-restrictions", title: "Drone Restrictions", icon: "🚫", explanation: "Drones require official authorization." },
+          { id: "protect-stonework", title: "Protect the Stonework", icon: "🪨", explanation: "Do not touch, move, or remove ancient stonework." },
+          { id: "assigned-circuits", title: "Follow Assigned Circuits", icon: "🚶", explanation: "Stay on your assigned visitor circuit and follow site rules." }
+        ]
+      },
+      {
+        id: "st-peters-basilica", name: "St. Peter's Basilica", location: "Rome, Italy", icon: "⛪",
+        intro: "A quiet, considerate visit helps respect this place of worship.",
+        lessons: [
+          { id: "dress-code", title: "Dress Code", icon: "👕", explanation: "Cover shoulders and knees." },
+          { id: "quiet-voices", title: "Quiet Voices", icon: "🤫", explanation: "Speak quietly inside the basilica." },
+          { id: "food-and-drinks", title: "Food and Drinks", icon: "🥤", explanation: "Do not bring food or drinks inside." }
+        ]
+      },
+      {
+        id: "chichen-itza", name: "Chichén Itzá", location: "Mexico", icon: "🛕",
+        intro: "Keep these simple site rules in mind while exploring the archaeological zone.",
+        lessons: [
+          { id: "food-restrictions", title: "Food Restrictions", icon: "🍎", explanation: "Do not bring food into the archaeological zone." },
+          { id: "flash-photography", title: "Flash Photography", icon: "📸", explanation: "Do not use flash photography." },
+          { id: "smoking", title: "Smoking", icon: "🚭", explanation: "Smoking is prohibited." }
+        ]
+      },
+      {
+        id: "christ-redeemer", name: "Christ the Redeemer", location: "Rio de Janeiro, Brazil", icon: "🌄",
+        intro: "Follow visitor rules and treat the surrounding wildlife with care.",
+        lessons: [
+          { id: "clothing-rules", title: "Clothing Rules", icon: "🩳", explanation: "Swimwear is prohibited." },
+          { id: "respect-barriers", title: "Respect Barriers", icon: "🧱", explanation: "Do not climb, sit, or lean on walls or barriers." },
+          { id: "wildlife-protection", title: "Wildlife Protection", icon: "🦜", explanation: "Do not feed, capture, or interact with wildlife." }
+        ]
+      }
     ];
-    const studyDifficulty = ["Very Easy", "Easy", "Medium", "Hard", "Very Hard"];
-    const studyRewards = [1, 2, 3, 4, 5];
     const phraseTranslations = {
       ja: {
         "i need help": ["助けてください", "Tasukete kudasai"],
@@ -2650,11 +2976,96 @@
         "how much does this cost": ["这个多少钱？", "Zhège duōshǎo qián?"],
         "do you speak english": ["你会说英语吗？", "Nǐ huì shuō Yīngyǔ ma?"],
         "please call an ambulance": ["请叫救护车。", "Qǐng jiào jiùhùchē."]
+      },
+      hi: {
+        "i need help": ["मुझे मदद चाहिए।", "Mujhe madad chahiye."],
+        "where is the nearest hospital": ["सबसे नज़दीकी अस्पताल कहाँ है?", "Sabse nazdeeki aspataal kahan hai?"],
+        "call the police": ["कृपया पुलिस को बुलाइए।", "Kripya police ko bulaiye."],
+        "i am lost": ["मैं रास्ता भटक गया / गई हूँ।", "Main raasta bhatak gaya / gayi hoon."]
+      },
+      ar: {
+        "i need help": ["أحتاج إلى المساعدة.", "Ahtaju ila al-musaada."],
+        "where is the nearest hospital": ["أين أقرب مستشفى؟", "Ayna aqrab mustashfa?"],
+        "call the police": ["اتصل بالشرطة من فضلك.", "Ittasil bish-shurta min fadlik."],
+        "i am lost": ["أنا تائه / تائهة.", "Ana taih / taiha."]
+      },
+      pt: {
+        "i need help": ["Preciso de ajuda.", "Pre-see-zoo djee ah-zhoo-dah."],
+        "where is the nearest hospital": ["Onde fica o hospital mais próximo?", "On-djee fee-kah oo ohs-pee-tahl mais pro-see-moo?"],
+        "call the police": ["Chame a polícia, por favor.", "Sha-mee ah poh-lee-see-ah, por fah-vor."],
+        "i am lost": ["Estou perdido / perdida.", "Esh-toh pehr-djee-doo / pehr-djee-dah."]
       }
     };
-    const languageNames = { ja: "Japanese", es: "Spanish", it: "Italian", fr: "French", zh: "Mandarin" };
+    const languageNames = { ja: "Japanese", es: "Spanish", it: "Italian", fr: "French", zh: "Mandarin", hi: "Hindi", ar: "Arabic", pt: "Brazilian Portuguese" };
     const emergencyKeys = ["i need help", "where is the nearest hospital", "call the police", "i am lost"];
     const emergencyIcons = ["🚨", "🏥", "🚓", "📍"];
+    const emergencyCategories = {
+      "i need help": "Requesting help",
+      "where is the nearest hospital": "Medical help",
+      "call the police": "Police assistance",
+      "i am lost": "Asking for directions"
+    };
+    const emergencyLabels = {
+      "i need help": "I need help.",
+      "where is the nearest hospital": "Where is the nearest hospital?",
+      "call the police": "Please call the police.",
+      "i am lost": "I am lost."
+    };
+    const emergencyProfiles = {
+      tokyo: { speechLanguage: "ja-JP", numbers: [] },
+      madrid: { speechLanguage: "es-ES", numbers: [] },
+      rome: { speechLanguage: "it-IT", numbers: ["General: 112", "Police: 113", "Fire: 115", "Ambulance: 118"] },
+      paris: { speechLanguage: "fr-FR", numbers: [] },
+      beijing: { speechLanguage: "zh-CN", numbers: [] },
+      mexicoCity: { speechLanguage: "es-MX", numbers: [] },
+      agra: { speechLanguage: "hi-IN", numbers: ["Unified: 112", "Police: 100", "Fire: 101", "Ambulance: 102"] },
+      petra: { speechLanguage: "ar-JO", numbers: ["911"] },
+      machuPicchu: { speechLanguage: "es-PE", numbers: ["Police: 105", "Fire: 116", "Civil defense: 115", "Ambulance: 106 (conditional, never guaranteed)"] },
+      chichenItza: { speechLanguage: "es-MX", numbers: ["National emergency number: 911"] },
+      rio: { speechLanguage: "pt-BR", numbers: ["Police: 190", "SAMU: 192", "Fire: 193", "Civil defense: 199", "Federal police: 191"] }
+    };
+    const guardianSafetyNotice = "General tips only. This companion cannot tell you whether a place is safe. If you feel in danger, call the local emergency number.";
+    const guardianSettings = [
+      { id: "tourist-site", name: "Tourist site", tips: [
+        { times: ["daytime", "evening", "late-night"], text: "Check the attraction's current official entry rules and ticket requirements before setting out." },
+        { times: ["daytime", "evening", "late-night"], text: "Choose a meeting point with your travel party and note the site's posted closing and re-entry guidance." },
+        { times: ["late-night"], text: "Check official visitor hours and available transport before planning a late visit." }
+      ] },
+      { id: "public-transport", name: "Public transport", tips: [
+        { times: ["daytime", "evening", "late-night"], text: "Check official service updates and route changes before boarding." },
+        { times: ["daytime", "evening", "late-night"], text: "Keep your route and a way to contact your travel party accessible during the trip." },
+        { times: ["late-night"], text: "Check the operator's last-service times and plan your onward connection in advance." }
+      ] },
+      { id: "walking-at-night", name: "Walking at night", tips: [
+        { times: ["daytime", "evening", "late-night"], text: "Plan your route using current official transport and street information, and share your intended route with someone you trust." },
+        { times: ["daytime", "evening", "late-night"], text: "Keep your phone charged and save your destination details where you can access them." },
+        { times: ["late-night"], text: "Check available public transport or licensed ride options before you begin your trip." }
+      ] },
+      { id: "taxi-ride", name: "Taxi or ride app", tips: [
+        { times: ["daytime", "evening", "late-night"], text: "For an app-based ride, check the vehicle and driver details in the app before getting in." },
+        { times: ["daytime", "evening", "late-night"], text: "Confirm the destination and fare or meter arrangement before the journey begins." },
+        { times: ["late-night"], text: "Arrange your pickup through an official taxi stand or the ride provider's app." }
+      ] },
+      { id: "atm-cash", name: "ATM or cash", tips: [
+        { times: ["daytime", "evening", "late-night"], text: "Shield the keypad when entering your PIN and put your card and cash away before leaving the machine." },
+        { times: ["daytime", "evening", "late-night"], text: "Review your bank's official guidance for card use and contact details before your trip." },
+        { times: ["late-night"], text: "Plan cash needs ahead so you can choose a time and ATM location that work for your itinerary." }
+      ] },
+      { id: "meeting-people", name: "Meeting new people", tips: [
+        { times: ["daytime", "evening", "late-night"], text: "Agree on a public meeting place and let someone you trust know your plan." },
+        { times: ["daytime", "evening", "late-night"], text: "Keep control of your own transport arrangements and personal belongings." },
+        { times: ["late-night"], text: "Plan how you will leave and arrange your return transport before meeting." }
+      ] }
+    ];
+    const guardianPetIntros = {
+      zuri: "Zuri's checklist suggests: ",
+      momo: "Momo says, after one sleepy snack break: ",
+      skye: "Skye says, \"Actually...\" here's the plan: ",
+      pudding: "Pudding says, no rush: ",
+      hazel: "Hazel notices the natural details and reminds you: ",
+      kiki: "Kiki says, LET'S GOOOO! Quick prep: ",
+      frosty: "Frosty bravely suggests: "
+    };
     const scores = Object.fromEntries(Object.keys(pets).map((name) => [name, 0]));
     const picks = [];
 
@@ -3122,7 +3533,12 @@
     }
 
     function snackDefinition(id) {
-      return landmarkData.find((landmark) => landmark.snack.id === id)?.snack;
+      const landmarkSnack = landmarkData.find((landmark) => landmark.snack.id === id)?.snack;
+      if (landmarkSnack) return landmarkSnack;
+      const sideQuestSnack = Object.values(sideQuestPets).map((pet) => pet.reward).find((snack) => snack.id === id);
+      if (sideQuestSnack) return { ...sideQuestSnack, emoji: sideQuestSnack.icon };
+      const etiquetteSnack = Object.values(etiquettePets).map((pet) => pet.food).find((snack) => snack.id === id);
+      return etiquetteSnack ? { ...etiquetteSnack, emoji: etiquetteSnack.icon } : undefined;
     }
 
     function renderAdventureWidgets() {
@@ -3214,8 +3630,8 @@
       host.replaceChildren(row);
     }
 
-    function addSnack(snack) {
-      appState.snacks[snack.id] = (appState.snacks[snack.id] || 0) + 1;
+    function addSnack(snack, count = 1) {
+      appState.snacks[snack.id] = (appState.snacks[snack.id] || 0) + count;
       appState.lastSnack = snack.name;
     }
 
@@ -3294,10 +3710,6 @@
     function closeModal(modal, returnFocus) {
       if (modal === ui.hubModal) {
         stopARMode();
-        studyRequestId += 1;
-        studyAbortController?.abort();
-        studyAbortController = null;
-        el("study-generate").disabled = false;
       }
       modal.classList.remove("active");
       modal.setAttribute("aria-hidden", "true");
@@ -3319,12 +3731,6 @@
       const title = card.querySelector(".hub-card-title").textContent;
       const copy = card.querySelector("p").textContent;
       stopARMode();
-      if (hub !== "study") {
-        studyRequestId += 1;
-        studyAbortController?.abort();
-        studyAbortController = null;
-        el("study-generate").disabled = false;
-      }
       activeHub = hub;
       ui.hubKicker.textContent = `${currentPet || "Your companion"}'s quest recommendation`;
       ui.hubTitle.textContent = title;
@@ -3365,16 +3771,7 @@
               : hub === "study" ? "study-title"
               : "hub-modal-title"
       );
-      if (hub === "study") {
-        const options = el("study-landmark-options");
-        if (!options.options.length) {
-          options.replaceChildren(...studyWonders.map((wonder) => {
-            const option = document.createElement("option");
-            option.value = wonder.name;
-            return option;
-          }));
-        }
-      }
+      if (hub === "study") initializeEtiquette();
       if (hub === "lingo") {
         initializeLingo();
       }
@@ -3399,7 +3796,159 @@
       }
     }
 
-    function openDestinationQuest(id) {
+    function readSideQuestState() {
+      try {
+        const saved = localStorage.getItem("pawportSideQuests");
+        if (!saved) return { offers: {}, completedQuestIds: [] };
+        const parsed = JSON.parse(saved);
+        if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+          throw new TypeError("Saved migration-path data must be an object.");
+        }
+        if (parsed.offers !== undefined
+          && (!parsed.offers || typeof parsed.offers !== "object" || Array.isArray(parsed.offers))) {
+          throw new TypeError("Saved migration-path offers must be an object.");
+        }
+        if (parsed.completedQuestIds !== undefined && !Array.isArray(parsed.completedQuestIds)) {
+          throw new TypeError("Saved migration-path completions must be an array.");
+        }
+        const offers = parsed.offers && typeof parsed.offers === "object" && !Array.isArray(parsed.offers)
+          ? Object.fromEntries(Object.entries(parsed.offers).filter(([, count]) => Number.isInteger(count) && count >= 0))
+          : {};
+        const completedQuestIds = Array.isArray(parsed.completedQuestIds)
+          ? parsed.completedQuestIds.filter((questId) => typeof questId === "string")
+          : [];
+        return { offers, completedQuestIds };
+      } catch (error) {
+        console.error("Could not read PawPort migration-path progress.", error);
+        showToast("Migration-path progress could not be read; this visit will use fresh offer counts.");
+        return { offers: {}, completedQuestIds: [] };
+      }
+    }
+
+    function writeSideQuestState(state) {
+      try {
+        localStorage.setItem("pawportSideQuests", JSON.stringify(state));
+        return true;
+      } catch (error) {
+        console.error("Could not save PawPort migration-path progress.", error);
+        showToast("Migration-path progress is available for this visit, but browser storage could not save it.");
+        return false;
+      }
+    }
+
+    function selectedSideQuestPet() {
+      let selectedId = "zuri";
+      try {
+        selectedId = localStorage.getItem("selectedPetId")
+          || localStorage.getItem("pawport.selectedPetId")
+          || selectedId;
+      } catch (error) {
+        console.error("Could not read the selected PawPort pet for a migration quest.", error);
+        showToast("Pet selection could not be read; Zuri will guide this migration quest.");
+      }
+      selectedId = selectedId.toLowerCase();
+      const petName = Object.keys(pets).find((name) => name.toLowerCase() === selectedId);
+      if (!petName) {
+        console.warn(`Unknown PawPort migration-quest pet id: ${selectedId}`);
+        return { id: "zuri", name: "Zuri", profile: sideQuestPets.zuri };
+      }
+      return { id: selectedId, name: petName, profile: sideQuestPets[selectedId] };
+    }
+
+    function offerSideQuest(landmark) {
+      const state = readSideQuestState();
+      const alternative = landmark.alternatives.reduce((lowest, candidate) => {
+        const candidateCount = state.offers[`${landmark.id}:${candidate.id}`] || 0;
+        const lowestCount = state.offers[`${landmark.id}:${lowest.id}`] || 0;
+        return candidateCount < lowestCount ? candidate : lowest;
+      });
+      const offerKey = `${landmark.id}:${alternative.id}`;
+      state.offers[offerKey] = (state.offers[offerKey] || 0) + 1;
+      writeSideQuestState(state);
+      const questId = `migration-${currentSideQuestPlaceId || landmark.id}-${alternative.id}`;
+      return {
+        questId,
+        landmarkId: landmark.id,
+        alternative,
+        completed: completedSideQuestIds.has(questId) || state.completedQuestIds.includes(questId)
+      };
+    }
+
+    function renderSideQuestPanel(crowdLevel) {
+      const landmark = sideQuestConfigById[currentDestinationId];
+      const control = el("side-quest-control");
+      const panel = el("side-quest-panel");
+      control.hidden = !landmark;
+      if (!landmark) {
+        panel.hidden = true;
+        activeSideQuest = null;
+        return;
+      }
+      if (crowdLevel === "low") {
+        el("side-quest-status").textContent = "Low crowds: no migration quest needed.";
+        panel.hidden = true;
+        return;
+      }
+      if (crowdLevel !== "medium" && crowdLevel !== "high") return;
+      el("side-quest-status").textContent = `${crowdLevel === "high" ? "High" : "Medium"} crowds: your companion found a quieter route.`;
+      if (!activeSideQuest || activeSideQuest.landmarkId !== landmark.id) {
+        activeSideQuest = offerSideQuest(landmark);
+      }
+      const pet = selectedSideQuestPet();
+      activeSideQuest.petId = pet.id;
+      activeSideQuest.petName = pet.name;
+      activeSideQuest.food = pet.profile.reward;
+      const arrivalAlreadyComplete = activeSideQuest.completed || completedSideQuestIds.has(activeSideQuest.questId);
+      el("side-quest-avatar").innerHTML = makePetAvatar(pet.name);
+      el("side-quest-dialogue").textContent = pet.profile.dialogue(landmark.name, activeSideQuest.alternative.name);
+      el("side-quest-title").textContent = `Migration Quest · ${activeSideQuest.alternative.name}`;
+      el("side-quest-details").textContent = `${activeSideQuest.alternative.note} Travel time: not verified. Transport mode: not verified. ${pet.profile.trait} reward: ${pet.profile.reward.icon} ${pet.profile.reward.name} × 2 (rare snack).`;
+      const mapQuery = activeSideQuest.alternative.mapsQuery;
+      el("side-quest-map").href = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapQuery)}`;
+      el("side-quest-arrive").disabled = arrivalAlreadyComplete;
+      el("side-quest-arrive").textContent = arrivalAlreadyComplete
+        ? "Migration reward already claimed ✓"
+        : `Arrive and claim ${pet.profile.reward.icon} × 2`;
+      panel.hidden = false;
+    }
+
+    function completeSideQuestArrival() {
+      if (!activeSideQuest || activeSideQuest.completed || completedSideQuestIds.has(activeSideQuest.questId)) return;
+      const state = readSideQuestState();
+      if (state.completedQuestIds.includes(activeSideQuest.questId)) {
+        activeSideQuest.completed = true;
+        renderSideQuestPanel(el("side-quest-crowd").value);
+        return;
+      }
+      state.completedQuestIds.push(activeSideQuest.questId);
+      completedSideQuestIds.add(activeSideQuest.questId);
+      activeSideQuest.completed = true;
+      writeSideQuestState(state);
+      addSnack(activeSideQuest.food, 2);
+      const xpMultiplier = 2;
+      appState.xp += 20 * xpMultiplier;
+      appState.sessionQuests += 1;
+      appState.sessionSteps += 3000;
+      persistAdventureState();
+      renderAdventureWidgets();
+      updateXPDisplay();
+      el("side-quest-arrive").disabled = true;
+      el("side-quest-arrive").textContent = "Migration reward claimed ✓";
+      el("side-quest-status").textContent = "Arrival logged — reward added to your travel party!";
+      window.dispatchEvent(new CustomEvent("pawport:reward", {
+        detail: {
+          source: "sideQuest",
+          questId: activeSideQuest.questId,
+          petId: activeSideQuest.petId,
+          xpMultiplier,
+          food: { name: activeSideQuest.food.name, icon: activeSideQuest.food.icon, count: 2 },
+          rareSnack: true
+        }
+      }));
+      showToast(`${activeSideQuest.food.icon} ${activeSideQuest.food.name} × 2 earned · +${20 * xpMultiplier} XP!`);
+    }
+
+    function openDestinationQuest(id, placeId = id) {
       const landmark = landmarkById[id];
       if (!landmark) {
         console.error(`PawPort received an unknown landmark quest id: ${id}`);
@@ -3407,6 +3956,10 @@
         return;
       }
       currentDestinationId = id;
+      currentSideQuestPlaceId = typeof placeId === "string" && placeId.trim() ? placeId.trim() : id;
+      activeSideQuest = null;
+      el("side-quest-crowd").value = "low";
+      renderSideQuestPanel("low");
       const guideByLandmark = {
         "great-wall": "beijing",
         "machu-picchu": "madrid",
@@ -3560,6 +4113,218 @@
         : `${activeDestinationQuest.snack.emoji} ${activeDestinationQuest.snack.name} earned · Guild stamp added!`);
     }
 
+    function loadGuardianSafetyState() {
+      try {
+        const saved = localStorage.getItem("pawportSafety");
+        if (!saved) {
+          guardianSafetyState = { time: "daytime", settingId: "tourist-site", preparedSettings: [], companionState: "calm" };
+          return;
+        }
+        const parsed = JSON.parse(saved);
+        if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+          throw new TypeError("Saved Guardian Radar progress must be an object.");
+        }
+        guardianSafetyState = {
+          time: ["daytime", "evening", "late-night"].includes(parsed.time) ? parsed.time : "daytime",
+          settingId: guardianSettings.some((setting) => setting.id === parsed.settingId) ? parsed.settingId : "tourist-site",
+          preparedSettings: Array.isArray(parsed.preparedSettings)
+            ? [...new Set(parsed.preparedSettings.filter((id) => guardianSettings.some((setting) => setting.id === id)))]
+            : [],
+          companionState: parsed.companionState === "alert" ? "alert" : "calm"
+        };
+      } catch (error) {
+        console.error("Could not read Guardian Radar settings from browser storage.", error);
+        showToast("Guardian Radar settings could not be read; default demo settings are active.");
+        guardianSafetyState = { time: "daytime", settingId: "tourist-site", preparedSettings: [], companionState: "calm" };
+      }
+    }
+
+    function saveGuardianSafetyState() {
+      try {
+        localStorage.setItem("pawportSafety", JSON.stringify(guardianSafetyState));
+      } catch (error) {
+        console.error("Could not save Guardian Radar settings to browser storage.", error);
+        showToast("Guardian Radar progress is available for this visit, but browser storage could not save it.");
+      }
+    }
+
+    function guardianPetId() {
+      try {
+        const selected = localStorage.getItem("selectedPetId")
+          || localStorage.getItem("pawport.selectedPetId")
+          || "zuri";
+        const petId = selected.toLowerCase();
+        if (guardianPetIntros[petId]) return petId;
+        console.warn(`Unknown Guardian Radar pet id: ${selected}`);
+      } catch (error) {
+        console.error("Could not read the Guardian Radar companion selection.", error);
+        showToast("Companion selection could not be read; Zuri will guide the demo.");
+      }
+      return "zuri";
+    }
+
+    function renderGuardianPreparedBadges() {
+      const host = el("guardian-prepared-badges");
+      host.replaceChildren(...guardianSafetyState.preparedSettings.map((settingId) => {
+        const setting = guardianSettings.find((item) => item.id === settingId);
+        if (!setting) return null;
+        const badge = document.createElement("span");
+        badge.className = "guardian-badge";
+        badge.textContent = `✓ Prepared: ${setting.name}`;
+        return badge;
+      }).filter(Boolean));
+    }
+
+    function renderGuardianCompanion() {
+      const state = guardianSafetyState.companionState;
+      const petId = guardianPetId();
+      const petName = Object.keys(pets).find((name) => name.toLowerCase() === petId) || "Zuri";
+      const button = el("guardian-pet");
+      button.classList.toggle("guardian-state-alert", state === "alert");
+      button.classList.toggle("guardian-state-help", state === "help");
+      button.setAttribute("aria-label", `${petName} is ${state}. Double-tap to open emergency information.`);
+      el("guardian-pet-avatar").innerHTML = makePetAvatar(petName);
+      el("guardian-pet-accessory").textContent = state === "alert" ? "🕵️ !" : state === "help" ? "🛡️" : "";
+      el("guardian-state-label").textContent = state === "help" ? "Help"
+        : state === "alert" ? "Alert" : "Calm";
+      el("guardian-state-message").textContent = state === "help"
+        ? "Emergency information only. Your companion does not monitor surroundings."
+        : state === "alert"
+          ? `${petName} has general preparation tips for this simulated situation.`
+          : "Choose demo controls and scan to see general preparation tips. This companion does not monitor surroundings.";
+    }
+
+    function renderGuardianTip() {
+      const panel = el("guardian-tip-panel");
+      if (guardianSafetyState.companionState !== "alert" || !guardianTips.length) {
+        panel.hidden = true;
+        el("guardian-status").textContent = guardianSafetyState.companionState === "calm"
+          ? "Calm state: no tips are available until you run a demo simulation."
+          : "No curated tip is available for this demo combination.";
+        return;
+      }
+      const tip = guardianTips[guardianTipIndex];
+      const petId = guardianPetId();
+      panel.hidden = false;
+      el("guardian-tip-title").textContent = guardianPetIntros[petId];
+      el("guardian-tip-fact").textContent = tip.text;
+      el("guardian-tip-count").textContent = `Tip ${guardianTipIndex + 1} of ${guardianTips.length}`;
+      el("guardian-status").textContent = `${guardianSettings.find((setting) => setting.id === guardianSafetyState.settingId)?.name || "Selected situation"} · ${guardianSafetyState.time.replace("-", " ")}`;
+      el("guardian-tip-previous").disabled = guardianTipIndex === 0;
+      el("guardian-tip-next").disabled = guardianTipIndex >= guardianTips.length - 1;
+    }
+
+    function renderGuardianRadar() {
+      el("guardian-time").value = guardianSafetyState.time;
+      el("guardian-setting").value = guardianSafetyState.settingId;
+      renderGuardianCompanion();
+      renderGuardianTip();
+      renderGuardianPreparedBadges();
+    }
+
+    function matchingGuardianTips(settingId, time) {
+      return guardianSettings.flatMap((setting) =>
+        setting.tips.map((tip) => ({ ...tip, settingId: setting.id }))
+      ).filter((tip) => tip.settingId === settingId)
+        .filter((tip) => tip.times.includes(time));
+    }
+
+    function runGuardianSimulation() {
+      guardianSafetyState.time = el("guardian-time").value;
+      guardianSafetyState.settingId = el("guardian-setting").value;
+      guardianTips = matchingGuardianTips(guardianSafetyState.settingId, guardianSafetyState.time);
+      guardianTipIndex = 0;
+      guardianSafetyState.companionState = "alert";
+      saveGuardianSafetyState();
+      renderGuardianRadar();
+    }
+
+    function markGuardianTipComplete() {
+      if (guardianSafetyState.companionState !== "alert" || !guardianTips.length) return;
+      if (guardianTipIndex < guardianTips.length - 1) {
+        guardianTipIndex += 1;
+        renderGuardianTip();
+        return;
+      }
+      const settingId = guardianSafetyState.settingId;
+      if (guardianSafetyState.preparedSettings.includes(settingId)) {
+        el("guardian-status").textContent = `Prepared: ${guardianSettings.find((setting) => setting.id === settingId)?.name || "setting"} badge already collected.`;
+        return;
+      }
+      const setting = guardianSettings.find((item) => item.id === settingId);
+      if (!setting) {
+        console.error(`Unknown Guardian Radar setting id: ${settingId}`);
+        showToast("The prepared badge could not be recorded.");
+        return;
+      }
+      guardianSafetyState.preparedSettings.push(settingId);
+      saveGuardianSafetyState();
+      renderGuardianPreparedBadges();
+      el("guardian-status").textContent = `Prepared: ${setting.name} badge collected.`;
+      window.dispatchEvent(new CustomEvent("pawport:badge", {
+        detail: { id: `prepared-${settingId}`, name: `Prepared: ${setting.name}` }
+      }));
+      showToast(`Prepared: ${setting.name} badge collected!`);
+    }
+
+    function renderGuardianEmergencyNumbers() {
+      const destinationId = el("lingo-destination").value;
+      const profile = emergencyProfiles[destinationId];
+      const list = el("guardian-emergency-numbers");
+      const numbers = profile?.numbers || [];
+      if (!numbers.length) {
+        const item = document.createElement("li");
+        item.textContent = "No curated emergency number is listed for this destination in this guide. Confirm the local number through official sources before travel.";
+        list.replaceChildren(item);
+        return;
+      }
+      list.replaceChildren(...numbers.map((number) => {
+        const item = document.createElement("li");
+        item.textContent = number;
+        return item;
+      }));
+    }
+
+    function renderGuardianPhrases() {
+      const lang = el("lingo-language").value;
+      const grid = el("emergency-grid");
+      const cards = emergencyKeys.map((key, index) => {
+        const translation = phraseTranslations[lang]?.[key];
+        const card = document.createElement("article");
+        card.className = "guardian-phrase-card";
+        const title = document.createElement("h4");
+        title.textContent = `${emergencyIcons[index]} ${emergencyCategories[key]}`;
+        const localPhrase = document.createElement("p");
+        localPhrase.className = "guardian-phrase-local";
+        localPhrase.textContent = translation?.[0] || "Phrase not available yet.";
+        const meaning = document.createElement("p");
+        meaning.className = "guardian-phrase-meaning";
+        meaning.textContent = `English: ${emergencyLabels[key]}`;
+        const pronunciation = document.createElement("p");
+        pronunciation.className = "guardian-phrase-pronunciation";
+        pronunciation.textContent = translation ? `Pronunciation: ${translation[1]}` : "Pronunciation: Phrase not available yet.";
+        const actions = document.createElement("div");
+        actions.className = "guardian-emergency-actions";
+        const play = document.createElement("button");
+        play.type = "button";
+        play.className = "guardian-action";
+        play.textContent = "▶ Play";
+        play.disabled = !translation;
+        play.addEventListener("click", () => {
+          if (translation) playGuardianPhrase(translation[0]);
+        });
+        const show = document.createElement("button");
+        show.type = "button";
+        show.className = "guardian-action guardian-action-shield";
+        show.textContent = "Show";
+        show.addEventListener("click", () => showEmergencyPhrase(key, translation, lang));
+        actions.append(play, show);
+        card.append(title, localPhrase, meaning, pronunciation, actions);
+        return card;
+      });
+      grid.replaceChildren(...cards);
+    }
+
     function initializeLingo() {
       const destinationSelect = el("lingo-destination");
       if (!destinationSelect.options.length) {
@@ -3579,6 +4344,12 @@
       destinationSelect.value = destinations[savedDestination] ? savedDestination : "tokyo";
       el("lingo-language").value = destinations[destinationSelect.value].language;
       if (currentPet) el("lingo-pet-avatar").innerHTML = makePetAvatar(currentPet);
+      loadGuardianSafetyState();
+      guardianTips = guardianSafetyState.companionState === "alert"
+        ? matchingGuardianTips(guardianSafetyState.settingId, guardianSafetyState.time)
+        : [];
+      guardianTipIndex = 0;
+      renderGuardianRadar();
       renderLingoDestination();
       translateLingoPhrase();
     }
@@ -3624,51 +4395,26 @@
       });
       const reminder = document.createElement("li");
       reminder.className = "voice-note";
-      reminder.textContent = "General travel reminders, not live incident reports. Follow local authorities and current official guidance.";
+      reminder.textContent = guardianSafetyNotice;
       alerts.push(reminder);
       el("safety-alerts").replaceChildren(...alerts);
       renderEmergencyPhrases();
+      renderGuardianEmergencyNumbers();
       translateLingoPhrase();
     }
 
     function renderEmergencyPhrases() {
-      const lang = el("lingo-language").value;
-      const grid = el("emergency-grid");
-      const buttons = emergencyKeys.map((key, index) => {
-        const translation = phraseTranslations[lang]?.[key];
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "emergency-quick";
-        button.disabled = !translation;
-        const icon = document.createElement("span");
-        icon.setAttribute("aria-hidden", "true");
-        icon.textContent = emergencyIcons[index];
-        const label = document.createElement("span");
-        label.textContent = {
-          "i need help": "I need help!",
-          "where is the nearest hospital": "Nearest hospital?",
-          "call the police": "Call the police",
-          "i am lost": "I am lost"
-        }[key];
-        button.append(icon, label);
-        button.addEventListener("click", () => {
-          if (!translation) return;
-          showEmergencyPhrase(key, translation, lang);
-        });
-        return button;
-      });
-      grid.replaceChildren(...buttons);
+      renderGuardianPhrases();
     }
 
     function normalizePhrase(value) {
       return value.trim().toLocaleLowerCase().replace(/[.!?。！？,，]+$/u, "").replace(/\s+/g, " ");
     }
 
-    async function translateLingoPhrase() {
+    function translateLingoPhrase() {
       const input = el("phrase-input").value.trim();
       const lang = el("lingo-language").value;
       const destination = destinations[el("lingo-destination").value];
-      const requestId = ++translationRequest;
       const textNode = el("translated-text");
       const pronunciationNode = el("translated-pronunciation");
       const statusNode = el("translated-status");
@@ -3698,48 +4444,9 @@
         return;
       }
 
-      if (typeof window.PawPortTranslate === "function") {
-        el("translator-status").textContent = "TRANSLATING";
-        statusNode.textContent = "Using your app-connected translation provider.";
-        button.disabled = true;
-        try {
-          const result = await window.PawPortTranslate({
-            text: input,
-            targetLanguage: lang,
-            destination: el("lingo-destination").value
-          });
-          if (requestId !== translationRequest) return;
-          const translated = typeof result === "string" ? result : result?.translation;
-          if (typeof translated !== "string" || !translated.trim()) {
-            throw new TypeError("Translation provider must return text or { translation, pronunciation }.");
-          }
-          textNode.textContent = translated;
-          pronunciationNode.textContent = typeof result === "object" && result.pronunciation
-            ? `Say it: ${result.pronunciation}`
-            : "Pronunciation guide not provided by the translation provider.";
-          statusNode.textContent = `${languageNames[lang]} · ${destination.name} · connected provider`;
-          el("translator-status").textContent = "TRANSLATION READY";
-          button.disabled = false;
-          button.dataset.phrase = translated;
-          button.dataset.language = lang;
-          bubble.classList.remove("pop");
-          void bubble.offsetWidth;
-          bubble.classList.add("pop");
-        } catch (error) {
-          if (requestId !== translationRequest) return;
-          console.error("PawPort's connected translation provider failed.", error);
-          textNode.textContent = "We couldn't translate that phrase.";
-          pronunciationNode.textContent = "Check your connection or try a phrase from the offline phrasebook.";
-          statusNode.textContent = "Translation provider error.";
-          el("translator-status").textContent = "TRANSLATION ERROR";
-          button.disabled = true;
-        }
-        return;
-      }
-
       textNode.textContent = "That phrase isn't in the offline phrasebook yet.";
       pronunciationNode.textContent = "Try “I need help”, “Thank you”, “Hello”, or another common travel phrase.";
-      statusNode.textContent = "Your text stays on this device. Optional host adapter: window.PawPortTranslate({ text, targetLanguage, destination }).";
+      statusNode.textContent = "Your text stays on this device. Only phrases in the curated offline phrasebook can be translated.";
       el("translator-status").textContent = "OFFLINE PHRASEBOOK";
       button.disabled = true;
     }
@@ -3751,7 +4458,7 @@
       }
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = { ja: "ja-JP", es: "es-ES", it: "it-IT", fr: "fr-FR", zh: "zh-CN" }[language] || "en";
+      utterance.lang = { ja: "ja-JP", es: "es-ES", it: "it-IT", fr: "fr-FR", zh: "zh-CN", hi: "hi-IN", ar: "ar-JO", pt: "pt-BR" }[language] || "en";
       utterance.rate = currentPet === "Kiki" ? 1.06 : .9;
       utterance.pitch = currentPet === "Frosty" ? 1.22 : 1.08;
       utterance.onerror = (event) => {
@@ -3764,22 +4471,100 @@
     }
 
     function showEmergencyPhrase(key, translation, language) {
-      activeEmergencyPhrase = { key, translation, language };
-      const labels = {
-        "i need help": "I need help!",
-        "where is the nearest hospital": "Where is the nearest hospital?",
-        "call the police": "Call the police",
-        "i am lost": "I am lost"
-      };
-      el("emergency-language").textContent = `${languageNames[language]} · ${destinations[el("lingo-destination").value].name}`;
-      el("emergency-original").textContent = labels[key];
-      el("emergency-translation").textContent = translation[0];
-      el("emergency-pronunciation").textContent = translation[1];
+      const destinationId = el("lingo-destination").value;
+      activeEmergencyPhrase = translation ? {
+        key,
+        translation,
+        language,
+        locale: emergencyProfiles[destinationId]?.speechLanguage
+      } : null;
+      guardianSafetyState.companionState = "help";
+      saveGuardianSafetyState();
+      renderGuardianCompanion();
+      renderGuardianEmergencyNumbers();
+      el("emergency-language").textContent = `${languageNames[language] || "Local language"} · ${destinations[destinationId]?.name || "Selected destination"}`;
+      el("emergency-category").textContent = emergencyCategories[key] || "Emergency phrase";
+      el("emergency-original").textContent = emergencyLabels[key] || "Phrase not available yet.";
+      el("emergency-translation").textContent = translation?.[0] || "Phrase not available yet.";
+      el("emergency-pronunciation").textContent = translation ? `Pronunciation: ${translation[1]}` : "Pronunciation: Phrase not available yet.";
+      el("emergency-audio-status").textContent = "";
+      el("speak-emergency").disabled = !translation;
+      el("guardian-emergency-plain").hidden = false;
+      el("guardian-emergency-plain").textContent = "Your companion: Take a breath if you can. This is general information, not monitoring. If you feel in danger, call the local emergency number.";
       const screen = el("emergency-screen");
       screen.classList.add("active");
       screen.setAttribute("aria-hidden", "false");
       screen.inert = false;
+      void requestGuardianWakeLock();
       el("emergency-close").focus({ preventScroll: true });
+    }
+
+    function openGuardianEmergencyScreen() {
+      const language = el("lingo-language").value;
+      const translation = phraseTranslations[language]?.["i need help"];
+      showEmergencyPhrase("i need help", translation, language);
+    }
+
+    async function requestGuardianWakeLock() {
+      if (!navigator.wakeLock || typeof navigator.wakeLock.request !== "function") return;
+      await releaseGuardianWakeLock();
+      try {
+        guardianWakeLock = await navigator.wakeLock.request("screen");
+      } catch (error) {
+        console.error("Could not keep the emergency phrase screen awake.", error);
+        el("emergency-audio-status").textContent = "Screen wake lock is unavailable on this device.";
+      }
+    }
+
+    async function releaseGuardianWakeLock() {
+      if (!guardianWakeLock) return;
+      const lock = guardianWakeLock;
+      guardianWakeLock = null;
+      try {
+        await lock.release();
+      } catch (error) {
+        console.error("Could not release the emergency screen wake lock.", error);
+      }
+    }
+
+    function guardianSpeechLocale() {
+      const profileLocale = emergencyProfiles[el("lingo-destination").value]?.speechLanguage;
+      const language = el("lingo-language").value;
+      if (profileLocale && profileLocale.split("-")[0] === language) return profileLocale;
+      return { ja: "ja-JP", es: "es-ES", it: "it-IT", fr: "fr-FR", zh: "zh-CN", hi: "hi-IN", ar: "ar-JO", pt: "pt-BR" }[language]
+        || profileLocale || "en";
+    }
+
+    function playGuardianPhrase(phrase) {
+      const status = el("guardian-audio-status");
+      const emergencyStatus = el("emergency-audio-status");
+      if (!("speechSynthesis" in window) || typeof SpeechSynthesisUtterance === "undefined") {
+        const message = "Audio is not available on this device — tap Show instead.";
+        status.textContent = message;
+        emergencyStatus.textContent = message;
+        return;
+      }
+      try {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(phrase);
+        utterance.lang = guardianSpeechLocale();
+        utterance.onerror = (event) => {
+          if (event.error !== "canceled" && event.error !== "interrupted") {
+            console.error("Guardian Radar speech playback failed.", event.error);
+            const message = "Audio is not available on this device — tap Show instead.";
+            status.textContent = message;
+            emergencyStatus.textContent = message;
+          }
+        };
+        window.speechSynthesis.speak(utterance);
+        status.textContent = "";
+        emergencyStatus.textContent = "";
+      } catch (error) {
+        console.error("Guardian Radar could not start speech playback.", error);
+        const message = "Audio is not available on this device — tap Show instead.";
+        status.textContent = message;
+        emergencyStatus.textContent = message;
+      }
     }
 
     function closeEmergencyPhrase() {
@@ -3788,11 +4573,14 @@
       screen.setAttribute("aria-hidden", "true");
       screen.inert = true;
       activeEmergencyPhrase = null;
+      guardianSafetyState.companionState = "calm";
+      saveGuardianSafetyState();
+      renderGuardianRadar();
+      void releaseGuardianWakeLock();
       el("emergency-grid").querySelector("button")?.focus({ preventScroll: true });
     }
 
     function scheduleLingoTranslation() {
-      translationRequest += 1;
       window.clearTimeout(translationTimer);
       translationTimer = window.setTimeout(translateLingoPhrase, 220);
     }
@@ -4120,6 +4908,7 @@
       delete document.body.dataset.selectedPetId;
       try {
         localStorage.removeItem("pawport.selectedPetId");
+        localStorage.removeItem("selectedPetId");
       } catch (error) {
         console.error("Could not clear the saved PawPort pet before retaking the quiz.", error);
       }
@@ -4315,203 +5104,177 @@
       toastTimer = window.setTimeout(() => ui.toast.classList.remove("show"), 2800);
     }
 
-    function normalizeStudyLandmark(value) {
-      return value.trim().normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase();
-    }
-
-    function selectedStudyWonder() {
-      const value = normalizeStudyLandmark(el("study-landmark").value);
-      return studyWonders.find((wonder) => normalizeStudyLandmark(wonder.name) === value) || null;
-    }
-
-    function isValidStudyGuide(data) {
-      return Boolean(
-        data &&
-        typeof data.landmarkSummary === "string" &&
-        data.landmarkSummary.trim() &&
-        Array.isArray(data.quiz) &&
-        data.quiz.length === 5 &&
-        data.quiz.every((question, index) =>
-          question &&
-          question.id === index + 1 &&
-          question.difficulty === studyDifficulty[index] &&
-          typeof question.question === "string" &&
-          question.question.trim() &&
-          Array.isArray(question.options) &&
-          question.options.length === 4 &&
-          question.options.every((option) => typeof option === "string" && option.trim()) &&
-          Number.isInteger(question.correctAnswerIndex) &&
-          question.correctAnswerIndex >= 0 &&
-          question.correctAnswerIndex <= 3 &&
-          question.snackReward === studyRewards[index]
-        )
-      );
-    }
-
-    async function generateStudyGuide() {
-      const wonder = selectedStudyWonder();
-      const status = el("study-status");
-      const button = el("study-generate");
-      const requestId = ++studyRequestId;
-      if (!wonder) {
-        status.textContent = "Choose or enter one of the New 7 Wonders from the list.";
-        el("study-landmark").focus();
-        return;
-      }
-
-      studyAbortController?.abort();
-      studyAbortController = new AbortController();
-      button.disabled = true;
-      el("study-summary").hidden = true;
-      el("study-quiz").hidden = true;
-      status.textContent = `Gathering field notes for ${wonder.name}…`;
-      studyQuizState = null;
+    function currentEtiquettePet() {
+      let petId = "zuri";
       try {
-        const response = await fetch("/api/study-landmark", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ landmark: wonder.name }),
-          signal: studyAbortController.signal
-        });
-        const responseText = await response.text();
-        let data;
-        try {
-          data = JSON.parse(responseText);
-        } catch {
-          const responseType = response.headers.get("content-type") || "unknown content type";
-          console.error("PawPort study API returned a non-JSON response.", {
-            status: response.status,
-            contentType: responseType,
-            responseText
-          });
-          throw new Error(
-            `Study guide API returned HTTP ${response.status} (${responseType}). ` +
-            "The API server is not available on this origin. Start PawPort with `node --experimental-strip-types server.mjs`; " +
-            `server response: ${responseText.slice(0, 200) || "(empty response)"}`
-          );
-        }
-        if (!response.ok) {
-          const errorMessage = typeof data.error === "string"
-            ? data.error
-            : `Study guide request failed with HTTP ${response.status}.`;
-          console.error("PawPort study API request failed.", {
-            status: response.status,
-            error: errorMessage
-          });
-          throw new Error(errorMessage);
-        }
-        if (!isValidStudyGuide(data)) {
-          throw new TypeError("The study guide service returned an invalid guide or quiz.");
-        }
-        if (requestId !== studyRequestId) return;
-
-        studyQuizState = { wonder, quiz: data.quiz, index: 0, earnedSnacks: 0, answered: false, finished: false };
-        el("study-summary-title").textContent = wonder.name;
-        el("study-summary-text").textContent = data.landmarkSummary;
-        el("study-start-quiz").hidden = false;
-        el("study-summary").hidden = false;
-        status.textContent = "Field guide ready. Read the summary, then start the five-question quiz.";
+        petId = localStorage.getItem("selectedPetId") || "zuri";
       } catch (error) {
-        if (error.name === "AbortError") return;
-        if (requestId !== studyRequestId) return;
-        console.error("Could not generate the PawPort landmark study guide.", error);
-        status.textContent = error instanceof TypeError && error.message.includes("invalid guide")
-          ? "The study service returned an unexpected response. Please try again."
-          : error.message || "Could not load the study guide. Please try again.";
-      } finally {
-        if (requestId === studyRequestId) {
-          button.disabled = false;
-          studyAbortController = null;
+        console.error("Could not read the selected PawPort pet.", error);
+      }
+      return etiquettePets[petId.toLowerCase()] ? etiquettePets[petId.toLowerCase()] : etiquettePets.zuri;
+    }
+
+    function loadEtiquetteState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem("pawportEtiquette") || "{}");
+        const validExplored = {};
+        for (const landmark of studyWonders) {
+          const sectionIds = saved.explored?.[landmark.id];
+          if (Array.isArray(sectionIds)) {
+            validExplored[landmark.id] = [...new Set(sectionIds.filter((id) =>
+              landmark.lessons.some((lesson) => lesson.id === id)
+            ))];
+          }
         }
+        etiquetteState = {
+          explored: validExplored,
+          rewarded: Array.isArray(saved.rewarded)
+            ? [...new Set(saved.rewarded.filter((id) => studyWonders.some((landmark) => landmark.id === id)))]
+            : [],
+          readinessStamps: Number.isInteger(saved.readinessStamps) && saved.readinessStamps >= 0
+            ? saved.readinessStamps
+            : 0
+        };
+      } catch (error) {
+        console.error("Could not load PawPort etiquette progress.", error);
+        showToast("Etiquette progress could not be loaded from browser storage.");
+      }
+      etiquetteLoaded = true;
+    }
+
+    function saveEtiquetteState() {
+      try {
+        localStorage.setItem("pawportEtiquette", JSON.stringify(etiquetteState));
+        return true;
+      } catch (error) {
+        console.error("Could not save PawPort etiquette progress.", error);
+        showToast("Etiquette progress is only available for this visit; browser storage is unavailable.");
+        return false;
       }
     }
 
-    function renderStudyQuestion() {
-      if (!studyQuizState || studyQuizState.finished) return;
-      const question = studyQuizState.quiz[studyQuizState.index];
-      el("study-quiz").hidden = false;
-      el("study-progress").textContent = `Question ${question.id} of 5 · ${question.difficulty}`;
-      el("study-reward").textContent = `Reward: ${question.snackReward} ${question.snackReward === 1 ? "snack" : "snacks"}`;
-      el("study-question").textContent = question.question;
-      el("study-feedback").textContent = "";
-      el("study-quiz-action").textContent = "Check answer";
-      el("study-quiz-action").hidden = false;
-      studyQuizState.answered = false;
+    function renderEtiquetteLessons() {
+      const landmark = studyWonders.find((item) => item.id === selectedEtiquetteLandmarkId) || studyWonders[0];
+      const explored = etiquetteState.explored[landmark.id] || [];
+      const pet = currentEtiquettePet();
+      el("study-landmark-title").textContent = landmark.name;
+      el("study-landmark-location").textContent = landmark.location;
+      el("study-landmark-intro").textContent = landmark.intro;
+      el("study-hero-art").textContent = landmark.icon;
+      el("study-hero-art").setAttribute("aria-label", `${landmark.name} illustration`);
+      el("study-progress").textContent = `${explored.length}/3 explored · ${etiquetteState.readinessStamps} Readiness Stamp${etiquetteState.readinessStamps === 1 ? "" : "s"}`;
+      el("study-dialogue").textContent = `${pet.name}: “${pet.intro}”`;
+      el("study-reward").textContent = etiquetteState.rewarded.includes(landmark.id)
+        ? "Landmark complete! Its Readiness Stamp and pet food reward have already been claimed."
+        : "Explore all three lessons to earn 1 Readiness Stamp and 1 pet food item.";
 
-      const options = question.options.map((option, index) => {
-        const label = document.createElement("label");
-        label.className = "study-option";
-        const input = document.createElement("input");
-        input.type = "radio";
-        input.name = "study-answer";
-        input.value = String(index);
-        const text = document.createElement("span");
-        text.textContent = option;
-        label.append(input, text);
-        return label;
+      const lessonCards = landmark.lessons.map((lesson) => {
+        const card = document.createElement("article");
+        card.className = `study-lesson${explored.includes(lesson.id) ? " is-explored" : ""}`;
+        const illustration = document.createElement("div");
+        illustration.className = "study-lesson-art";
+        illustration.setAttribute("role", "img");
+        illustration.setAttribute("aria-label", `${lesson.title} illustration`);
+        illustration.textContent = lesson.icon;
+        const text = document.createElement("div");
+        const heading = document.createElement("h4");
+        heading.textContent = lesson.title;
+        const explanation = document.createElement("p");
+        explanation.textContent = lesson.explanation;
+        text.append(heading, explanation);
+        const button = document.createElement("button");
+        button.className = "creative-action";
+        button.type = "button";
+        button.dataset.exploreLesson = lesson.id;
+        button.textContent = explored.includes(lesson.id) ? "Explored ✓" : "Mark as Explored";
+        button.disabled = explored.includes(lesson.id);
+        card.append(illustration, text, button);
+        return card;
       });
-      el("study-options").replaceChildren(...options);
+      el("study-lessons").replaceChildren(...lessonCards);
+      renderStudyReadinessLog();
     }
 
-    function finishStudyQuiz() {
-      if (!studyQuizState || studyQuizState.finished) return;
-      studyQuizState.finished = true;
-      const wonder = studyQuizState.wonder;
-      const snack = landmarkById[wonder.id].snack;
-      const totalSnacks = studyQuizState.earnedSnacks;
-      const xpEarned = totalSnacks * 5;
-
-      for (let count = 0; count < totalSnacks; count += 1) addSnack(snack);
-      appState.xp += xpEarned;
-      renderAdventureWidgets();
-      updateXPDisplay();
-      persistAdventureState();
-      if (petRig) petHopStart = performance.now();
-
-      el("study-options").replaceChildren();
-      el("study-progress").textContent = "Quiz complete!";
-      el("study-reward").textContent = `${totalSnacks} ${totalSnacks === 1 ? "snack" : "snacks"} earned`;
-      el("study-question").textContent = `Great exploring, ${appState.travelerName}!`;
-      el("study-feedback").textContent = totalSnacks
-        ? `${currentPet || "Your companion"} earned ${totalSnacks} ${snack.emoji} ${snack.name} ${totalSnacks === 1 ? "snack" : "snacks"} and +${xpEarned} XP.`
-        : "No correct answers this time, so no snacks were added. Read the guide and try another quiz!";
-      el("study-quiz-action").hidden = true;
-      el("study-start-quiz").hidden = true;
-      el("study-status").textContent = "Study session complete. Your snack pouch and XP have been updated.";
-      showToast(totalSnacks
-        ? `${snack.emoji} ${totalSnacks} ${snack.name} ${totalSnacks === 1 ? "snack" : "snacks"} earned · +${xpEarned} XP`
-        : "Study quiz complete. Keep exploring to earn snacks!");
+    function renderStudyReadinessLog() {
+      const rows = studyWonders.map((landmark) => {
+        const exploredCount = (etiquetteState.explored[landmark.id] || []).length;
+        const complete = etiquetteState.rewarded.includes(landmark.id);
+        const row = document.createElement("article");
+        row.className = "study-readiness-row";
+        const icon = document.createElement("span");
+        icon.className = "study-readiness-icon";
+        icon.setAttribute("aria-hidden", "true");
+        icon.textContent = landmark.icon;
+        const details = document.createElement("div");
+        const heading = document.createElement("h4");
+        heading.textContent = landmark.name;
+        const progress = document.createElement("p");
+        progress.textContent = complete
+          ? "Complete · Readiness Stamp earned"
+          : `${exploredCount}/3 lessons explored`;
+        details.append(heading, progress);
+        const button = document.createElement("button");
+        button.className = "creative-action";
+        button.type = "button";
+        button.dataset.studyLandmark = landmark.id;
+        button.textContent = complete ? "Review" : "Explore";
+        button.setAttribute("aria-label", `${complete ? "Review" : "Explore"} ${landmark.name} lessons`);
+        row.append(icon, details, button);
+        return row;
+      });
+      el("study-readiness-list").replaceChildren(...rows);
     }
 
-    function handleStudyQuizAction() {
-      if (!studyQuizState || studyQuizState.finished) return;
-      if (!studyQuizState.answered) {
-        const selected = el("study-options").querySelector('input[name="study-answer"]:checked');
-        if (!selected) {
-          el("study-feedback").textContent = "Choose an answer before continuing.";
-          return;
-        }
+    function setStudyTab(tab) {
+      activeStudyTab = tab === "readiness" ? "readiness" : "etiquette";
+      const isEtiquette = activeStudyTab === "etiquette";
+      el("study-etiquette-tab").setAttribute("aria-selected", String(isEtiquette));
+      el("study-etiquette-tab").tabIndex = isEtiquette ? 0 : -1;
+      el("study-readiness-tab").setAttribute("aria-selected", String(!isEtiquette));
+      el("study-readiness-tab").tabIndex = isEtiquette ? -1 : 0;
+      el("study-etiquette-panel").hidden = !isEtiquette;
+      el("study-readiness-panel").hidden = isEtiquette;
+      if (!isEtiquette) renderStudyReadinessLog();
+    }
 
-        const question = studyQuizState.quiz[studyQuizState.index];
-        const correct = Number(selected.value) === question.correctAnswerIndex;
-        if (correct) studyQuizState.earnedSnacks += question.snackReward;
-        el("study-options").querySelectorAll("input").forEach((input) => { input.disabled = true; });
-        el("study-feedback").textContent = correct
-          ? `Correct! ${currentPet || "Your companion"} is cheering — ${question.snackReward} ${question.snackReward === 1 ? "snack" : "snacks"} added to your quiz rewards.`
-          : `Not quite. The correct answer was: ${question.options[question.correctAnswerIndex]}.`;
-        studyQuizState.answered = true;
-        el("study-quiz-action").textContent = studyQuizState.index === studyQuizState.quiz.length - 1
-          ? "Finish quiz"
-          : "Next question";
-        return;
+    function initializeEtiquette() {
+      if (!etiquetteLoaded) loadEtiquetteState();
+      const selector = el("study-landmark");
+      if (!selector.options.length) {
+        selector.replaceChildren(...studyWonders.map((landmark) => {
+          const option = document.createElement("option");
+          option.value = landmark.id;
+          option.textContent = `${landmark.name} · ${landmark.location}`;
+          return option;
+        }));
       }
+      selector.value = selectedEtiquetteLandmarkId;
+      renderEtiquetteLessons();
+      setStudyTab(activeStudyTab);
+    }
 
-      if (studyQuizState.index === studyQuizState.quiz.length - 1) {
-        finishStudyQuiz();
-        return;
+    function exploreEtiquetteLesson(lessonId) {
+      const landmark = studyWonders.find((item) => item.id === selectedEtiquetteLandmarkId);
+      if (!landmark || !landmark.lessons.some((lesson) => lesson.id === lessonId)) return;
+      const explored = etiquetteState.explored[landmark.id] || [];
+      if (explored.includes(lessonId)) return;
+      etiquetteState.explored[landmark.id] = [...explored, lessonId];
+      if (etiquetteState.explored[landmark.id].length === landmark.lessons.length &&
+        !etiquetteState.rewarded.includes(landmark.id)) {
+        const pet = currentEtiquettePet();
+        etiquetteState.rewarded.push(landmark.id);
+        etiquetteState.readinessStamps += 1;
+        addSnack({ ...pet.food, emoji: pet.food.icon }, 1);
+        persistAdventureState();
+        saveEtiquetteState();
+        renderAdventureWidgets();
+        if (petRig) petHopStart = performance.now();
+        playFlash();
+        showToast(`Readiness Stamp + ${pet.food.icon} ${pet.food.name}!`);
+      } else {
+        saveEtiquetteState();
       }
-      studyQuizState.index += 1;
-      renderStudyQuestion();
+      renderEtiquetteLessons();
     }
 
     function resizePetRenderer(host) {
@@ -4702,6 +5465,7 @@
       let petSaved = true;
       try {
         localStorage.setItem("pawport.selectedPetId", selectedPetId);
+        localStorage.setItem("selectedPetId", selectedPetId);
       } catch (error) {
         petSaved = false;
         console.error("Could not save the selected PawPort pet to browser storage.", error);
@@ -4745,30 +5509,43 @@
       const card = event.target.closest("[data-hub]");
       if (card) openHub(card);
     });
-    el("study-generate").addEventListener("click", generateStudyGuide);
-    el("study-landmark").addEventListener("input", () => {
-      if (studyAbortController) {
-        studyRequestId += 1;
-        studyAbortController.abort();
-        studyAbortController = null;
-        el("study-generate").disabled = false;
-      }
-      studyQuizState = null;
-      el("study-summary").hidden = true;
-      el("study-quiz").hidden = true;
-      el("study-status").textContent = "Generate a new guide for the selected landmark.";
+    el("study-landmark").addEventListener("change", (event) => {
+      selectedEtiquetteLandmarkId = event.currentTarget.value;
+      renderEtiquetteLessons();
     });
-    el("study-start-quiz").addEventListener("click", () => {
-      if (!studyQuizState || studyQuizState.finished) return;
-      renderStudyQuestion();
-      el("study-quiz").scrollIntoView({ behavior: "smooth", block: "nearest" });
-      el("study-question").focus?.({ preventScroll: true });
+    el("study-lessons").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-explore-lesson]");
+      if (button) exploreEtiquetteLesson(button.dataset.exploreLesson);
     });
-    el("study-quiz-action").addEventListener("click", handleStudyQuizAction);
+    el("study-readiness-list").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-study-landmark]");
+      if (!button) return;
+      selectedEtiquetteLandmarkId = button.dataset.studyLandmark;
+      el("study-landmark").value = selectedEtiquetteLandmarkId;
+      renderEtiquetteLessons();
+      setStudyTab("etiquette");
+      el("study-etiquette-tab").focus();
+    });
+    el("study-tabs").addEventListener("click", (event) => {
+      const tab = event.target.closest("[data-study-tab]");
+      if (tab) setStudyTab(tab.dataset.studyTab);
+    });
+    el("study-tabs").addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      const tabs = ["etiquette", "readiness"];
+      const currentIndex = tabs.indexOf(activeStudyTab);
+      const nextIndex = event.key === "Home" ? 0
+        : event.key === "End" ? tabs.length - 1
+          : (currentIndex + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+      setStudyTab(tabs[nextIndex]);
+      el(tabs[nextIndex] === "etiquette" ? "study-etiquette-tab" : "study-readiness-tab").focus();
+    });
     el("ar-toggle").addEventListener("click", startARMode);
     el("ar-exit").addEventListener("click", stopARMode);
     el("ar-snapshot").addEventListener("click", snapARPhoto);
     window.addEventListener("pagehide", stopARMode);
+    window.addEventListener("pagehide", () => { void releaseGuardianWakeLock(); });
     document.querySelector(".creative-tabs").addEventListener("click", (event) => {
       const tab = event.target.closest("[data-creative-tab]");
       if (tab) setCreativeTab(tab.dataset.creativeTab);
@@ -4855,6 +5632,30 @@
     });
     el("quest-check-answer").addEventListener("click", checkDestinationTrivia);
     el("quest-claim-reward").addEventListener("click", claimDestinationQuest);
+    el("side-quest-crowd").addEventListener("change", (event) => {
+      renderSideQuestPanel(event.currentTarget.value);
+    });
+    el("side-quest-arrive").addEventListener("click", completeSideQuestArrival);
+    window.addEventListener("pawport:openSideQuest", (event) => {
+      const detail = event.detail || {};
+      const requestedLandmarkId = typeof detail.landmarkId === "string" ? detail.landmarkId : "";
+      const placeId = typeof detail.placeId === "string" ? detail.placeId : "";
+      const landmarkId = landmarkById[requestedLandmarkId]
+        ? requestedLandmarkId
+        : landmarkById[placeId] ? placeId : "";
+      if (!landmarkId) {
+        console.error("PawPort received a side-quest event without a supported landmarkId or placeId.", detail);
+        showToast("That migration quest could not find a supported landmark.");
+        return;
+      }
+      openDestinationQuest(landmarkId, placeId || landmarkId);
+    });
+    window.addEventListener("storage", (event) => {
+      if ((event.key === "selectedPetId" || event.key === "pawport.selectedPetId")
+        && activeSideQuest && !el("side-quest-panel").hidden) {
+        renderSideQuestPanel(el("side-quest-crowd").value);
+      }
+    });
     el("feed-pet").addEventListener("click", feedPet);
     el("radar-scan").addEventListener("click", () => {
       activeRadarScan += 1;
@@ -4911,6 +5712,68 @@
       renderEmergencyPhrases();
       scheduleLingoTranslation();
     });
+    const resetGuardianSelection = () => {
+      guardianSafetyState.time = el("guardian-time").value;
+      guardianSafetyState.settingId = el("guardian-setting").value;
+      guardianSafetyState.companionState = "calm";
+      guardianTips = [];
+      guardianTipIndex = 0;
+      saveGuardianSafetyState();
+      renderGuardianRadar();
+    };
+    el("guardian-time").addEventListener("change", resetGuardianSelection);
+    el("guardian-setting").addEventListener("change", resetGuardianSelection);
+    el("guardian-simulate").addEventListener("click", runGuardianSimulation);
+    el("guardian-emergency-open").addEventListener("click", openGuardianEmergencyScreen);
+    el("guardian-tip-previous").addEventListener("click", () => {
+      if (guardianTipIndex === 0) return;
+      guardianTipIndex -= 1;
+      renderGuardianTip();
+    });
+    el("guardian-tip-next").addEventListener("click", () => {
+      if (guardianTipIndex >= guardianTips.length - 1) return;
+      guardianTipIndex += 1;
+      renderGuardianTip();
+    });
+    el("guardian-tip-got-it").addEventListener("click", markGuardianTipComplete);
+    const guardianTapTimes = new WeakMap();
+    [el("guardian-pet"), el("pet-scene")].forEach((companion) => {
+      companion.addEventListener("click", (event) => {
+        if (event.detail === 0) return;
+        const now = Date.now();
+        const previousTap = guardianTapTimes.get(companion) || 0;
+        guardianTapTimes.set(companion, now);
+        if (now - previousTap <= 450) {
+          guardianTapTimes.set(companion, 0);
+          openGuardianEmergencyScreen();
+        }
+      });
+    });
+    window.addEventListener("pawport:openEmergency", (event) => {
+      const destinationId = event.detail?.destinationId;
+      if (typeof destinationId === "string" && destinations[destinationId]) {
+        el("lingo-destination").value = destinationId;
+        el("lingo-language").value = destinations[destinationId].language;
+        renderLingoDestination();
+      }
+      openGuardianEmergencyScreen();
+    });
+    window.addEventListener("storage", (event) => {
+      if (event.key === "pawportSafety") {
+        loadGuardianSafetyState();
+        guardianTips = guardianSafetyState.companionState === "alert"
+          ? matchingGuardianTips(guardianSafetyState.settingId, guardianSafetyState.time)
+          : [];
+        guardianTipIndex = 0;
+        renderGuardianRadar();
+        return;
+      }
+      if (event.key === "selectedPetId" || event.key === "pawport.selectedPetId") {
+        renderGuardianCompanion();
+        renderGuardianTip();
+        if (activeHub === "study" && !el("study-content").hidden) renderEtiquetteLessons();
+      }
+    });
     el("phrase-input").addEventListener("input", scheduleLingoTranslation);
     el("phrase-input").addEventListener("keydown", (event) => {
       if (event.key === "Enter") translateLingoPhrase();
@@ -4921,7 +5784,7 @@
       if (phrase && language) speakPhrase(phrase, language);
     });
     el("speak-emergency").addEventListener("click", () => {
-      if (activeEmergencyPhrase) speakPhrase(activeEmergencyPhrase.translation[0], activeEmergencyPhrase.language);
+      if (activeEmergencyPhrase) playGuardianPhrase(activeEmergencyPhrase.translation[0]);
     });
     el("emergency-close").addEventListener("click", closeEmergencyPhrase);
     el("emergency-screen").addEventListener("click", (event) => {

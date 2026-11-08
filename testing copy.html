@@ -1225,23 +1225,36 @@
     .creative-shell[hidden] { display: none; }
     .creative-heading { margin: 0 0 5px !important; color: #ffd84c !important; font: 700 clamp(25px, 5vw, 34px)/1.08 "Fredoka",sans-serif !important; -webkit-text-stroke: 2px #0f172a !important; paint-order: stroke fill; text-shadow: 2px 3px #0f172a !important; }
     .creative-subtitle { margin: 0; color: #cbd5e1; font-size: 12px; font-weight: 800; line-height: 1.5; }
-    .study-shell { display: grid; gap: 12px; }
-    .study-shell[hidden], .study-summary[hidden], .study-quiz[hidden] { display: none; }
-    .study-card { padding: 14px; border: 1px solid rgba(56,189,248,.55); border-radius: 14px; background: linear-gradient(145deg,rgba(15,23,42,.97),rgba(30,41,74,.97)); color: #e2e8f0; }
-    .study-card h3 { margin: 0 0 8px; color: #fcd34d; font: 700 17px "Fredoka",sans-serif; }
+    .study-shell { display: grid; max-height: min(78vh,760px); gap: 12px; min-width: 0; overflow-y: auto; overscroll-behavior: contain; }
+    .study-shell[hidden] { display: none; }
+    .study-tabs { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; padding: 5px; border: 1px solid #1e293b; border-radius: 12px; background: rgba(15,23,42,.92); }
+    .study-tab { min-height: 42px; padding: 7px; border: 2px solid #1e293b; border-radius: 8px; background: #111827; color: #cbd5e1; cursor: pointer; font: 800 10px "Nunito",sans-serif; }
+    .study-tab[aria-selected="true"] { border-color: #ffee55; background: linear-gradient(135deg,#ffee55,#ff8800); box-shadow: 0 3px 0 #7c2d12; color: #0b0f19; }
+    .study-tab-panel[hidden], .study-summary[hidden] { display: none; }
+    .study-card { min-width: 0; padding: 14px; border: 1px solid #1e293b; border-radius: 14px; background: rgba(15,23,42,.92); color: #e2e8f0; }
+    .study-card h3 { margin: 0 0 8px; color: #ffee55; font: 800 17px "Nunito",sans-serif; }
     .study-card p { margin: 0; color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.6; }
     .study-select-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 9px; align-items: end; }
-    .study-status { min-height: 1.4em; color: #0369a1 !important; font-size: 11px !important; font-weight: 800 !important; }
-    .study-quiz { display: grid; gap: 10px; }
-    .study-question { margin: 0; padding: 13px; border: 1px solid #38bdf8; border-radius: 12px; color: #172033; background: #f8fafc; }
-    .study-question legend { position: relative; top: 10px; z-index: 1; display: block; width: 100%; box-sizing: border-box; padding: 0 5px; background: #f8fafc; color: #172033; font: 800 12px/1.45 "Nunito",sans-serif; text-align: center; }
-    .study-question-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; margin-bottom: 10px; color: #075985; font: 800 9px var(--mono); text-transform: uppercase; }
-    .study-options { display: grid; gap: 7px; }
-    .study-option { display: flex; align-items: flex-start; gap: 8px; padding: 9px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; color: #172033; cursor: pointer; font-size: 12px; font-weight: 700; }
-    .study-option:has(input:checked) { border-color: #0284c7; background: #e0f2fe; }
-    .study-option input { margin-top: 3px; accent-color: #0284c7; }
-    .study-result { min-height: 1.5em; color: #075985 !important; font-weight: 900 !important; }
-    @media (max-width: 580px) { .study-select-row { grid-template-columns: 1fr; } }
+    .study-status { min-height: 1.4em; color: #cbd5e1 !important; font-size: 11px !important; font-weight: 800 !important; }
+    .study-hero { display: grid; grid-template-columns: auto minmax(0,1fr); align-items: center; gap: 13px; }
+    .study-hero-art { display: grid; width: 68px; height: 68px; place-items: center; border: 2px solid #ffee55; border-radius: 14px; background: linear-gradient(145deg,#172554,#0b0f19); font-size: 38px; }
+    .study-toolbar { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: end; gap: 10px; }
+    .study-progress { color: #ffee55 !important; font: 800 10px var(--mono); text-align: right; }
+    .study-dialogue { margin-top: 10px !important; padding: 9px 11px; border-left: 3px solid #ff8800; border-radius: 7px; background: rgba(255,136,0,.1); color: #fef3c7 !important; }
+    .study-lessons,.study-readiness-list { display: grid; gap: 10px; }
+    .study-lesson { display: grid; grid-template-columns: 54px minmax(0,1fr); align-items: center; gap: 10px; padding: 11px; border: 1px solid #1e293b; border-radius: 12px; background: rgba(15,23,42,.9); color: #e2e8f0; }
+    .study-lesson-art { display: grid; width: 50px; height: 50px; place-items: center; border: 1px solid rgba(255,238,85,.6); border-radius: 11px; background: linear-gradient(145deg,#172554,#0b0f19); font-size: 27px; }
+    .study-lesson h4,.study-readiness-row h4 { margin: 0 0 4px; color: #ffee55; font: 800 14px "Nunito",sans-serif; }
+    .study-lesson p,.study-readiness-row p { margin: 0; color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.5; }
+    .study-lesson .creative-action { grid-column: 1 / -1; justify-self: start; min-height: 38px; border: 0; background: linear-gradient(180deg,#22c55e,#16a34a); box-shadow: 0 4px 0 #14532d; color: #052e16; font: 800 12px "Nunito",sans-serif; }
+    .study-lesson .creative-action:disabled { background: #166534; box-shadow: none; color: #dcfce7; cursor: default; }
+    .study-lesson.is-explored { border-color: #22c55e; }
+    .study-readiness-row { display: grid; grid-template-columns: 42px minmax(0,1fr) auto; align-items: center; gap: 10px; padding: 10px; border: 1px solid #1e293b; border-radius: 10px; background: rgba(15,23,42,.9); }
+    .study-readiness-icon { font-size: 27px; text-align: center; }
+    .study-readiness-row h4 { font-size: 13px; }
+    .study-readiness-row p { font-size: 11px; }
+    .study-readiness-row .creative-action { min-height: 34px; padding: 0 9px; }
+    @media (max-width: 580px) { .study-select-row,.study-toolbar { grid-template-columns: 1fr; } .study-progress { text-align: left; } }
     .ar-tools { display: grid; gap: 10px; padding: 13px; border: 1px solid rgba(56,189,248,.58); border-radius: 13px; background: rgba(15,23,42,.95); }
     .ar-tools[hidden], #ar-preview[hidden], #ar-video[hidden] { display: none; }
     .ar-tools h3 { margin: 0; color: #fcd34d; font: 700 16px "Fredoka",sans-serif; }
@@ -1823,10 +1836,10 @@
             <span class="companion-tile">?</span><span class="companion-tile">?</span>
             <span class="companion-tile">?</span>
           </div>
-          <p class="welcome-copy" id="welcome-copy">Welcome to <strong>PawPort!</strong> Every legendary traveler needs a trusted partner. Answer these <strong>4 quick personality questions</strong> to pair with your ideal travel pet! Your pet will tailor your itineraries, unlock location quizzes, and help you build travel scrapbooks!</p>
+          <p class="welcome-copy" id="welcome-copy">Welcome to <strong>PawPort!</strong> Every legendary traveler needs a trusted partner. Answer these <strong>4 quick personality questions</strong> to pair with your ideal travel pet! Your pet will tailor your itineraries, guide you through visual etiquette lessons, and help you build travel scrapbooks!</p>
           <div class="welcome-features" aria-label="Your pet partner features">
             <span class="welcome-feature">Tailored itineraries</span>
-            <span class="welcome-feature">Location quizzes</span>
+            <span class="welcome-feature">Visual etiquette lessons</span>
             <span class="welcome-feature">Travel scrapbooks</span>
           </div>
           <button class="primary-button welcome-button" id="quiz-start-button" type="button">Start quiz ➜</button>
@@ -1909,7 +1922,7 @@
         <h2 class="hub-heading">Choose your next quest</h2>
         <div class="hub-grid" id="hub-grid">
           <button class="hub-card" type="button" data-hub="study">
-            <span class="hub-icon" aria-hidden="true">📚</span><span><span class="hub-card-title">Study Hub</span><p>Explore famous tourist destinations (Great Wall of China, Petra, Taj Mahal, etc.), complete location quizzes to earn pet food snacks, and snap AR photo memories!</p></span><span class="hub-arrow" aria-hidden="true">›</span>
+            <span class="hub-icon" aria-hidden="true">📚</span><span><span class="hub-card-title">Study Hub</span><p>Browse landmark field guides, explore visual etiquette lessons, earn readiness rewards, and snap AR photo memories!</p></span><span class="hub-arrow" aria-hidden="true">›</span>
           </button>
           <button class="hub-card" type="button" data-hub="itinerary">
             <span class="hub-icon" aria-hidden="true">🗺️</span><span><span class="hub-card-title">Itinerary Builder</span><p>Generate custom day-by-day travel schedules or trigger a “Mystery Trip” curated specifically by your pet companion's personality!</p></span><span class="hub-arrow" aria-hidden="true">›</span>
@@ -1999,37 +2012,61 @@
           </div>
           <section class="study-shell" id="study-content" hidden aria-labelledby="study-title">
             <header>
-              <p class="dashboard-kicker">Local landmark field guide</p>
+              <p class="dashboard-kicker">Local field notes · visual learning</p>
               <h2 id="study-title">STUDY HUB</h2>
-              <p class="creative-subtitle">Explore seven famous landmarks, then test your knowledge to earn local treats.</p>
+              <p class="creative-subtitle">Browse landmark field notes, explore visual etiquette lessons, and track your readiness.</p>
             </header>
-            <div class="study-card">
-              <label class="creative-field" for="study-landmark">Choose a landmark
-                <input class="creative-input" id="study-landmark" list="study-landmark-options" maxlength="60" autocomplete="off" placeholder="e.g. Petra">
-                <datalist id="study-landmark-options"></datalist>
-              </label>
-              <div class="study-select-row creative-spaced">
-                <p class="study-status" id="study-status" aria-live="polite">Choose a landmark to open its field guide and quiz.</p>
-                <button class="creative-action" id="study-open-guide" type="button">Open field guide</button>
-              </div>
+            <div class="study-tabs" id="study-tabs" role="tablist" aria-label="Study Hub sections">
+              <button class="study-tab" id="study-guide-tab" type="button" role="tab" data-study-tab="guide" aria-selected="true" aria-controls="study-guide-panel" tabindex="0">🗺️ Field Guide</button>
+              <button class="study-tab" id="study-etiquette-tab" type="button" role="tab" data-study-tab="etiquette" aria-selected="false" aria-controls="study-etiquette-panel" tabindex="-1">📖 Etiquette</button>
+              <button class="study-tab" id="study-readiness-tab" type="button" role="tab" data-study-tab="readiness" aria-selected="false" aria-controls="study-readiness-panel" tabindex="-1">🏅 Readiness</button>
             </div>
-            <section class="study-card study-summary" id="study-summary" hidden aria-labelledby="study-summary-title">
+            <section class="study-tab-panel" id="study-guide-panel" role="tabpanel" aria-labelledby="study-guide-tab">
+              <div class="study-card">
+                <label class="creative-field" for="study-guide-landmark">Choose a landmark
+                  <input class="creative-input" id="study-guide-landmark" list="study-landmark-options" maxlength="60" autocomplete="off" placeholder="e.g. Petra">
+                  <datalist id="study-landmark-options"></datalist>
+                </label>
+                <div class="study-select-row creative-spaced">
+                  <p class="study-status" id="study-status" aria-live="polite">Choose a landmark to open its field guide.</p>
+                  <button class="creative-action" id="study-open-guide" type="button">Open field guide</button>
+                </div>
+              </div>
+              <section class="study-card study-summary" id="study-summary" hidden aria-labelledby="study-summary-title">
               <h3 id="study-summary-title"></h3>
               <p id="study-country"></p>
               <p id="study-pronunciation"></p>
               <p id="study-summary-text"></p>
               <ul id="study-key-facts"></ul>
-              <p class="creative-note creative-spaced">Read the guide first. Then answer five questions; each correct answer earns its listed snack reward.</p>
-              <button class="creative-action creative-spaced" id="study-start-quiz" type="button">Start the 5-question quiz</button>
+              </section>
             </section>
-            <section class="study-card study-quiz" id="study-quiz" hidden aria-labelledby="study-question">
-              <div class="study-question-meta"><span id="study-progress"></span><span id="study-reward"></span></div>
-              <fieldset class="study-question">
-                <legend id="study-question" tabindex="-1"></legend>
-                <div class="study-options" id="study-options"></div>
-              </fieldset>
-              <p class="study-result" id="study-feedback" aria-live="polite"></p>
-              <button class="creative-action" id="study-quiz-action" type="button">Check answer</button>
+            <section class="study-tab-panel" id="study-etiquette-panel" role="tabpanel" aria-labelledby="study-etiquette-tab" hidden>
+              <section class="study-card study-hero" aria-live="polite">
+                <div class="study-hero-art" id="etiquette-hero-art" role="img" aria-label="Landmark illustration">🕌</div>
+                <div>
+                  <h3 id="etiquette-landmark-title">Taj Mahal</h3>
+                  <p id="etiquette-landmark-location">Agra, India</p>
+                  <p id="etiquette-landmark-intro"></p>
+                </div>
+              </section>
+              <section class="study-card" aria-label="Etiquette landmark and progress">
+                <div class="study-toolbar">
+                  <label class="creative-field" for="etiquette-landmark">Choose a landmark
+                    <select class="creative-select" id="etiquette-landmark"></select>
+                  </label>
+                  <p class="study-progress" id="etiquette-progress" aria-live="polite"></p>
+                </div>
+                <p class="study-dialogue" id="etiquette-dialogue" aria-live="polite"></p>
+                <p class="study-status" id="etiquette-reward" aria-live="polite"></p>
+              </section>
+              <section class="study-lessons" id="etiquette-lessons" aria-label="Etiquette lessons"></section>
+            </section>
+            <section class="study-tab-panel" id="study-readiness-panel" role="tabpanel" aria-labelledby="study-readiness-tab" hidden>
+              <section class="study-card">
+                <h3>Your Readiness Log</h3>
+                <p>Track explored lessons at each landmark. Complete all three lessons in one place to claim its one-time stamp and pet food reward.</p>
+              </section>
+              <section class="study-readiness-list" id="study-readiness-list" aria-label="Landmark readiness progress"></section>
             </section>
           </section>
           <section class="creative-shell" id="creative-content" hidden aria-labelledby="creative-title">
@@ -2455,7 +2492,10 @@
     let petScene, petCamera, petRenderer, petControls, petRig, petPedestal;
     let arStream = null;
     let arModeActive = false;
-    let studyQuizState = null;
+    let etiquetteState = { explored: {}, rewarded: [], readinessStamps: 0 };
+    let etiquetteLoaded = false;
+    let selectedEtiquetteLandmarkId = "taj-mahal";
+    let activeStudyTab = "guide";
     const petSparkles = [];
     let petHopStart = 0;
     let petPointerDown = null;
@@ -2588,13 +2628,6 @@
           "Built across multiple dynasties, most famously the Ming Dynasty.",
           "Constructed using stone, brick, tamped earth, and wood."
         ],
-        quiz: [
-          { id: 1, difficulty: "Easy", question: "Which country is the Great Wall located in?", options: ["Japan", "China", "Mongolia", "Korea"], correctAnswerIndex: 1 },
-          { id: 2, difficulty: "Easy", question: "What primary purpose did the Great Wall serve in ancient times?", options: ["Border fortification", "Aqueduct", "Trade center", "Religious monument"], correctAnswerIndex: 0 },
-          { id: 3, difficulty: "Medium", question: "What is the Great Wall's total length?", options: ["About 2,100 km", "Over 21,196 km", "About 50,000 km", "About 800 km"], correctAnswerIndex: 1 },
-          { id: 4, difficulty: "Medium", question: "Which set lists materials used to build the Great Wall?", options: ["Stone, brick, tamped earth, and wood", "Marble, glass, and copper", "Bamboo and clay only", "Granite and steel"], correctAnswerIndex: 0 },
-          { id: 5, difficulty: "Hard", question: "Which dynasty is most famously associated with building sections of the Great Wall?", options: ["Qing Dynasty", "Ming Dynasty", "Han Dynasty", "Tang Dynasty"], correctAnswerIndex: 1 }
-        ]
       },
       {
         id: "petra",
@@ -2607,13 +2640,6 @@
           "Nicknamed the \"Rose City\" due to the pink sandstone color of the cliffs.",
           "Access is gained through a narrow gorge called the Siq."
         ],
-        quiz: [
-          { id: 1, difficulty: "Easy", question: "In which country is Petra located?", options: ["Egypt", "Jordan", "Greece", "Lebanon"], correctAnswerIndex: 1 },
-          { id: 2, difficulty: "Easy", question: "What nickname does Petra have because of its pink sandstone cliffs?", options: ["The White City", "The Golden Gate", "The Rose City", "The Red Fort"], correctAnswerIndex: 2 },
-          { id: 3, difficulty: "Medium", question: "Which people made Petra their capital as early as 312 BC?", options: ["The Nabataeans", "The Romans", "The Phoenicians", "The Persians"], correctAnswerIndex: 0 },
-          { id: 4, difficulty: "Medium", question: "What is the narrow gorge leading into Petra called?", options: ["The gorge", "The Siq", "The Wadi Rum", "The Treasury"], correctAnswerIndex: 1 },
-          { id: 5, difficulty: "Hard", question: "Besides its rock-cut architecture, what system is Petra especially famous for?", options: ["A water conduit system", "A system of railways", "A network of lighthouses", "An underground theater"], correctAnswerIndex: 0 }
-        ]
       },
       {
         id: "christ-redeemer",
@@ -2626,13 +2652,6 @@
           "Located at the peak of the 700-meter Corcovado mountain in the Tijuca Forest National Park.",
           "Made of reinforced concrete and soapstone tiles."
         ],
-        quiz: [
-          { id: 1, difficulty: "Easy", question: "In which country is Christ the Redeemer located?", options: ["Argentina", "Brazil", "Portugal", "Chile"], correctAnswerIndex: 1 },
-          { id: 2, difficulty: "Easy", question: "In which city can you see Christ the Redeemer?", options: ["São Paulo", "Brasília", "Rio de Janeiro", "Salvador"], correctAnswerIndex: 2 },
-          { id: 3, difficulty: "Medium", question: "How tall is the statue, not counting its pedestal?", options: ["30 meters", "8 meters", "70 meters", "300 meters"], correctAnswerIndex: 0 },
-          { id: 4, difficulty: "Medium", question: "On which mountain does the statue stand?", options: ["Sugarloaf", "Corcovado", "Pico da Neblina", "Mount Roraima"], correctAnswerIndex: 1 },
-          { id: 5, difficulty: "Hard", question: "What materials make up the statue's exterior and structure?", options: ["Bronze and granite", "Reinforced concrete and soapstone tiles", "Steel and glass", "Wood and limestone"], correctAnswerIndex: 1 }
-        ]
       },
       {
         id: "machu-picchu",
@@ -2645,13 +2664,6 @@
           "Built with dry-stone walls using massive fitted blocks without mortar (Ashlar masonry).",
           "Divided into an Agricultural Sector and an Urban Sector."
         ],
-        quiz: [
-          { id: 1, difficulty: "Easy", question: "In which country is Machu Picchu?", options: ["Bolivia", "Peru", "Ecuador", "Colombia"], correctAnswerIndex: 1 },
-          { id: 2, difficulty: "Easy", question: "Which civilization built Machu Picchu?", options: ["The Maya", "The Inca", "The Aztecs", "The Olmec"], correctAnswerIndex: 1 },
-          { id: 3, difficulty: "Medium", question: "At what elevation is Machu Picchu situated?", options: ["About 430 meters", "2,430 meters", "5,000 meters", "7,970 meters"], correctAnswerIndex: 1 },
-          { id: 4, difficulty: "Medium", question: "How were the citadel's dry-stone walls built?", options: ["With fitted blocks and no mortar", "With wooden frames", "With brick and plaster mortar", "With metal panels"], correctAnswerIndex: 0 },
-          { id: 5, difficulty: "Hard", question: "What are the two main sectors of Machu Picchu?", options: ["Royal and Sacred", "Agricultural and Urban", "North and South", "Temple and Market"], correctAnswerIndex: 1 }
-        ]
       },
       {
         id: "chichen-itza",
@@ -2664,13 +2676,6 @@
           "During the spring and autumn equinoxes, the afternoon sun creates a shadow mimicking a serpent crawling down the staircase.",
           "Home to the Great Ball Court, the largest preserved ball court in ancient Mesoamerica."
         ],
-        quiz: [
-          { id: 1, difficulty: "Easy", question: "In which country is Chichén Itzá located?", options: ["Guatemala", "Mexico", "Peru", "Belize"], correctAnswerIndex: 1 },
-          { id: 2, difficulty: "Easy", question: "Which people built Chichén Itzá?", options: ["The Maya", "The Inca", "The Romans", "The Olmec"], correctAnswerIndex: 0 },
-          { id: 3, difficulty: "Medium", question: "What is the famous temple pyramid El Castillo also called?", options: ["Temple of Kukulcán", "Temple of the Sun", "Temple of the Moon", "Temple of the Jaguar"], correctAnswerIndex: 0 },
-          { id: 4, difficulty: "Medium", question: "What does the equinox shadow on El Castillo resemble?", options: ["A bird in flight", "A serpent crawling down the staircase", "A jaguar running", "A wave across the plaza"], correctAnswerIndex: 1 },
-          { id: 5, difficulty: "Hard", question: "What notable feature is home to the largest preserved ball court in ancient Mesoamerica?", options: ["The Great Ball Court", "El Castillo's summit", "The observatory", "The northern cenote"], correctAnswerIndex: 0 }
-        ]
       },
       {
         id: "colosseum",
@@ -2684,13 +2689,6 @@
           "Could hold an estimated 50,000 to 80,000 spectators for gladiatorial contests and public spectacles.",
           "The hypogeum was an elaborate underground network of tunnels and lifts for animals and gladiators."
         ],
-        quiz: [
-          { id: 1, difficulty: "Easy", question: "In which city is the Colosseum?", options: ["Athens", "Rome", "Venice", "Milan"], correctAnswerIndex: 1 },
-          { id: 2, difficulty: "Easy", question: "What kind of building is the Colosseum?", options: ["An oval amphitheatre", "A palace", "An aqueduct", "A temple pyramid"], correctAnswerIndex: 0 },
-          { id: 3, difficulty: "Medium", question: "Under which dynasty was the Colosseum built?", options: ["The Flavian dynasty", "The Julio-Claudian dynasty", "The Ptolemaic dynasty", "The Severan dynasty"], correctAnswerIndex: 0 },
-          { id: 4, difficulty: "Medium", question: "About how many spectators could the Colosseum hold?", options: ["5,000 to 8,000", "20,000 to 30,000", "50,000 to 80,000", "100,000 to 150,000"], correctAnswerIndex: 2 },
-          { id: 5, difficulty: "Hard", question: "What was the hypogeum?", options: ["An underground network of tunnels and lifts", "The emperor's private balcony", "A stone bridge over the arena", "A public garden beside the amphitheatre"], correctAnswerIndex: 0 }
-        ]
       },
       {
         id: "taj-mahal",
@@ -2703,16 +2701,49 @@
           "Incorporates symmetrical Mughal architecture with semi-precious stones inlaid into white marble (Pietra Dura).",
           "Appears to shift colors throughout the day depending on light and moonlight."
         ],
-        quiz: [
-          { id: 1, difficulty: "Easy", question: "In which country is the Taj Mahal?", options: ["India", "Pakistan", "Nepal", "Bangladesh"], correctAnswerIndex: 0 },
-          { id: 2, difficulty: "Easy", question: "In which Indian city is the Taj Mahal?", options: ["Delhi", "Jaipur", "Agra", "Mumbai"], correctAnswerIndex: 2 },
-          { id: 3, difficulty: "Medium", question: "Which emperor commissioned the Taj Mahal in 1631?", options: ["Akbar", "Shah Jahan", "Aurangzeb", "Babur"], correctAnswerIndex: 1 },
-          { id: 4, difficulty: "Medium", question: "What is the name for the semi-precious stone inlay in white marble?", options: ["Ashlar", "Pietra Dura", "Tamped earth", "Mosaic glass"], correctAnswerIndex: 1 },
-          { id: 5, difficulty: "Hard", question: "What visual effect can the Taj Mahal show as lighting changes?", options: ["It appears to shift colors throughout the day and in moonlight", "Its dome disappears at noon", "Its marble becomes transparent at sunset", "Its minarets change height at night"], correctAnswerIndex: 0 }
-        ]
       }
     ];
-    const studyRewards = { Easy: 1, Medium: 2, Hard: 3 };
+    const etiquettePets = {
+      zuri: { name: "Zuri", intro: "Checklist time! Let's explore these lessons one by one.", food: { id: "etiquette-checklist-chops", name: "Checklist Chops", icon: "🥩" } },
+      momo: { name: "Momo", intro: "Mmm... three little lessons, then we can take a cozy snack break.", food: { id: "etiquette-bamboo-latte-bun", name: "Bamboo Latte Bun", icon: "🥐" } },
+      skye: { name: "Skye", intro: "Actually... knowing local etiquette makes for a more thoughtful visit.", food: { id: "etiquette-actually-salmon", name: "Actually Salmon", icon: "🐟" } },
+      pudding: { name: "Pudding", intro: "No rush, friend. Let's explore each lesson at our own pace.", food: { id: "etiquette-chill-melon-slice", name: "Chill Melon Slice", icon: "🍉" } },
+      hazel: { name: "Hazel", intro: "Let's learn how to show care for the places and people we visit.", food: { id: "etiquette-blossom-berry-tart", name: "Blossom Berry Tart", icon: "🍓" } },
+      kiki: { name: "Kiki", intro: "LET'S GOOOO! Three lessons, three discoveries!", food: { id: "etiquette-victory-hop-bar", name: "Victory Hop Bar", icon: "🌾" } },
+      frosty: { name: "Frosty", intro: "I'm ready to bravely explore these lessons with you!", food: { id: "etiquette-brave-krill-bites", name: "Brave Krill Bites", icon: "🦐" } }
+    };
+    const etiquetteLandmarks = [
+      { id: "taj-mahal", name: "Taj Mahal", location: "Agra, India", icon: "🕌", intro: "A few thoughtful choices help keep the mausoleum experience respectful.", lessons: [
+        { id: "shoe-covers", title: "Shoe Covers", icon: "👟", explanation: "Remove shoes or wear shoe covers before entering the main mausoleum." },
+        { id: "photography", title: "Photography", icon: "📷", explanation: "Photography is prohibited inside the main mausoleum. Visitors can take pictures outside." },
+        { id: "quiet-voices", title: "Quiet Voices", icon: "🤫", explanation: "Keep voices low inside the main chamber." }
+      ] },
+      { id: "petra", name: "Petra", location: "Jordan", icon: "🏜️", intro: "Explore Petra with consideration for local people, customs, and site guidance.", lessons: [
+        { id: "appropriate-clothing", title: "Appropriate Clothing", icon: "🧣", explanation: "Follow recommended clothing guidelines and dress respectfully." },
+        { id: "photography", title: "Photography", icon: "📷", explanation: "Ask permission before photographing local people." },
+        { id: "official-guides", title: "Official Guides", icon: "🧭", explanation: "Arrange guides through the Visitor Center, hotel desk, or a registered agency." }
+      ] },
+      { id: "machu-picchu", name: "Machu Picchu", location: "Peru", icon: "⛰️", intro: "Help preserve this historic site by following its visitor rules.", lessons: [
+        { id: "drone-restrictions", title: "Drone Restrictions", icon: "🚫", explanation: "Drones require official authorization." },
+        { id: "protect-stonework", title: "Protect the Stonework", icon: "🪨", explanation: "Do not touch, move, or remove ancient stonework." },
+        { id: "assigned-circuits", title: "Follow Assigned Circuits", icon: "🚶", explanation: "Stay on your assigned visitor circuit and follow site rules." }
+      ] },
+      { id: "st-peters-basilica", name: "St. Peter's Basilica", location: "Rome, Italy", icon: "⛪", intro: "A quiet, considerate visit helps respect this place of worship.", lessons: [
+        { id: "dress-code", title: "Dress Code", icon: "👕", explanation: "Cover shoulders and knees." },
+        { id: "quiet-voices", title: "Quiet Voices", icon: "🤫", explanation: "Speak quietly inside the basilica." },
+        { id: "food-and-drinks", title: "Food and Drinks", icon: "🥤", explanation: "Do not bring food or drinks inside." }
+      ] },
+      { id: "chichen-itza", name: "Chichén Itzá", location: "Mexico", icon: "🛕", intro: "Keep these simple site rules in mind while exploring the archaeological zone.", lessons: [
+        { id: "food-restrictions", title: "Food Restrictions", icon: "🍎", explanation: "Do not bring food into the archaeological zone." },
+        { id: "flash-photography", title: "Flash Photography", icon: "📸", explanation: "Do not use flash photography." },
+        { id: "smoking", title: "Smoking", icon: "🚭", explanation: "Smoking is prohibited." }
+      ] },
+      { id: "christ-redeemer", name: "Christ the Redeemer", location: "Rio de Janeiro, Brazil", icon: "🌄", intro: "Follow visitor rules and treat the surrounding wildlife with care.", lessons: [
+        { id: "clothing-rules", title: "Clothing Rules", icon: "🩳", explanation: "Swimwear is prohibited." },
+        { id: "respect-barriers", title: "Respect Barriers", icon: "🧱", explanation: "Do not climb, sit, or lean on walls or barriers." },
+        { id: "wildlife-protection", title: "Wildlife Protection", icon: "🦜", explanation: "Do not feed, capture, or interact with wildlife." }
+      ] }
+    ];
     const phraseTranslations = {
       ja: {
         "i need help": ["助けてください", "Tasukete kudasai"],
@@ -3250,7 +3281,10 @@
     }
 
     function snackDefinition(id) {
-      return landmarkData.find((landmark) => landmark.snack.id === id)?.snack;
+      const landmarkSnack = landmarkData.find((landmark) => landmark.snack.id === id)?.snack;
+      if (landmarkSnack) return landmarkSnack;
+      const etiquetteSnack = Object.values(etiquettePets).map((pet) => pet.food).find((snack) => snack.id === id);
+      return etiquetteSnack ? { ...etiquetteSnack, emoji: etiquetteSnack.icon } : undefined;
     }
 
     function renderAdventureWidgets() {
@@ -3483,16 +3517,7 @@
               : hub === "study" ? "study-title"
               : "hub-modal-title"
       );
-      if (hub === "study") {
-        const options = el("study-landmark-options");
-        if (!options.options.length) {
-          options.replaceChildren(...studyWonders.map((wonder) => {
-            const option = document.createElement("option");
-            option.value = wonder.name;
-            return option;
-          }));
-        }
-      }
+      if (hub === "study") initializeStudyHub();
       if (hub === "lingo") {
         initializeLingo();
       }
@@ -4438,7 +4463,7 @@
     }
 
     function selectedStudyWonder() {
-      const value = normalizeStudyLandmark(el("study-landmark").value);
+      const value = normalizeStudyLandmark(el("study-guide-landmark").value);
       return studyWonders.find((wonder) =>
         normalizeStudyLandmark(wonder.name) === value ||
         wonder.aliases?.some((alias) => normalizeStudyLandmark(alias) === value)
@@ -4449,14 +4474,12 @@
       const wonder = selectedStudyWonder();
       const status = el("study-status");
       if (!wonder) {
-        status.textContent = "Choose one of the seven landmarks from the list.";
-        el("study-landmark").focus();
+        status.textContent = "Choose a landmark from the field guide list.";
+        el("study-guide-landmark").focus();
         return;
       }
 
       el("study-summary").hidden = true;
-      el("study-quiz").hidden = true;
-      studyQuizState = { wonder, quiz: wonder.quiz, index: 0, earnedSnacks: 0, answered: false, finished: false };
       el("study-summary-title").textContent = wonder.name;
       el("study-country").textContent = `Country: ${wonder.country}`;
       el("study-pronunciation").textContent = `Pronunciation: ${wonder.pronunciation}`;
@@ -4466,99 +4489,184 @@
         item.textContent = fact;
         return item;
       }));
-      el("study-start-quiz").hidden = false;
       el("study-summary").hidden = false;
-      status.textContent = "Field guide ready. Review the details, then start the five-question quiz.";
+      status.textContent = "Field guide ready. Explore the overview and key facts.";
     }
 
-    function renderStudyQuestion() {
-      if (!studyQuizState || studyQuizState.finished) return;
-      const question = studyQuizState.quiz[studyQuizState.index];
-      const snackReward = studyRewards[question.difficulty];
-      el("study-quiz").hidden = false;
-      el("study-progress").textContent = `Question ${question.id} of 5 · ${question.difficulty}`;
-      el("study-reward").textContent = `Reward: ${snackReward} ${snackReward === 1 ? "snack" : "snacks"}`;
-      el("study-question").textContent = question.question;
-      el("study-feedback").textContent = "";
-      el("study-quiz-action").textContent = "Check answer";
-      el("study-quiz-action").hidden = false;
-      studyQuizState.answered = false;
-
-      const options = question.options.map((option, index) => {
-        const label = document.createElement("label");
-        label.className = "study-option";
-        const input = document.createElement("input");
-        input.type = "radio";
-        input.name = "study-answer";
-        input.value = String(index);
-        const text = document.createElement("span");
-        text.textContent = option;
-        label.append(input, text);
-        return label;
-      });
-      el("study-options").replaceChildren(...options);
+    function currentEtiquettePet() {
+      let petId = "zuri";
+      try {
+        petId = localStorage.getItem("selectedPetId")
+          || localStorage.getItem("pawport.selectedPetId")
+          || "zuri";
+      } catch (error) {
+        console.error("Could not read the selected PawPort pet.", error);
+      }
+      return etiquettePets[petId.toLowerCase()] || etiquettePets.zuri;
     }
 
-    function finishStudyQuiz() {
-      if (!studyQuizState || studyQuizState.finished) return;
-      studyQuizState.finished = true;
-      const wonder = studyQuizState.wonder;
-      const snack = landmarkById[wonder.id].snack;
-      const totalSnacks = studyQuizState.earnedSnacks;
-      const xpEarned = totalSnacks * 5;
-
-      for (let count = 0; count < totalSnacks; count += 1) addSnack(snack);
-      appState.xp += xpEarned;
-      renderAdventureWidgets();
-      updateXPDisplay();
-      persistAdventureState();
-      if (petRig) petHopStart = performance.now();
-
-      el("study-options").replaceChildren();
-      el("study-progress").textContent = "Quiz complete!";
-      el("study-reward").textContent = `${totalSnacks} ${totalSnacks === 1 ? "snack" : "snacks"} earned`;
-      el("study-question").textContent = `Great exploring, ${appState.travelerName}!`;
-      el("study-feedback").textContent = totalSnacks
-        ? `${currentPet || "Your companion"} earned ${totalSnacks} ${snack.emoji} ${snack.name} ${totalSnacks === 1 ? "snack" : "snacks"} and +${xpEarned} XP.`
-        : "No correct answers this time, so no snacks were added. Read the guide and try another quiz!";
-      el("study-quiz-action").hidden = true;
-      el("study-start-quiz").hidden = true;
-      el("study-status").textContent = "Study session complete. Your snack pouch and XP have been updated.";
-      showToast(totalSnacks
-        ? `${snack.emoji} ${totalSnacks} ${snack.name} ${totalSnacks === 1 ? "snack" : "snacks"} earned · +${xpEarned} XP`
-        : "Study quiz complete. Keep exploring to earn snacks!");
-    }
-
-    function handleStudyQuizAction() {
-      if (!studyQuizState || studyQuizState.finished) return;
-      if (!studyQuizState.answered) {
-        const selected = el("study-options").querySelector('input[name="study-answer"]:checked');
-        if (!selected) {
-          el("study-feedback").textContent = "Choose an answer before continuing.";
-          return;
+    function loadEtiquetteState() {
+      try {
+        const saved = JSON.parse(localStorage.getItem("pawportEtiquette") || "{}");
+        const explored = {};
+        for (const landmark of etiquetteLandmarks) {
+          const ids = saved.explored?.[landmark.id];
+          if (Array.isArray(ids)) explored[landmark.id] = [...new Set(ids.filter((id) =>
+            landmark.lessons.some((lesson) => lesson.id === id)
+          ))];
         }
-
-        const question = studyQuizState.quiz[studyQuizState.index];
-        const correct = Number(selected.value) === question.correctAnswerIndex;
-        const snackReward = studyRewards[question.difficulty];
-        if (correct) studyQuizState.earnedSnacks += snackReward;
-        el("study-options").querySelectorAll("input").forEach((input) => { input.disabled = true; });
-        el("study-feedback").textContent = correct
-          ? `Correct! ${currentPet || "Your companion"} is cheering — ${snackReward} ${snackReward === 1 ? "snack" : "snacks"} added to your quiz rewards.`
-          : `Not quite. The correct answer was: ${question.options[question.correctAnswerIndex]}.`;
-        studyQuizState.answered = true;
-        el("study-quiz-action").textContent = studyQuizState.index === studyQuizState.quiz.length - 1
-          ? "Finish quiz"
-          : "Next question";
-        return;
+        etiquetteState = {
+          explored,
+          rewarded: Array.isArray(saved.rewarded)
+            ? [...new Set(saved.rewarded.filter((id) => etiquetteLandmarks.some((landmark) => landmark.id === id)))]
+            : [],
+          readinessStamps: Number.isInteger(saved.readinessStamps) && saved.readinessStamps >= 0
+            ? saved.readinessStamps
+            : 0
+        };
+      } catch (error) {
+        console.error("Could not load PawPort etiquette progress.", error);
+        showToast("Etiquette progress could not be loaded from browser storage.");
       }
+    }
 
-      if (studyQuizState.index === studyQuizState.quiz.length - 1) {
-        finishStudyQuiz();
-        return;
+    function saveEtiquetteState() {
+      try {
+        localStorage.setItem("pawportEtiquette", JSON.stringify(etiquetteState));
+      } catch (error) {
+        console.error("Could not save PawPort etiquette progress.", error);
+        showToast("Etiquette progress is only available for this visit; browser storage is unavailable.");
       }
-      studyQuizState.index += 1;
-      renderStudyQuestion();
+    }
+
+    function renderStudyReadinessLog() {
+      el("study-readiness-list").replaceChildren(...etiquetteLandmarks.map((landmark) => {
+        const count = (etiquetteState.explored[landmark.id] || []).length;
+        const complete = etiquetteState.rewarded.includes(landmark.id);
+        const row = document.createElement("article");
+        row.className = "study-readiness-row";
+        const icon = document.createElement("span");
+        icon.className = "study-readiness-icon";
+        icon.setAttribute("aria-hidden", "true");
+        icon.textContent = landmark.icon;
+        const details = document.createElement("div");
+        const heading = document.createElement("h4");
+        heading.textContent = landmark.name;
+        const progress = document.createElement("p");
+        progress.textContent = complete ? "Complete · Readiness Stamp earned" : `${count}/3 lessons explored`;
+        details.append(heading, progress);
+        const button = document.createElement("button");
+        button.className = "creative-action";
+        button.type = "button";
+        button.dataset.readinessLandmark = landmark.id;
+        button.textContent = complete ? "Review" : "Explore";
+        button.setAttribute("aria-label", `${complete ? "Review" : "Explore"} ${landmark.name} lessons`);
+        row.append(icon, details, button);
+        return row;
+      }));
+    }
+
+    function renderEtiquetteLessons() {
+      const landmark = etiquetteLandmarks.find((item) => item.id === selectedEtiquetteLandmarkId) || etiquetteLandmarks[0];
+      const explored = etiquetteState.explored[landmark.id] || [];
+      const pet = currentEtiquettePet();
+      el("etiquette-landmark-title").textContent = landmark.name;
+      el("etiquette-landmark-location").textContent = landmark.location;
+      el("etiquette-landmark-intro").textContent = landmark.intro;
+      el("etiquette-hero-art").textContent = landmark.icon;
+      el("etiquette-hero-art").setAttribute("aria-label", `${landmark.name} illustration`);
+      el("etiquette-progress").textContent = `${explored.length}/3 explored · ${etiquetteState.readinessStamps} Readiness Stamp${etiquetteState.readinessStamps === 1 ? "" : "s"}`;
+      el("etiquette-dialogue").textContent = `${pet.name}: “${pet.intro}”`;
+      el("etiquette-reward").textContent = etiquetteState.rewarded.includes(landmark.id)
+        ? "Landmark complete! Its Readiness Stamp and pet food reward have already been claimed."
+        : "Explore all three lessons to earn 1 Readiness Stamp and 1 pet food item.";
+      el("etiquette-lessons").replaceChildren(...landmark.lessons.map((lesson) => {
+        const done = explored.includes(lesson.id);
+        const card = document.createElement("article");
+        card.className = `study-lesson${done ? " is-explored" : ""}`;
+        const art = document.createElement("div");
+        art.className = "study-lesson-art";
+        art.setAttribute("role", "img");
+        art.setAttribute("aria-label", `${lesson.title} illustration`);
+        art.textContent = lesson.icon;
+        const copy = document.createElement("div");
+        const title = document.createElement("h4");
+        title.textContent = lesson.title;
+        const explanation = document.createElement("p");
+        explanation.textContent = lesson.explanation;
+        copy.append(title, explanation);
+        const button = document.createElement("button");
+        button.className = "creative-action";
+        button.type = "button";
+        button.dataset.exploreLesson = lesson.id;
+        button.textContent = done ? "Explored ✓" : "Mark as Explored";
+        button.disabled = done;
+        card.append(art, copy, button);
+        return card;
+      }));
+      renderStudyReadinessLog();
+    }
+
+    function setStudyTab(tab) {
+      activeStudyTab = ["etiquette", "readiness"].includes(tab) ? tab : "guide";
+      for (const id of ["guide", "etiquette", "readiness"]) {
+        const selected = id === activeStudyTab;
+        el(`study-${id}-tab`).setAttribute("aria-selected", String(selected));
+        el(`study-${id}-tab`).tabIndex = selected ? 0 : -1;
+        el(`study-${id}-panel`).hidden = !selected;
+      }
+      if (activeStudyTab === "readiness") renderStudyReadinessLog();
+    }
+
+    function initializeStudyHub() {
+      if (!etiquetteLoaded) {
+        loadEtiquetteState();
+        etiquetteLoaded = true;
+      }
+      const guideOptions = el("study-landmark-options");
+      if (!guideOptions.options.length) {
+        guideOptions.replaceChildren(...studyWonders.map((wonder) => {
+          const option = document.createElement("option");
+          option.value = wonder.name;
+          return option;
+        }));
+      }
+      const etiquetteSelect = el("etiquette-landmark");
+      if (!etiquetteSelect.options.length) {
+        etiquetteSelect.replaceChildren(...etiquetteLandmarks.map((landmark) => {
+          const option = document.createElement("option");
+          option.value = landmark.id;
+          option.textContent = `${landmark.name} · ${landmark.location}`;
+          return option;
+        }));
+      }
+      etiquetteSelect.value = selectedEtiquetteLandmarkId;
+      renderEtiquetteLessons();
+      setStudyTab(activeStudyTab);
+    }
+
+    function exploreEtiquetteLesson(lessonId) {
+      const landmark = etiquetteLandmarks.find((item) => item.id === selectedEtiquetteLandmarkId);
+      if (!landmark || !landmark.lessons.some((lesson) => lesson.id === lessonId)) return;
+      const explored = etiquetteState.explored[landmark.id] || [];
+      if (explored.includes(lessonId)) return;
+      etiquetteState.explored[landmark.id] = [...explored, lessonId];
+      if (etiquetteState.explored[landmark.id].length === landmark.lessons.length &&
+          !etiquetteState.rewarded.includes(landmark.id)) {
+        const pet = currentEtiquettePet();
+        etiquetteState.rewarded.push(landmark.id);
+        etiquetteState.readinessStamps += 1;
+        addSnack(pet.food);
+        persistAdventureState();
+        saveEtiquetteState();
+        renderAdventureWidgets();
+        if (petRig) petHopStart = performance.now();
+        playFlash();
+        showToast(`Readiness Stamp + ${pet.food.icon} ${pet.food.name}!`);
+      } else {
+        saveEtiquetteState();
+      }
+      renderEtiquetteLessons();
     }
 
     function resizePetRenderer(host) {
@@ -4749,6 +4857,7 @@
       let petSaved = true;
       try {
         localStorage.setItem("pawport.selectedPetId", selectedPetId);
+        localStorage.setItem("selectedPetId", selectedPetId);
       } catch (error) {
         petSaved = false;
         console.error("Could not save the selected PawPort pet to browser storage.", error);
@@ -4793,19 +4902,42 @@
       if (card) openHub(card);
     });
     el("study-open-guide").addEventListener("click", openStudyGuide);
-    el("study-landmark").addEventListener("input", () => {
-      studyQuizState = null;
+    el("study-guide-landmark").addEventListener("input", () => {
       el("study-summary").hidden = true;
-      el("study-quiz").hidden = true;
       el("study-status").textContent = "Open the field guide for the selected landmark.";
     });
-    el("study-start-quiz").addEventListener("click", () => {
-      if (!studyQuizState || studyQuizState.finished) return;
-      renderStudyQuestion();
-      el("study-quiz").scrollIntoView({ behavior: "smooth", block: "nearest" });
-      el("study-question").focus?.({ preventScroll: true });
+    el("etiquette-landmark").addEventListener("change", (event) => {
+      selectedEtiquetteLandmarkId = event.currentTarget.value;
+      renderEtiquetteLessons();
     });
-    el("study-quiz-action").addEventListener("click", handleStudyQuizAction);
+    el("etiquette-lessons").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-explore-lesson]");
+      if (button) exploreEtiquetteLesson(button.dataset.exploreLesson);
+    });
+    el("study-readiness-list").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-readiness-landmark]");
+      if (!button) return;
+      selectedEtiquetteLandmarkId = button.dataset.readinessLandmark;
+      el("etiquette-landmark").value = selectedEtiquetteLandmarkId;
+      renderEtiquetteLessons();
+      setStudyTab("etiquette");
+      el("study-etiquette-tab").focus();
+    });
+    el("study-tabs").addEventListener("click", (event) => {
+      const tab = event.target.closest("[data-study-tab]");
+      if (tab) setStudyTab(tab.dataset.studyTab);
+    });
+    el("study-tabs").addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      const tabs = ["guide", "etiquette", "readiness"];
+      const currentIndex = tabs.indexOf(activeStudyTab);
+      const nextIndex = event.key === "Home" ? 0
+        : event.key === "End" ? tabs.length - 1
+          : (currentIndex + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+      setStudyTab(tabs[nextIndex]);
+      el(`study-${tabs[nextIndex]}-tab`).focus();
+    });
     el("ar-toggle").addEventListener("click", startARMode);
     el("ar-exit").addEventListener("click", stopARMode);
     el("ar-snapshot").addEventListener("click", snapARPhoto);

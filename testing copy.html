@@ -1234,7 +1234,7 @@
     .study-status { min-height: 1.4em; color: #0369a1 !important; font-size: 11px !important; font-weight: 800 !important; }
     .study-quiz { display: grid; gap: 10px; }
     .study-question { margin: 0; padding: 13px; border: 1px solid #38bdf8; border-radius: 12px; color: #172033; background: #f8fafc; }
-    .study-question legend { padding: 0 5px; color: #172033; font: 800 12px "Nunito",sans-serif; }
+    .study-question legend { position: relative; top: 10px; z-index: 1; display: block; width: 100%; box-sizing: border-box; padding: 0 5px; background: #f8fafc; color: #172033; font: 800 12px/1.45 "Nunito",sans-serif; text-align: center; }
     .study-question-meta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; margin-bottom: 10px; color: #075985; font: 800 9px var(--mono); text-transform: uppercase; }
     .study-options { display: grid; gap: 7px; }
     .study-option { display: flex; align-items: flex-start; gap: 8px; padding: 9px; border: 1px solid #cbd5e1; border-radius: 8px; background: #fff; color: #172033; cursor: pointer; font-size: 12px; font-weight: 700; }
@@ -1999,23 +1999,26 @@
           </div>
           <section class="study-shell" id="study-content" hidden aria-labelledby="study-title">
             <header>
-              <p class="dashboard-kicker">AI-powered landmark field guide</p>
+              <p class="dashboard-kicker">Local landmark field guide</p>
               <h2 id="study-title">STUDY HUB</h2>
-              <p class="creative-subtitle">Explore one of the New 7 Wonders, then test your knowledge to earn local treats.</p>
+              <p class="creative-subtitle">Explore seven famous landmarks, then test your knowledge to earn local treats.</p>
             </header>
             <div class="study-card">
-              <label class="creative-field" for="study-landmark">Choose or enter a New 7 Wonder
+              <label class="creative-field" for="study-landmark">Choose a landmark
                 <input class="creative-input" id="study-landmark" list="study-landmark-options" maxlength="60" autocomplete="off" placeholder="e.g. Petra">
                 <datalist id="study-landmark-options"></datalist>
               </label>
               <div class="study-select-row creative-spaced">
-                <p class="study-status" id="study-status" aria-live="polite">Choose a landmark to generate its field guide and quiz.</p>
-                <button class="creative-action" id="study-generate" type="button">✨ Generate study guide</button>
+                <p class="study-status" id="study-status" aria-live="polite">Choose a landmark to open its field guide and quiz.</p>
+                <button class="creative-action" id="study-open-guide" type="button">Open field guide</button>
               </div>
             </div>
             <section class="study-card study-summary" id="study-summary" hidden aria-labelledby="study-summary-title">
               <h3 id="study-summary-title"></h3>
+              <p id="study-country"></p>
+              <p id="study-pronunciation"></p>
               <p id="study-summary-text"></p>
+              <ul id="study-key-facts"></ul>
               <p class="creative-note creative-spaced">Read the guide first. Then answer five questions; each correct answer earns its listed snack reward.</p>
               <button class="creative-action creative-spaced" id="study-start-quiz" type="button">Start the 5-question quiz</button>
             </section>
@@ -2453,8 +2456,6 @@
     let arStream = null;
     let arModeActive = false;
     let studyQuizState = null;
-    let studyRequestId = 0;
-    let studyAbortController = null;
     const petSparkles = [];
     let petHopStart = 0;
     let petPointerDown = null;
@@ -2575,16 +2576,143 @@
     ];
     const landmarkById = Object.fromEntries(landmarkData.map((landmark) => [landmark.id, landmark]));
     const studyWonders = [
-      { id: "great-wall", name: "Great Wall of China" },
-      { id: "petra", name: "Petra" },
-      { id: "christ-redeemer", name: "Christ the Redeemer" },
-      { id: "machu-picchu", name: "Machu Picchu" },
-      { id: "chichen-itza", name: "Chichén Itzá" },
-      { id: "colosseum", name: "Colosseum" },
-      { id: "taj-mahal", name: "Taj Mahal" }
+      {
+        id: "great-wall",
+        name: "Great Wall of China",
+        aliases: ["Great Wall"],
+        country: "China",
+        pronunciation: "Great Wall of China",
+        overview: "An ancient series of walls and fortifications built across the northern borders of historical Chinese states to protect against nomadic invasions.",
+        keyFacts: [
+          "Measures over 21,196 km (13,171 miles) in total length.",
+          "Built across multiple dynasties, most famously the Ming Dynasty.",
+          "Constructed using stone, brick, tamped earth, and wood."
+        ],
+        quiz: [
+          { id: 1, difficulty: "Easy", question: "Which country is the Great Wall located in?", options: ["Japan", "China", "Mongolia", "Korea"], correctAnswerIndex: 1 },
+          { id: 2, difficulty: "Easy", question: "What primary purpose did the Great Wall serve in ancient times?", options: ["Border fortification", "Aqueduct", "Trade center", "Religious monument"], correctAnswerIndex: 0 },
+          { id: 3, difficulty: "Medium", question: "What is the Great Wall's total length?", options: ["About 2,100 km", "Over 21,196 km", "About 50,000 km", "About 800 km"], correctAnswerIndex: 1 },
+          { id: 4, difficulty: "Medium", question: "Which set lists materials used to build the Great Wall?", options: ["Stone, brick, tamped earth, and wood", "Marble, glass, and copper", "Bamboo and clay only", "Granite and steel"], correctAnswerIndex: 0 },
+          { id: 5, difficulty: "Hard", question: "Which dynasty is most famously associated with building sections of the Great Wall?", options: ["Qing Dynasty", "Ming Dynasty", "Han Dynasty", "Tang Dynasty"], correctAnswerIndex: 1 }
+        ]
+      },
+      {
+        id: "petra",
+        name: "Petra",
+        country: "Jordan",
+        pronunciation: "PEH-truh",
+        overview: "A historic and archaeological city in southern Jordan famous for its rock-cut architecture and water conduit system.",
+        keyFacts: [
+          "Established as early as 312 BC as the capital of the Nabataeans.",
+          "Nicknamed the \"Rose City\" due to the pink sandstone color of the cliffs.",
+          "Access is gained through a narrow gorge called the Siq."
+        ],
+        quiz: [
+          { id: 1, difficulty: "Easy", question: "In which country is Petra located?", options: ["Egypt", "Jordan", "Greece", "Lebanon"], correctAnswerIndex: 1 },
+          { id: 2, difficulty: "Easy", question: "What nickname does Petra have because of its pink sandstone cliffs?", options: ["The White City", "The Golden Gate", "The Rose City", "The Red Fort"], correctAnswerIndex: 2 },
+          { id: 3, difficulty: "Medium", question: "Which people made Petra their capital as early as 312 BC?", options: ["The Nabataeans", "The Romans", "The Phoenicians", "The Persians"], correctAnswerIndex: 0 },
+          { id: 4, difficulty: "Medium", question: "What is the narrow gorge leading into Petra called?", options: ["The gorge", "The Siq", "The Wadi Rum", "The Treasury"], correctAnswerIndex: 1 },
+          { id: 5, difficulty: "Hard", question: "Besides its rock-cut architecture, what system is Petra especially famous for?", options: ["A water conduit system", "A system of railways", "A network of lighthouses", "An underground theater"], correctAnswerIndex: 0 }
+        ]
+      },
+      {
+        id: "christ-redeemer",
+        name: "Christ the Redeemer",
+        country: "Brazil",
+        pronunciation: "KRYST the rih-DEE-mer",
+        overview: "An Art Deco statue of Jesus Christ in Rio de Janeiro, Brazil, created by French sculptor Paul Landowski and built by Brazilian engineer Heitor da Silva Costa.",
+        keyFacts: [
+          "Stands 30 meters (98 ft) tall, excluding its 8-meter pedestal.",
+          "Located at the peak of the 700-meter Corcovado mountain in the Tijuca Forest National Park.",
+          "Made of reinforced concrete and soapstone tiles."
+        ],
+        quiz: [
+          { id: 1, difficulty: "Easy", question: "In which country is Christ the Redeemer located?", options: ["Argentina", "Brazil", "Portugal", "Chile"], correctAnswerIndex: 1 },
+          { id: 2, difficulty: "Easy", question: "In which city can you see Christ the Redeemer?", options: ["São Paulo", "Brasília", "Rio de Janeiro", "Salvador"], correctAnswerIndex: 2 },
+          { id: 3, difficulty: "Medium", question: "How tall is the statue, not counting its pedestal?", options: ["30 meters", "8 meters", "70 meters", "300 meters"], correctAnswerIndex: 0 },
+          { id: 4, difficulty: "Medium", question: "On which mountain does the statue stand?", options: ["Sugarloaf", "Corcovado", "Pico da Neblina", "Mount Roraima"], correctAnswerIndex: 1 },
+          { id: 5, difficulty: "Hard", question: "What materials make up the statue's exterior and structure?", options: ["Bronze and granite", "Reinforced concrete and soapstone tiles", "Steel and glass", "Wood and limestone"], correctAnswerIndex: 1 }
+        ]
+      },
+      {
+        id: "machu-picchu",
+        name: "Machu Picchu",
+        country: "Peru",
+        pronunciation: "MAH-choo PEE-choo",
+        overview: "A 15th-century Inca citadel situated on a mountain ridge 2,430 meters (7,970 ft) above sea level in the Cusco Region of Peru.",
+        keyFacts: [
+          "Built around 1450 for the Inca emperor Pachacuti and abandoned during the Spanish Conquest.",
+          "Built with dry-stone walls using massive fitted blocks without mortar (Ashlar masonry).",
+          "Divided into an Agricultural Sector and an Urban Sector."
+        ],
+        quiz: [
+          { id: 1, difficulty: "Easy", question: "In which country is Machu Picchu?", options: ["Bolivia", "Peru", "Ecuador", "Colombia"], correctAnswerIndex: 1 },
+          { id: 2, difficulty: "Easy", question: "Which civilization built Machu Picchu?", options: ["The Maya", "The Inca", "The Aztecs", "The Olmec"], correctAnswerIndex: 1 },
+          { id: 3, difficulty: "Medium", question: "At what elevation is Machu Picchu situated?", options: ["About 430 meters", "2,430 meters", "5,000 meters", "7,970 meters"], correctAnswerIndex: 1 },
+          { id: 4, difficulty: "Medium", question: "How were the citadel's dry-stone walls built?", options: ["With fitted blocks and no mortar", "With wooden frames", "With brick and plaster mortar", "With metal panels"], correctAnswerIndex: 0 },
+          { id: 5, difficulty: "Hard", question: "What are the two main sectors of Machu Picchu?", options: ["Royal and Sacred", "Agricultural and Urban", "North and South", "Temple and Market"], correctAnswerIndex: 1 }
+        ]
+      },
+      {
+        id: "chichen-itza",
+        name: "Chichén Itzá",
+        country: "Mexico",
+        pronunciation: "chee-CHEN eet-ZAH",
+        overview: "A large pre-Columbian city built by the Maya people of the Terminal Classic period, located in Yucatán, Mexico.",
+        keyFacts: [
+          "Features the famous temple pyramid El Castillo (Temple of Kukulcán).",
+          "During the spring and autumn equinoxes, the afternoon sun creates a shadow mimicking a serpent crawling down the staircase.",
+          "Home to the Great Ball Court, the largest preserved ball court in ancient Mesoamerica."
+        ],
+        quiz: [
+          { id: 1, difficulty: "Easy", question: "In which country is Chichén Itzá located?", options: ["Guatemala", "Mexico", "Peru", "Belize"], correctAnswerIndex: 1 },
+          { id: 2, difficulty: "Easy", question: "Which people built Chichén Itzá?", options: ["The Maya", "The Inca", "The Romans", "The Olmec"], correctAnswerIndex: 0 },
+          { id: 3, difficulty: "Medium", question: "What is the famous temple pyramid El Castillo also called?", options: ["Temple of Kukulcán", "Temple of the Sun", "Temple of the Moon", "Temple of the Jaguar"], correctAnswerIndex: 0 },
+          { id: 4, difficulty: "Medium", question: "What does the equinox shadow on El Castillo resemble?", options: ["A bird in flight", "A serpent crawling down the staircase", "A jaguar running", "A wave across the plaza"], correctAnswerIndex: 1 },
+          { id: 5, difficulty: "Hard", question: "What notable feature is home to the largest preserved ball court in ancient Mesoamerica?", options: ["The Great Ball Court", "El Castillo's summit", "The observatory", "The northern cenote"], correctAnswerIndex: 0 }
+        ]
+      },
+      {
+        id: "colosseum",
+        name: "The Colosseum",
+        aliases: ["Colosseum"],
+        country: "Italy",
+        pronunciation: "The kah-luh-SEE-um",
+        overview: "An oval amphitheatre in the centre of the city of Rome, Italy, built of travertine limestone, tuff, and brick-faced concrete.",
+        keyFacts: [
+          "Built under the Flavian dynasty, begun by Emperor Vespasian in 72 AD.",
+          "Could hold an estimated 50,000 to 80,000 spectators for gladiatorial contests and public spectacles.",
+          "The hypogeum was an elaborate underground network of tunnels and lifts for animals and gladiators."
+        ],
+        quiz: [
+          { id: 1, difficulty: "Easy", question: "In which city is the Colosseum?", options: ["Athens", "Rome", "Venice", "Milan"], correctAnswerIndex: 1 },
+          { id: 2, difficulty: "Easy", question: "What kind of building is the Colosseum?", options: ["An oval amphitheatre", "A palace", "An aqueduct", "A temple pyramid"], correctAnswerIndex: 0 },
+          { id: 3, difficulty: "Medium", question: "Under which dynasty was the Colosseum built?", options: ["The Flavian dynasty", "The Julio-Claudian dynasty", "The Ptolemaic dynasty", "The Severan dynasty"], correctAnswerIndex: 0 },
+          { id: 4, difficulty: "Medium", question: "About how many spectators could the Colosseum hold?", options: ["5,000 to 8,000", "20,000 to 30,000", "50,000 to 80,000", "100,000 to 150,000"], correctAnswerIndex: 2 },
+          { id: 5, difficulty: "Hard", question: "What was the hypogeum?", options: ["An underground network of tunnels and lifts", "The emperor's private balcony", "A stone bridge over the arena", "A public garden beside the amphitheatre"], correctAnswerIndex: 0 }
+        ]
+      },
+      {
+        id: "taj-mahal",
+        name: "Taj Mahal",
+        country: "India",
+        pronunciation: "TAHJ muh-HAHL",
+        overview: "An ivory-white marble mausoleum on the right bank of the Yamuna River in the Indian city of Agra.",
+        keyFacts: [
+          "Commissioned in 1631 by the Mughal emperor Shah Jahan to house the tomb of his favorite wife, Mumtaz Mahal.",
+          "Incorporates symmetrical Mughal architecture with semi-precious stones inlaid into white marble (Pietra Dura).",
+          "Appears to shift colors throughout the day depending on light and moonlight."
+        ],
+        quiz: [
+          { id: 1, difficulty: "Easy", question: "In which country is the Taj Mahal?", options: ["India", "Pakistan", "Nepal", "Bangladesh"], correctAnswerIndex: 0 },
+          { id: 2, difficulty: "Easy", question: "In which Indian city is the Taj Mahal?", options: ["Delhi", "Jaipur", "Agra", "Mumbai"], correctAnswerIndex: 2 },
+          { id: 3, difficulty: "Medium", question: "Which emperor commissioned the Taj Mahal in 1631?", options: ["Akbar", "Shah Jahan", "Aurangzeb", "Babur"], correctAnswerIndex: 1 },
+          { id: 4, difficulty: "Medium", question: "What is the name for the semi-precious stone inlay in white marble?", options: ["Ashlar", "Pietra Dura", "Tamped earth", "Mosaic glass"], correctAnswerIndex: 1 },
+          { id: 5, difficulty: "Hard", question: "What visual effect can the Taj Mahal show as lighting changes?", options: ["It appears to shift colors throughout the day and in moonlight", "Its dome disappears at noon", "Its marble becomes transparent at sunset", "Its minarets change height at night"], correctAnswerIndex: 0 }
+        ]
+      }
     ];
-    const studyDifficulty = ["Very Easy", "Easy", "Medium", "Hard", "Very Hard"];
-    const studyRewards = [1, 2, 3, 4, 5];
+    const studyRewards = { Easy: 1, Medium: 2, Hard: 3 };
     const phraseTranslations = {
       ja: {
         "i need help": ["助けてください", "Tasukete kudasai"],
@@ -3294,10 +3422,6 @@
     function closeModal(modal, returnFocus) {
       if (modal === ui.hubModal) {
         stopARMode();
-        studyRequestId += 1;
-        studyAbortController?.abort();
-        studyAbortController = null;
-        el("study-generate").disabled = false;
       }
       modal.classList.remove("active");
       modal.setAttribute("aria-hidden", "true");
@@ -3319,12 +3443,6 @@
       const title = card.querySelector(".hub-card-title").textContent;
       const copy = card.querySelector("p").textContent;
       stopARMode();
-      if (hub !== "study") {
-        studyRequestId += 1;
-        studyAbortController?.abort();
-        studyAbortController = null;
-        el("study-generate").disabled = false;
-      }
       activeHub = hub;
       ui.hubKicker.textContent = `${currentPet || "Your companion"}'s quest recommendation`;
       ui.hubTitle.textContent = title;
@@ -4321,117 +4439,45 @@
 
     function selectedStudyWonder() {
       const value = normalizeStudyLandmark(el("study-landmark").value);
-      return studyWonders.find((wonder) => normalizeStudyLandmark(wonder.name) === value) || null;
+      return studyWonders.find((wonder) =>
+        normalizeStudyLandmark(wonder.name) === value ||
+        wonder.aliases?.some((alias) => normalizeStudyLandmark(alias) === value)
+      ) || null;
     }
 
-    function isValidStudyGuide(data) {
-      return Boolean(
-        data &&
-        typeof data.landmarkSummary === "string" &&
-        data.landmarkSummary.trim() &&
-        Array.isArray(data.quiz) &&
-        data.quiz.length === 5 &&
-        data.quiz.every((question, index) =>
-          question &&
-          question.id === index + 1 &&
-          question.difficulty === studyDifficulty[index] &&
-          typeof question.question === "string" &&
-          question.question.trim() &&
-          Array.isArray(question.options) &&
-          question.options.length === 4 &&
-          question.options.every((option) => typeof option === "string" && option.trim()) &&
-          Number.isInteger(question.correctAnswerIndex) &&
-          question.correctAnswerIndex >= 0 &&
-          question.correctAnswerIndex <= 3 &&
-          question.snackReward === studyRewards[index]
-        )
-      );
-    }
-
-    async function generateStudyGuide() {
+    function openStudyGuide() {
       const wonder = selectedStudyWonder();
       const status = el("study-status");
-      const button = el("study-generate");
-      const requestId = ++studyRequestId;
       if (!wonder) {
-        status.textContent = "Choose or enter one of the New 7 Wonders from the list.";
+        status.textContent = "Choose one of the seven landmarks from the list.";
         el("study-landmark").focus();
         return;
       }
 
-      studyAbortController?.abort();
-      studyAbortController = new AbortController();
-      button.disabled = true;
       el("study-summary").hidden = true;
       el("study-quiz").hidden = true;
-      status.textContent = `Gathering field notes for ${wonder.name}…`;
-      studyQuizState = null;
-      try {
-        const response = await fetch("/api/study-landmark", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ landmark: wonder.name }),
-          signal: studyAbortController.signal
-        });
-        const responseText = await response.text();
-        let data;
-        try {
-          data = JSON.parse(responseText);
-        } catch {
-          const responseType = response.headers.get("content-type") || "unknown content type";
-          console.error("PawPort study API returned a non-JSON response.", {
-            status: response.status,
-            contentType: responseType,
-            responseText
-          });
-          throw new Error(
-            `Study guide API returned HTTP ${response.status} (${responseType}). ` +
-            "The API server is not available on this origin. Start PawPort with `node --experimental-strip-types server.mjs`; " +
-            `server response: ${responseText.slice(0, 200) || "(empty response)"}`
-          );
-        }
-        if (!response.ok) {
-          const errorMessage = typeof data.error === "string"
-            ? data.error
-            : `Study guide request failed with HTTP ${response.status}.`;
-          console.error("PawPort study API request failed.", {
-            status: response.status,
-            error: errorMessage
-          });
-          throw new Error(errorMessage);
-        }
-        if (!isValidStudyGuide(data)) {
-          throw new TypeError("The study guide service returned an invalid guide or quiz.");
-        }
-        if (requestId !== studyRequestId) return;
-
-        studyQuizState = { wonder, quiz: data.quiz, index: 0, earnedSnacks: 0, answered: false, finished: false };
-        el("study-summary-title").textContent = wonder.name;
-        el("study-summary-text").textContent = data.landmarkSummary;
-        el("study-start-quiz").hidden = false;
-        el("study-summary").hidden = false;
-        status.textContent = "Field guide ready. Read the summary, then start the five-question quiz.";
-      } catch (error) {
-        if (error.name === "AbortError") return;
-        if (requestId !== studyRequestId) return;
-        console.error("Could not generate the PawPort landmark study guide.", error);
-        status.textContent = error instanceof TypeError && error.message.includes("invalid guide")
-          ? "The study service returned an unexpected response. Please try again."
-          : error.message || "Could not load the study guide. Please try again.";
-      } finally {
-        if (requestId === studyRequestId) {
-          button.disabled = false;
-          studyAbortController = null;
-        }
-      }
+      studyQuizState = { wonder, quiz: wonder.quiz, index: 0, earnedSnacks: 0, answered: false, finished: false };
+      el("study-summary-title").textContent = wonder.name;
+      el("study-country").textContent = `Country: ${wonder.country}`;
+      el("study-pronunciation").textContent = `Pronunciation: ${wonder.pronunciation}`;
+      el("study-summary-text").textContent = wonder.overview;
+      el("study-key-facts").replaceChildren(...wonder.keyFacts.map((fact) => {
+        const item = document.createElement("li");
+        item.textContent = fact;
+        return item;
+      }));
+      el("study-start-quiz").hidden = false;
+      el("study-summary").hidden = false;
+      status.textContent = "Field guide ready. Review the details, then start the five-question quiz.";
     }
 
     function renderStudyQuestion() {
       if (!studyQuizState || studyQuizState.finished) return;
       const question = studyQuizState.quiz[studyQuizState.index];
+      const snackReward = studyRewards[question.difficulty];
       el("study-quiz").hidden = false;
       el("study-progress").textContent = `Question ${question.id} of 5 · ${question.difficulty}`;
-      el("study-reward").textContent = `Reward: ${question.snackReward} ${question.snackReward === 1 ? "snack" : "snacks"}`;
+      el("study-reward").textContent = `Reward: ${snackReward} ${snackReward === 1 ? "snack" : "snacks"}`;
       el("study-question").textContent = question.question;
       el("study-feedback").textContent = "";
       el("study-quiz-action").textContent = "Check answer";
@@ -4494,10 +4540,11 @@
 
         const question = studyQuizState.quiz[studyQuizState.index];
         const correct = Number(selected.value) === question.correctAnswerIndex;
-        if (correct) studyQuizState.earnedSnacks += question.snackReward;
+        const snackReward = studyRewards[question.difficulty];
+        if (correct) studyQuizState.earnedSnacks += snackReward;
         el("study-options").querySelectorAll("input").forEach((input) => { input.disabled = true; });
         el("study-feedback").textContent = correct
-          ? `Correct! ${currentPet || "Your companion"} is cheering — ${question.snackReward} ${question.snackReward === 1 ? "snack" : "snacks"} added to your quiz rewards.`
+          ? `Correct! ${currentPet || "Your companion"} is cheering — ${snackReward} ${snackReward === 1 ? "snack" : "snacks"} added to your quiz rewards.`
           : `Not quite. The correct answer was: ${question.options[question.correctAnswerIndex]}.`;
         studyQuizState.answered = true;
         el("study-quiz-action").textContent = studyQuizState.index === studyQuizState.quiz.length - 1
@@ -4745,18 +4792,12 @@
       const card = event.target.closest("[data-hub]");
       if (card) openHub(card);
     });
-    el("study-generate").addEventListener("click", generateStudyGuide);
+    el("study-open-guide").addEventListener("click", openStudyGuide);
     el("study-landmark").addEventListener("input", () => {
-      if (studyAbortController) {
-        studyRequestId += 1;
-        studyAbortController.abort();
-        studyAbortController = null;
-        el("study-generate").disabled = false;
-      }
       studyQuizState = null;
       el("study-summary").hidden = true;
       el("study-quiz").hidden = true;
-      el("study-status").textContent = "Generate a new guide for the selected landmark.";
+      el("study-status").textContent = "Open the field guide for the selected landmark.";
     });
     el("study-start-quiz").addEventListener("click", () => {
       if (!studyQuizState || studyQuizState.finished) return;
@@ -5452,8 +5493,5 @@
 
     initThree();
   </script>
-  <!-- Inside index.html, near the bottom of <body> -->
-<script src="api.js"></script>
-<script src="script.js"></script>
 </body>
 </html>

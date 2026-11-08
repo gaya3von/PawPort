@@ -1114,6 +1114,30 @@
     .guild-members { display: flex; gap: 5px; margin-top: 10px; }
     .guild-members span { padding: 5px 7px; border: 1px solid rgba(196,181,253,.28); border-radius: 999px; background: rgba(15,23,42,.58); color: #e9d5ff; font: 7px var(--mono); }
     .travel-log-entry { margin-top: 9px !important; padding: 10px; border-left: 3px solid #fbbf24; border-radius: 0 9px 9px 0; background: rgba(15,23,42,.55); color: #e2e8f0 !important; font: italic 11px/1.6 "Nunito",sans-serif !important; }
+    .itinerary-shell { display: grid; gap: 12px; }
+    .itinerary-shell[hidden] { display: none; }
+    .itinerary-intro { margin: 0; color: #cbd5e1; font-size: 12px; font-weight: 700; line-height: 1.5; }
+    .itinerary-controls { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(110px,.7fr) auto; gap: 10px; align-items: end; }
+    .itinerary-controls .creative-field { color: #bae6fd; }
+    .itinerary-controls .creative-select { min-width: 0; }
+    .itinerary-pet-note { margin: 0; padding: 10px 12px; border: 1px solid rgba(56,189,248,.32); border-radius: 10px; background: rgba(15,23,42,.58); color: #e2e8f0; font-size: 11px; font-weight: 700; line-height: 1.5; }
+    .itinerary-status { min-height: 1.4em; margin: 0; color: #bae6fd; font-size: 11px; font-weight: 800; }
+    .itinerary-days { display: grid; gap: 10px; }
+    .itinerary-day { padding: 13px; border: 1px solid rgba(56,189,248,.4); border-radius: 13px; background: linear-gradient(145deg,rgba(15,23,42,.82),rgba(30,41,74,.86)); box-shadow: inset 0 1px rgba(255,255,255,.06); }
+    .itinerary-day h3 { margin: 0 0 3px; color: #ffdf77; font: 700 16px "Fredoka",sans-serif; }
+    .itinerary-day-location { margin: 0 0 10px; color: #bae6fd; font: 8px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .itinerary-stops { display: grid; gap: 8px; }
+    .itinerary-stop { padding: 10px; border: 1px solid rgba(196,181,253,.22); border-radius: 10px; background: rgba(11,18,54,.68); color: #e2e8f0; }
+    .itinerary-stop h4 { margin: 0 0 4px; color: #fcd34d; font: 700 13px "Fredoka",sans-serif; }
+    .itinerary-stop p { margin: 3px 0 0; color: #dbeafe; font-size: 10px; font-weight: 700; line-height: 1.5; }
+    .itinerary-stop .itinerary-stop-time { color: #67e8f9; font: 8px var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+    .itinerary-checkpoint { min-height: 31px; margin-top: 8px; padding: 0 9px; border: 1px solid #ffe47c; border-radius: 8px; background: linear-gradient(180deg,#ffe477,#f59e0b); color: #1b2457; cursor: pointer; font: 800 8px var(--mono); }
+    .itinerary-checkpoint:disabled { border-color: rgba(110,231,183,.55); background: rgba(16,185,129,.2); color: #a7f3d0; cursor: default; }
+    .itinerary-day-note { margin: 9px 0 0; padding: 9px; border-left: 2px solid #fbbf24; background: rgba(15,23,42,.52); color: #fef3c7; font-size: 10px; font-weight: 700; line-height: 1.5; }
+    @media (max-width: 700px) { .itinerary-controls { grid-template-columns: 1fr; } }
+    .study-select-row { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 9px; align-items: end; }
+    .study-status { min-height: 1.4em; color: #cbd5e1 !important; font-size: 11px !important; font-weight: 800 !important; }
+    .study-summary[hidden] { display: none; }
     .quest-modal-title { margin: 0 0 6px; color: #ffd84c; font: 700 clamp(24px,5vw,34px)/1.08 "Fredoka",sans-serif; -webkit-text-stroke: 2px #0f172a; paint-order: stroke fill; }
     .quest-meta { margin: 0 0 14px; color: #475569; font: 9px var(--mono); letter-spacing: .08em; text-transform: uppercase; }
     .quest-challenge { padding: 12px; border: 1px solid #38bdf8; border-radius: 12px; background: rgba(15,23,42,.95); color: #e2e8f0; font-size: 12px; font-weight: 800; line-height: 1.5; }
@@ -1242,7 +1266,7 @@
     .creative-subtitle { margin: 0; color: #cbd5e1; font-size: 12px; font-weight: 800; line-height: 1.5; }
     .study-shell { display: grid; max-height: min(78vh, 760px); gap: 12px; min-width: 0; overflow-y: auto; overscroll-behavior: contain; }
     .study-shell[hidden] { display: none; }
-    .study-tabs { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 8px; padding: 5px; border: 1px solid #1e293b; border-radius: 12px; background: rgba(15,23,42,.92); }
+    .study-tabs { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 7px; padding: 5px; border: 1px solid #1e293b; border-radius: 12px; background: rgba(15,23,42,.92); }
     .study-tab { min-height: 42px; padding: 8px; border: 2px solid #1e293b; border-radius: 8px; background: #111827; color: #cbd5e1; cursor: pointer; font: 800 10px "Nunito",sans-serif; }
     .study-tab[aria-selected="true"] { border-color: #ffee55; background: linear-gradient(135deg,#ffee55,#ff8800); box-shadow: 0 3px 0 #7c2d12; color: #0b0f19; }
     .study-tab-panel[hidden] { display: none; }
@@ -2077,17 +2101,74 @@
             <p class="modal-copy" id="hub-pet-tip"></p>
             <button class="modal-action" id="hub-action" type="button">Add to quest log · +25 XP</button>
           </div>
+          <section class="itinerary-shell" id="itinerary-content" hidden aria-labelledby="itinerary-title">
+            <header>
+              <p class="dashboard-kicker">Your companion's personalized Wonder trip</p>
+              <h2 class="creative-heading" id="itinerary-title">WONDER ITINERARY BUILDER</h2>
+              <p class="itinerary-intro">Choose a Wonder and trip length. Start near the Wonder, then explore different places in the same country, with pet-curated attractions each day. Intercity travel time is not included, so plan transfers between stops. Complete checkpoints to earn XP and add moments to your Adventure Log. Verify current hours, tickets, transport, and local guidance before travelling.</p>
+            </header>
+            <p class="itinerary-pet-note" id="itinerary-pet-note" aria-live="polite"></p>
+            <div class="itinerary-controls">
+              <label class="creative-field" for="itinerary-destination">Choose your Wonder trip
+                <select class="creative-select" id="itinerary-destination">
+                  <option value="great-wall">Great Wall of China · China</option>
+                  <option value="petra">Petra · Jordan</option>
+                  <option value="taj-mahal">Taj Mahal · India</option>
+                  <option value="colosseum">The Colosseum · Italy</option>
+                  <option value="machu-picchu">Machu Picchu · Peru</option>
+                  <option value="chichen-itza">Chichén Itzá · Mexico</option>
+                  <option value="christ-redeemer">Christ the Redeemer · Brazil</option>
+                </select>
+              </label>
+              <label class="creative-field" for="itinerary-duration">Trip duration
+                <select class="creative-select" id="itinerary-duration">
+                  <option value="1">1 day</option>
+                  <option value="2">2 days</option>
+                  <option value="3" selected>3 days</option>
+                  <option value="4">4 days</option>
+                  <option value="5">5 days</option>
+                  <option value="6">6 days</option>
+                  <option value="7">7 days</option>
+                </select>
+              </label>
+              <button class="creative-action" id="itinerary-generate" type="button">Build my trip</button>
+            </div>
+            <p class="itinerary-status" id="itinerary-status" aria-live="polite">Choose one Wonder and a trip duration to build your pet's itinerary.</p>
+            <div class="itinerary-days" id="itinerary-days"></div>
+            <button class="modal-action" id="itinerary-log-quest" type="button" hidden>Log itinerary to quest log · +25 XP</button>
+          </section>
           <section class="study-shell" id="study-content" hidden aria-labelledby="study-title">
             <header>
               <p class="dashboard-kicker">Local visual etiquette field guide</p>
               <h2 id="study-title">STUDY HUB</h2>
               <p class="creative-subtitle">Explore three illustrated etiquette lessons at each landmark. No quizzes—just learn at your own pace.</p>
             </header>
-            <div class="study-tabs" role="tablist" aria-label="Study Hub sections">
-              <button class="study-tab" id="study-etiquette-tab" type="button" role="tab" data-study-tab="etiquette" aria-selected="true" aria-controls="study-etiquette-panel" tabindex="0">📖 Etiquette Lessons</button>
-              <button class="study-tab" id="study-readiness-tab" type="button" role="tab" data-study-tab="readiness" aria-selected="false" aria-controls="study-readiness-panel" tabindex="-1">🏅 Readiness Log</button>
+            <div class="study-tabs" id="study-tabs" role="tablist" aria-label="Study Hub sections">
+              <button class="study-tab" id="study-guide-tab" type="button" role="tab" data-study-tab="guide" aria-selected="true" aria-controls="study-guide-panel" tabindex="0">🗺️ Field Guide</button>
+              <button class="study-tab" id="study-etiquette-tab" type="button" role="tab" data-study-tab="etiquette" aria-selected="false" aria-controls="study-etiquette-panel" tabindex="-1">📖 Etiquette</button>
+              <button class="study-tab" id="study-readiness-tab" type="button" role="tab" data-study-tab="readiness" aria-selected="false" aria-controls="study-readiness-panel" tabindex="-1">🏅 Readiness</button>
             </div>
-            <section class="study-tab-panel" id="study-etiquette-panel" role="tabpanel" aria-labelledby="study-etiquette-tab">
+
+            <section class="study-tab-panel" id="study-guide-panel" role="tabpanel" aria-labelledby="study-guide-tab">
+              <div class="study-card">
+                <label class="creative-field" for="study-guide-landmark">Choose a landmark
+                  <input class="creative-input" id="study-guide-landmark" list="study-landmark-options" maxlength="60" autocomplete="off" placeholder="e.g. Petra">
+                  <datalist id="study-landmark-options"></datalist>
+                </label>
+                <div class="study-select-row creative-spaced">
+                  <p class="study-status" id="study-status" aria-live="polite">Choose a landmark to open its field guide.</p>
+                  <button class="creative-action" id="study-open-guide" type="button">Open field guide</button>
+                </div>
+              </div>
+              <section class="study-card study-summary" id="study-summary" hidden aria-labelledby="study-summary-title">
+              <h3 id="study-summary-title"></h3>
+              <p id="study-country"></p>
+              <p id="study-pronunciation"></p>
+              <p id="study-summary-text"></p>
+              <ul id="study-key-facts"></ul>
+              </section>
+            </section>
+            <section class="study-tab-panel" id="study-etiquette-panel" role="tabpanel" aria-labelledby="study-etiquette-tab" hidden>
             <section class="study-card study-hero" aria-live="polite">
               <div class="study-hero-art" id="study-hero-art" role="img" aria-label="Landmark illustration">🏛️</div>
               <div>
@@ -2584,6 +2665,8 @@
     let savedGuildStamps = 0;
     let savedMood = 70;
     let savedDailyLog = "";
+    let savedItineraryStops = [];
+    let savedItineraryNotes = [];
     let savedSessionSteps = 0;
     let savedSessionQuests = 0;
     try {
@@ -2599,6 +2682,10 @@
       savedMood = Number(localStorage.getItem("pawport.petMood"));
       if (!Number.isFinite(savedMood)) savedMood = 70;
       savedDailyLog = localStorage.getItem("pawport.dailyLog") || "";
+      savedItineraryStops = JSON.parse(localStorage.getItem("pawport.itineraryCompletedStops") || "[]");
+      if (!Array.isArray(savedItineraryStops)) savedItineraryStops = [];
+      savedItineraryNotes = JSON.parse(localStorage.getItem("pawport.itineraryNotes") || "[]");
+      if (!Array.isArray(savedItineraryNotes)) savedItineraryNotes = [];
       savedSessionSteps = Number(localStorage.getItem("pawport.sessionSteps")) || 0;
       savedSessionQuests = Number(localStorage.getItem("pawport.sessionQuests")) || 0;
     } catch (error) {
@@ -2616,7 +2703,9 @@
       sessionSteps: Math.max(0, savedSessionSteps),
       sessionQuests: Math.max(0, savedSessionQuests),
       lastSnack: null,
-      dailyLog: savedDailyLog
+      dailyLog: savedDailyLog,
+      itineraryCompletedStops: [...new Set(savedItineraryStops.filter((id) => typeof id === "string"))],
+      itineraryNotes: savedItineraryNotes.filter((note) => typeof note === "string").slice(-10)
     };
     window.PawPortState = appState;
     let toastTimer;
@@ -2627,7 +2716,8 @@
     let etiquetteState = { explored: {}, rewarded: [], readinessStamps: 0 };
     let selectedEtiquetteLandmarkId = "taj-mahal";
     let etiquetteLoaded = false;
-    let activeStudyTab = "etiquette";
+    let activeStudyTab = "guide";
+    let activeItinerary = null;
     const petSparkles = [];
     let petHopStart = 0;
     let petPointerDown = null;
@@ -2855,6 +2945,233 @@
       kiki: { name: "Kiki", intro: "LET'S GOOOO! Three lessons, three discoveries!", food: { id: "etiquette-victory-hop-bar", name: "Victory Hop Bar", icon: "🌾" } },
       frosty: { name: "Frosty", intro: "I'm ready to bravely explore these lessons with you!", food: { id: "etiquette-brave-krill-bites", name: "Brave Krill Bites", icon: "🦐" } }
     };
+    const itineraryWonderDays = [
+      {
+        id: "great-wall", name: "Great Wall of China", country: "China", location: "Beijing region · China",
+        stops: [
+          { id: "wall-entry", time: "09:00", title: "Plan the wall visit", place: "Official visitor entrance", detail: "Check today's access, weather, and the marked path before setting out.", tags: ["easy", "quiet"], checkpoint: "Confirm the route and entry guidance", backup: "If the section is closed, explore the visitor exhibits instead.", trivia: "The Great Wall is a series of fortifications built across multiple dynasties.", safety: "Use marked paths and follow local site instructions." },
+          { id: "wall-walk", time: "10:00", title: "Walk a restored wall section", place: "Great Wall viewpoint", detail: "Take a comfortable section of the path and pause to enjoy the ridge views.", tags: ["scenic", "challenge"], checkpoint: "Reach a comfortable viewpoint", backup: "Choose a shorter accessible section or enjoy the view from the entrance.", trivia: "The Great Wall measures over 21,196 km in total length.", safety: "Wear suitable shoes; restored sections may be steep." },
+          { id: "wall-watchtower", time: "12:00", title: "Explore a watchtower", place: "Wall watchtower", detail: "Notice how the towers punctuate the ridgeline and offer places to pause.", tags: ["history", "art"], checkpoint: "Spot a watchtower detail", backup: "Study a tower from a nearby viewpoint if the climb feels too steep.", trivia: "The wall's construction used stone, brick, tamped earth, and wood.", safety: "Keep to visitor routes and take care on stairs." },
+          { id: "wall-teahouse", time: "13:00", title: "Try a local tea and lunch stop", place: "Nearby village café", detail: "Take a relaxed meal break and enjoy a local café or tea house.", tags: ["food", "neighborhood", "quiet"], checkpoint: "Log a relaxed local food stop", backup: "Pack a snack and take a seated break at the visitor area.", trivia: "Sections of the wall were built and rebuilt over many centuries.", safety: "Check opening times and transport back before settling in." },
+          { id: "wall-market", time: "15:00", title: "Browse local crafts", place: "Nearby village shops", detail: "Browse at your own pace and look for locally made souvenirs.", tags: ["market", "artisan", "neighborhood"], checkpoint: "Find one craft or neighborhood detail", backup: "Browse the visitor-center displays instead.", trivia: "The Ming Dynasty is the dynasty most famously associated with the wall.", safety: "Agree on a return meeting point and keep valuables secure." }
+        ]
+      },
+      {
+        id: "petra", name: "Petra", country: "Jordan", location: "Petra · Jordan",
+        stops: [
+          { id: "petra-entry", time: "08:00", title: "Set up a gentle arrival", place: "Petra Visitor Centre", detail: "Check site guidance, water, and the route that feels right for your group.", tags: ["easy", "quiet"], checkpoint: "Review the visitor route and water plan", backup: "Spend time with the visitor information before entering.", trivia: "Petra was established as early as 312 BC as the Nabataean capital.", safety: "Check official hours and carry water and sun protection." },
+          { id: "petra-siq", time: "09:00", title: "Walk through the Siq", place: "The Siq", detail: "Follow the narrow gorge at an unhurried pace and notice the changing rock colors.", tags: ["scenic", "challenge", "garden"], checkpoint: "Complete a comfortable section of the Siq", backup: "Pause at a shaded point or turn back whenever you need.", trivia: "The Siq is the narrow gorge that provides access to Petra.", safety: "Stay on marked paths and watch your footing." },
+          { id: "petra-treasury", time: "11:00", title: "Take in the Treasury façade", place: "Al-Khazneh viewpoint", detail: "Pause at the viewpoint to admire the detailed rock-cut façade.", tags: ["scenic", "art", "photo"], checkpoint: "Notice a carved façade detail", backup: "Enjoy the view from a quieter nearby spot.", trivia: "Petra is nicknamed the Rose City for the color of its pink sandstone cliffs.", safety: "Respect barriers and local guidance around the monuments." },
+          { id: "petra-tombs", time: "12:00", title: "Explore the carved tombs", place: "Royal Tombs viewpoint", detail: "Choose a manageable route and look for contrasts in the carved stone.", tags: ["history", "art", "challenge"], checkpoint: "Spot one rock-cut architectural detail", backup: "View the tomb façades from the main path.", trivia: "Petra is renowned for rock-cut architecture and its water conduit system.", safety: "Allow extra time for the return walk and rest in the shade." },
+          { id: "petra-tea", time: "14:00", title: "Pause for tea and local crafts", place: "Nearby café or artisan stall", detail: "Rest with a drink, then browse local crafts if you feel like exploring.", tags: ["food", "market", "artisan", "neighborhood", "quiet"], checkpoint: "Log a relaxed tea or craft stop", backup: "Take a quiet seated break and skip the browsing.", trivia: "Petra's water system helped support life in this desert landscape.", safety: "Use registered guides and check official visitor advice." }
+        ]
+      },
+      {
+        id: "taj-mahal", name: "Taj Mahal", country: "India", location: "Agra · India",
+        stops: [
+          { id: "taj-gardens", time: "07:00", title: "Begin in the garden", place: "Taj Mahal gardens", detail: "Take in the garden axis and the first views of the marble mausoleum.", tags: ["scenic", "garden", "photo", "easy"], checkpoint: "Find a peaceful garden viewpoint", backup: "Choose a shaded garden path and enjoy the view from there.", trivia: "The Taj Mahal stands on the right bank of the Yamuna River in Agra.", safety: "Check current entry rules and opening hours before travelling." },
+          { id: "taj-reflection", time: "08:00", title: "Follow the reflecting-pool view", place: "Garden watercourse", detail: "Notice the symmetry of the garden and the changing reflection.", tags: ["scenic", "garden", "photo"], checkpoint: "Capture a symmetrical garden view", backup: "Frame the mausoleum from a nearby garden path.", trivia: "The complex is known for its symmetrical Mughal architecture.", safety: "Follow site rules and keep walkways clear." },
+          { id: "taj-marble", time: "10:00", title: "Look closely at marble inlay", place: "Mausoleum exterior", detail: "Admire the marble details from the permitted visitor areas.", tags: ["art", "history", "challenge"], checkpoint: "Spot a semi-precious stone inlay", backup: "Look for exterior details from a quieter viewpoint.", trivia: "The stone-inlay technique used in the white marble is called Pietra Dura.", safety: "Check current photography and mausoleum-entry rules." },
+          { id: "taj-market", time: "12:00", title: "Browse Agra artisan work", place: "Agra artisan market", detail: "Explore local craft stalls at a relaxed pace and support local makers.", tags: ["market", "artisan", "neighborhood"], checkpoint: "Notice a local craft technique", backup: "Browse a nearby shop or return to the hotel for a rest.", trivia: "The Taj Mahal was commissioned by Shah Jahan in 1631.", safety: "Agree on transport and a meeting point before browsing." },
+          { id: "taj-cafe", time: "13:00", title: "Enjoy a relaxed lunch", place: "Agra café", detail: "Choose a comfortable café for lunch and a cool drink.", tags: ["food", "neighborhood", "quiet"], checkpoint: "Take a seated lunch break", backup: "Choose a familiar café or takeaway meal.", trivia: "The mausoleum was commissioned to house Mumtaz Mahal's tomb.", safety: "Use trusted transport and check current local guidance." }
+        ]
+      },
+      {
+        id: "colosseum", name: "The Colosseum", country: "Italy", location: "Rome · Italy",
+        stops: [
+          { id: "rome-arrival", time: "08:30", title: "Arrive and check your entry", place: "Colosseum entrance", detail: "Confirm your timed ticket and visitor route before entering.", tags: ["easy", "quiet"], checkpoint: "Check your entry details", backup: "Explore the surrounding public viewpoints while you regroup.", trivia: "Construction began under Emperor Vespasian in 72 AD.", safety: "Use official ticket sources and keep belongings secure in crowds." },
+          { id: "colosseum-arena", time: "09:00", title: "Explore the amphitheatre", place: "Colosseum interior", detail: "Follow the permitted visitor route and look across the oval arena.", tags: ["history", "challenge", "scenic"], checkpoint: "Reach a designated arena viewpoint", backup: "Take a rest at an approved seating area or enjoy the exterior.", trivia: "The Colosseum could hold an estimated 50,000 to 80,000 spectators.", safety: "Follow timed-entry instructions and staff directions." },
+          { id: "colosseum-hypogeum", time: "11:00", title: "Learn about the hypogeum", place: "Underground network exhibit", detail: "Look for information about the tunnels and lifts beneath the arena.", tags: ["history", "art"], checkpoint: "Find one detail about the underground network", backup: "Read the accessible interpretive displays along the route.", trivia: "The hypogeum contained tunnels and lifts for animals and gladiators.", safety: "Stay on your assigned route and mind uneven historic surfaces." },
+          { id: "rome-forum", time: "12:00", title: "Continue through the historic area", place: "Forum-area viewpoint", detail: "Choose a manageable walking route and pause to take in the ancient surroundings.", tags: ["scenic", "history", "photo"], checkpoint: "Notice a historic stone or arch detail", backup: "Choose a nearby viewpoint instead of a longer walk.", trivia: "The amphitheatre was built under the Flavian dynasty.", safety: "Use marked paths and plan water and shade breaks." },
+          { id: "rome-cafe", time: "14:00", title: "Take a neighborhood café break", place: "Monti neighborhood café", detail: "Recharge with a relaxed lunch or gelato at a local café.", tags: ["food", "market", "neighborhood", "artisan", "quiet"], checkpoint: "Log a local café or neighborhood stop", backup: "Choose a quieter nearby café or return to your accommodation.", trivia: "The Colosseum was built with travertine limestone, tuff, and brick-faced concrete.", safety: "Keep valuables close and use official transport information." }
+        ]
+      },
+      {
+        id: "machu-picchu", name: "Machu Picchu", country: "Peru", location: "Cusco Region · Peru",
+        stops: [
+          { id: "machu-entry", time: "08:00", title: "Prepare for your visitor circuit", place: "Machu Picchu entrance", detail: "Confirm your ticket, assigned circuit, and the current site rules.", tags: ["easy", "quiet"], checkpoint: "Confirm the assigned circuit", backup: "Take time at the entrance and choose the gentlest permitted route.", trivia: "Machu Picchu sits 2,430 meters above sea level in Peru's Cusco Region.", safety: "Entry may require advance tickets; follow official park guidance." },
+          { id: "machu-terraces", time: "09:00", title: "View the agricultural terraces", place: "Agricultural Sector viewpoint", detail: "Look across the terraces and the mountain ridge from the permitted path.", tags: ["scenic", "garden", "photo", "challenge"], checkpoint: "Reach a comfortable terrace viewpoint", backup: "Choose a shorter circuit viewpoint and rest as needed.", trivia: "The citadel is divided into Agricultural and Urban Sectors.", safety: "Stay on your assigned circuit and allow time to acclimatize." },
+          { id: "machu-stonework", time: "10:30", title: "Study fitted dry-stone walls", place: "Urban Sector", detail: "Notice how massive blocks fit together without mortar.", tags: ["history", "art", "challenge"], checkpoint: "Find a fitted stonework detail", backup: "Observe the wall from the permitted path without touching it.", trivia: "The walls use ashlar masonry: carefully fitted blocks without mortar.", safety: "Do not touch, move, or climb on historic stonework." },
+          { id: "machu-lookout", time: "12:00", title: "Take a quiet mountain-view pause", place: "Designated lookout", detail: "Pause for a calm view across the mountain ridge and surrounding landscape.", tags: ["scenic", "garden", "quiet", "photo"], checkpoint: "Choose a quiet viewpoint", backup: "Rest at a permitted shaded or less-crowded area.", trivia: "Machu Picchu was built around 1450 for the Inca emperor Pachacuti.", safety: "Use only designated viewpoints and follow the visitor circuit." },
+          { id: "machu-cafe", time: "14:00", title: "Rest and browse local crafts", place: "Nearby town café or artisan shop", detail: "Take a seated meal break and browse local crafts if you have energy.", tags: ["food", "market", "artisan", "neighborhood", "quiet"], checkpoint: "Log a relaxed meal or craft stop", backup: "Head back to rest rather than adding another stop.", trivia: "The citadel was abandoned during the Spanish Conquest.", safety: "Confirm onward transport and follow local visitor guidance." }
+        ]
+      },
+      {
+        id: "chichen-itza", name: "Chichén Itzá", country: "Mexico", location: "Yucatán · Mexico",
+        stops: [
+          { id: "chichen-entry", time: "08:00", title: "Start with a site orientation", place: "Archaeological zone entrance", detail: "Check site rules, route options, and the day's weather before exploring.", tags: ["easy", "quiet"], checkpoint: "Review the site route and visitor guidance", backup: "Take a shaded break near the entrance before continuing.", trivia: "Chichén Itzá was a large Maya city of the Terminal Classic period.", safety: "Bring water and sun protection and respect site barriers." },
+          { id: "chichen-castillo", time: "09:00", title: "See El Castillo", place: "Temple of Kukulcán", detail: "Admire the pyramid from the permitted public viewing area.", tags: ["scenic", "art", "photo", "challenge"], checkpoint: "Spot the pyramid's staircase details", backup: "View El Castillo from a quieter edge of the plaza.", trivia: "El Castillo is also known as the Temple of Kukulcán.", safety: "Stay on marked paths and do not climb restricted structures." },
+          { id: "chichen-serpent", time: "10:00", title: "Look for the equinox shadow effect", place: "El Castillo plaza", detail: "Learn how the afternoon equinox light can create a serpent-like shadow on the staircase.", tags: ["history", "scenic", "art"], checkpoint: "Find the staircase linked to the serpent shadow", backup: "Read the site's interpretation panels if the light effect is not visible.", trivia: "During spring and autumn equinoxes, sunlight creates the appearance of a serpent descending the staircase.", safety: "The effect depends on date and conditions; keep to public areas." },
+          { id: "chichen-ballcourt", time: "11:30", title: "Explore the Great Ball Court", place: "Great Ball Court", detail: "Notice the scale of the preserved court and its stone features.", tags: ["history", "challenge", "art"], checkpoint: "Find a distinctive ball-court feature", backup: "View the court from the marked perimeter.", trivia: "The Great Ball Court is the largest preserved ball court in ancient Mesoamerica.", safety: "Follow site barriers and keep the path clear." },
+          { id: "chichen-market", time: "13:00", title: "Rest and browse local crafts", place: "Nearby artisan stalls", detail: "Take a shaded drink break and browse local crafts at your own pace.", tags: ["food", "market", "artisan", "neighborhood", "quiet"], checkpoint: "Notice a local craft or food detail", backup: "Choose a quiet seated rest and skip shopping.", trivia: "Chichén Itzá is located in Mexico's Yucatán region.", safety: "Use trusted transport and check the return trip before leaving." }
+        ]
+      },
+      {
+        id: "christ-redeemer", name: "Christ the Redeemer", country: "Brazil", location: "Rio de Janeiro · Brazil",
+        stops: [
+          { id: "rio-arrival", time: "08:00", title: "Plan the summit visit", place: "Official Corcovado transport", detail: "Check official access, weather, and transport updates before setting off.", tags: ["easy", "quiet"], checkpoint: "Confirm the official summit transport", backup: "Choose another day if weather or access conditions are poor.", trivia: "Christ the Redeemer stands on 700-meter Corcovado mountain.", safety: "Use official transport and check weather and access updates." },
+          { id: "rio-statue", time: "09:00", title: "Visit the Art Deco statue", place: "Christ the Redeemer summit", detail: "Take in the statue and its setting from the visitor areas.", tags: ["scenic", "art", "photo", "challenge"], checkpoint: "Notice a detail in the statue's design", backup: "Enjoy the summit view from a less-crowded visitor area.", trivia: "The statue stands 30 meters tall, excluding its 8-meter pedestal.", safety: "Respect barriers and follow summit staff instructions." },
+          { id: "rio-panorama", time: "10:30", title: "Take in the Rio panorama", place: "Corcovado viewpoint", detail: "Choose a comfortable lookout and enjoy the views across the city.", tags: ["scenic", "garden", "photo"], checkpoint: "Find a scenic city-view angle", backup: "Pause at a sheltered viewpoint if the summit is busy.", trivia: "The monument is in Tijuca Forest National Park.", safety: "Stay within visitor areas and check changing weather." },
+          { id: "rio-art", time: "12:00", title: "Explore local art and neighborhood life", place: "Rio cultural district", detail: "Choose a nearby gallery, local maker, or neighborhood walk that suits your pace.", tags: ["art", "market", "artisan", "neighborhood"], checkpoint: "Find a local art or neighborhood detail", backup: "Choose a short indoor gallery visit or a café stop.", trivia: "The statue was created by French sculptor Paul Landowski and built by Brazilian engineer Heitor da Silva Costa.", safety: "Use trusted transport and follow current local advice." },
+          { id: "rio-cafe", time: "13:00", title: "Pause for a café lunch", place: "Rio café", detail: "Enjoy a relaxed local meal and a quiet break after the summit.", tags: ["food", "neighborhood", "quiet"], checkpoint: "Log a relaxed local food stop", backup: "Choose a familiar café or return to your accommodation.", trivia: "The statue is made of reinforced concrete and soapstone tiles.", safety: "Confirm your return transport and keep belongings secure." }
+        ]
+      }
+    ];
+    const itineraryPetProfiles = {
+      Zuri: { summary: "2 planned stops per day, 30-minute buffers, backup options, and visible safety reminders." },
+      Momo: { summary: "Local food and café anchors, a relaxed pace, and a required afternoon rest block every day." },
+      Skye: { summary: "Route-ordered stops with minimal backtracking and a deep historical field fact at every location." },
+      Pudding: { summary: "Local makers, markets, and neighborhood hangouts, plus an open slot for spontaneous discovery." },
+      Hazel: { summary: "Scenic, garden, and art stops, with a golden-hour photography checkpoint every day." },
+      Kiki: { summary: "A high-density day of location checkpoints and +15 XP rewards at every stop." },
+      Frosty: { summary: "Two gentle stops, a small optional brave step, and quiet comfort breaks whenever you need them." }
+    };
+    const itineraryCountryPlaces = {
+      "great-wall": [
+        { id: "beijing", name: "Beijing", sight: "Forbidden City", place: "Palace Museum", tags: ["history", "art", "photo"], trivia: "The Forbidden City served as China's imperial palace for nearly five centuries.", food: "a Beijing noodle house", market: "Panjiayuan Market" },
+        { id: "xian", name: "Xi'an", sight: "Terracotta Army", place: "Emperor Qinshihuang's Mausoleum Site Museum", tags: ["history", "art", "challenge"], trivia: "The Terracotta Army was created to accompany China's first emperor in the afterlife.", food: "a Xi'an Muslim Quarter food stall", market: "the Muslim Quarter lanes" },
+        { id: "shanghai", name: "Shanghai", sight: "Yuyuan Garden", place: "Old City", tags: ["garden", "scenic", "photo", "easy"], trivia: "Yuyuan Garden dates to the Ming dynasty and is known for its classical garden design.", food: "a Shanghai dumpling café", market: "Yuyuan Bazaar" },
+        { id: "chengdu", name: "Chengdu", sight: "Giant Panda Base", place: "Chengdu Research Base of Giant Panda Breeding", tags: ["scenic", "garden", "easy", "quiet"], trivia: "The Chengdu Research Base focuses on giant panda conservation and breeding.", food: "a Chengdu teahouse", market: "a local Jinli Street craft shop" },
+        { id: "suzhou", name: "Suzhou", sight: "Humble Administrator's Garden", place: "Suzhou classical gardens", tags: ["garden", "scenic", "art", "photo"], trivia: "Suzhou's classical gardens are recognized together as a UNESCO World Heritage property.", food: "a Suzhou canal-side café", market: "Pingjiang Road craft shops" },
+        { id: "hangzhou", name: "Hangzhou", sight: "West Lake", place: "West Lake scenic area", tags: ["scenic", "garden", "photo", "easy"], trivia: "West Lake's cultural landscape has inspired Chinese gardens, paintings, and poetry.", food: "a Hangzhou tea house", market: "Qinghefang Historic Street" }
+      ],
+      petra: [
+        { id: "amman", name: "Amman", sight: "Amman Citadel", place: "Jabal al-Qal'a", tags: ["history", "scenic", "photo"], trivia: "Amman's Citadel hill contains archaeological remains from several historic periods.", food: "a downtown Amman café", market: "Amman's downtown souks" },
+        { id: "jerash", name: "Jerash", sight: "Oval Plaza", place: "Jerash Archaeological Site", tags: ["history", "scenic", "photo"], trivia: "Jerash preserves a remarkably extensive collection of Roman-era architecture.", food: "a Jerash family restaurant", market: "Jerash's local market" },
+        { id: "wadi-rum", name: "Wadi Rum", sight: "Wadi Rum Protected Area", place: "Wadi Rum desert landscape", tags: ["scenic", "photo", "challenge"], trivia: "Wadi Rum's sandstone mountains and desert valleys form a protected landscape.", food: "a Bedouin camp meal", market: "a local Bedouin craft stall" },
+        { id: "dead-sea", name: "Dead Sea", sight: "Dead Sea shoreline", place: "Jordan's Dead Sea coast", tags: ["scenic", "quiet", "easy"], trivia: "The Dead Sea lies at one of Earth's lowest land elevations.", food: "a Dead Sea resort café", market: "a local Dead Sea artisan shop" },
+        { id: "aqaba", name: "Aqaba", sight: "Aqaba Fort", place: "Aqaba waterfront", tags: ["history", "scenic", "easy"], trivia: "Aqaba is Jordan's Red Sea port city and has long been an important trading hub.", food: "an Aqaba seafood café", market: "Aqaba's old-town shops" },
+        { id: "madaba", name: "Madaba", sight: "Madaba Mosaic Map", place: "St George's Church", tags: ["history", "art", "easy"], trivia: "The Madaba Map is a sixth-century mosaic map of the Holy Land.", food: "a Madaba family café", market: "Madaba's local craft shops" }
+      ],
+      "taj-mahal": [
+        { id: "delhi", name: "Delhi", sight: "Humayun's Tomb", place: "Nizamuddin East", tags: ["history", "garden", "art", "photo"], trivia: "Humayun's Tomb is an early example of Mughal garden-tomb architecture in India.", food: "a Delhi market food stall", market: "Dilli Haat" },
+        { id: "jaipur", name: "Jaipur", sight: "Amber Fort", place: "Amer", tags: ["history", "scenic", "art"], trivia: "Amber Fort is part of Jaipur's hilltop fort complex and historic landscape.", food: "a Jaipur thali café", market: "Johari Bazaar" },
+        { id: "varanasi", name: "Varanasi", sight: "Dashashwamedh Ghat", place: "Varanasi riverfront", tags: ["history", "scenic", "photo"], trivia: "Varanasi is one of the world's oldest continuously inhabited cities.", food: "a Varanasi vegetarian café", market: "Vishwanath Gali shops" },
+        { id: "mumbai", name: "Mumbai", sight: "Gateway of India", place: "Apollo Bunder", tags: ["history", "scenic", "photo", "easy"], trivia: "The Gateway of India was completed in 1924 on Mumbai's waterfront.", food: "a Mumbai café", market: "Colaba Causeway" },
+        { id: "udaipur", name: "Udaipur", sight: "City Palace", place: "Lake Pichola waterfront", tags: ["history", "art", "scenic", "photo"], trivia: "Udaipur's City Palace complex overlooks Lake Pichola.", food: "a lakeside Udaipur café", market: "Hathi Pol Bazaar" },
+        { id: "kochi", name: "Kochi", sight: "Fort Kochi", place: "Fort Kochi waterfront", tags: ["history", "art", "scenic", "easy"], trivia: "Fort Kochi reflects centuries of maritime trade and cultural exchange.", food: "a Kochi seafood café", market: "Jew Town's antique and craft shops" }
+      ],
+      colosseum: [
+        { id: "florence", name: "Florence", sight: "Uffizi Gallery", place: "Historic centre", tags: ["art", "history", "photo"], trivia: "The Uffizi Gallery holds a major collection of Italian Renaissance art.", food: "a Florence trattoria", market: "San Lorenzo Market" },
+        { id: "venice", name: "Venice", sight: "Doge's Palace", place: "St Mark's Square", tags: ["history", "art", "photo"], trivia: "The Doge's Palace was the residence of Venice's former rulers and a centre of government.", food: "a Venetian bacaro", market: "Rialto Market" },
+        { id: "naples", name: "Naples", sight: "National Archaeological Museum", place: "Naples historic centre", tags: ["history", "art", "easy"], trivia: "Naples' archaeological museum preserves many finds from Pompeii and Herculaneum.", food: "a Naples pizzeria", market: "Pignasecca Market" },
+        { id: "bologna", name: "Bologna", sight: "Piazza Maggiore", place: "Bologna historic centre", tags: ["history", "neighborhood", "easy"], trivia: "Bologna is known for its medieval porticoes and historic university.", food: "a Bologna trattoria", market: "Quadrilatero Market" },
+        { id: "milan", name: "Milan", sight: "Duomo di Milano", place: "Piazza del Duomo", tags: ["history", "art", "photo"], trivia: "Milan's cathedral is one of the largest Gothic churches in the world.", food: "a Milanese café", market: "Mercato Centrale Milano" },
+        { id: "pompeii", name: "Pompeii", sight: "Pompeii Archaeological Park", place: "Ancient Pompeii", tags: ["history", "art", "challenge"], trivia: "Pompeii was buried by the eruption of Mount Vesuvius in 79 CE.", food: "a Pompeii café", market: "a local Pompeii artisan shop" }
+      ],
+      "machu-picchu": [
+        { id: "cusco", name: "Cusco", sight: "Sacsayhuamán", place: "Cusco's northern edge", tags: ["history", "scenic", "challenge"], trivia: "Sacsayhuamán is known for its massive, precisely fitted stone walls.", food: "a Cusco café", market: "San Pedro Market" },
+        { id: "sacred-valley", name: "Sacred Valley", sight: "Ollantaytambo", place: "Ollantaytambo archaeological site", tags: ["history", "scenic", "challenge"], trivia: "Ollantaytambo preserves Inca-era terraces and an old town still shaped by its original layout.", food: "an Ollantaytambo café", market: "Ollantaytambo's local market" },
+        { id: "lima", name: "Lima", sight: "Historic Centre of Lima", place: "Lima's historic centre", tags: ["history", "art", "photo"], trivia: "Lima's historic centre is noted for its colonial-era architecture and balconies.", food: "a Lima cevichería", market: "Surquillo Market" },
+        { id: "arequipa", name: "Arequipa", sight: "Santa Catalina Monastery", place: "Arequipa historic centre", tags: ["history", "art", "photo"], trivia: "Arequipa's historic centre is built largely from pale volcanic sillar stone.", food: "an Arequipa picantería", market: "San Camilo Market" },
+        { id: "puno", name: "Puno", sight: "Lake Titicaca", place: "Puno lakeshore", tags: ["scenic", "photo", "quiet"], trivia: "Lake Titicaca is a high-altitude lake in the Andes shared by Peru and Bolivia.", food: "a Puno lakeside café", market: "Puno's central market" },
+        { id: "nazca", name: "Nazca", sight: "Nazca Lines", place: "Nazca Lines viewing area", tags: ["history", "scenic", "photo"], trivia: "The Nazca Lines are large geoglyphs etched into the desert surface.", food: "a Nazca family café", market: "Nazca's local craft shops" }
+      ],
+      "chichen-itza": [
+        { id: "merida", name: "Mérida", sight: "Paseo de Montejo", place: "Mérida historic district", tags: ["history", "art", "photo", "easy"], trivia: "Paseo de Montejo is a grand boulevard in Mérida lined with historic mansions.", food: "a Mérida Yucatecan restaurant", market: "Lucas de Gálvez Market" },
+        { id: "mexico-city", name: "Mexico City", sight: "Chapultepec Castle", place: "Bosque de Chapultepec", tags: ["history", "scenic", "art"], trivia: "Chapultepec Castle has served as a military academy, imperial residence, and museum.", food: "a Mexico City mercado", market: "La Ciudadela artisan market" },
+        { id: "oaxaca", name: "Oaxaca", sight: "Monte Albán", place: "Oaxaca Valley", tags: ["history", "scenic", "challenge"], trivia: "Monte Albán was a major centre of the ancient Zapotec civilization.", food: "an Oaxaca market comedor", market: "Benito Juárez Market" },
+        { id: "puebla", name: "Puebla", sight: "Puebla Cathedral", place: "Puebla historic centre", tags: ["history", "art", "photo"], trivia: "Puebla's historic centre is recognized for its colonial architecture and tilework.", food: "a Puebla mole restaurant", market: "El Parián artisan market" },
+        { id: "guanajuato", name: "Guanajuato", sight: "Alley of the Kiss", place: "Guanajuato historic centre", tags: ["history", "neighborhood", "photo"], trivia: "Guanajuato's historic centre is known for its narrow lanes and colourful hillside setting.", food: "a Guanajuato café", market: "Hidalgo Market" },
+        { id: "palenque", name: "Palenque", sight: "Palenque Archaeological Zone", place: "Palenque National Park", tags: ["history", "scenic", "challenge"], trivia: "Palenque is a Maya archaeological site set within tropical forest in Chiapas.", food: "a Palenque family restaurant", market: "Palenque's local craft market" }
+      ],
+      "christ-redeemer": [
+        { id: "paraty", name: "Paraty", sight: "Paraty Historic Centre", place: "Paraty waterfront", tags: ["history", "art", "scenic", "photo"], trivia: "Paraty's historic centre is part of a UNESCO-listed cultural and natural landscape.", food: "a Paraty seafood restaurant", market: "Paraty's local artisan shops" },
+        { id: "sao-paulo", name: "São Paulo", sight: "Ibirapuera Park", place: "Ibirapuera", tags: ["garden", "scenic", "art", "easy"], trivia: "Ibirapuera Park combines green space with major cultural institutions in São Paulo.", food: "a São Paulo café", market: "Mercado Municipal de São Paulo" },
+        { id: "salvador", name: "Salvador", sight: "Pelourinho", place: "Salvador's historic centre", tags: ["history", "art", "photo"], trivia: "Pelourinho is the historic centre of Salvador, known for its colonial architecture.", food: "a Salvador acarajé stand", market: "Mercado Modelo" },
+        { id: "brasilia", name: "Brasília", sight: "Cathedral of Brasília", place: "Monumental Axis", tags: ["art", "scenic", "photo", "easy"], trivia: "The Cathedral of Brasília is a modernist design by architect Oscar Niemeyer.", food: "a Brasília café", market: "Feira da Torre de TV" },
+        { id: "foz-do-iguacu", name: "Foz do Iguaçu", sight: "Iguaçu Falls", place: "Iguaçu National Park", tags: ["scenic", "garden", "photo", "challenge"], trivia: "Iguaçu Falls is a vast waterfall system on the border of Brazil and Argentina.", food: "a Foz do Iguaçu café", market: "a local Foz do Iguaçu artisan shop" },
+        { id: "manaus", name: "Manaus", sight: "Amazon Theatre", place: "Manaus historic centre", tags: ["history", "art", "photo"], trivia: "The Amazon Theatre opened in 1896 during Manaus's rubber boom.", food: "a Manaus riverside restaurant", market: "Adolpho Lisboa Municipal Market" }
+      ]
+    };
+    const fieldGuideWonders = [
+      {
+        id: "great-wall",
+        name: "Great Wall of China",
+        aliases: ["Great Wall"],
+        country: "China",
+        pronunciation: "Great Wall of China",
+        overview: "An ancient series of walls and fortifications built across the northern borders of historical Chinese states to protect against nomadic invasions.",
+        keyFacts: [
+          "Measures over 21,196 km (13,171 miles) in total length.",
+          "Built across multiple dynasties, most famously the Ming Dynasty.",
+          "Constructed using stone, brick, tamped earth, and wood."
+        ],
+      },
+      {
+        id: "petra",
+        name: "Petra",
+        country: "Jordan",
+        pronunciation: "PEH-truh",
+        overview: "A historic and archaeological city in southern Jordan famous for its rock-cut architecture and water conduit system.",
+        keyFacts: [
+          "Established as early as 312 BC as the capital of the Nabataeans.",
+          "Nicknamed the \"Rose City\" due to the pink sandstone color of the cliffs.",
+          "Access is gained through a narrow gorge called the Siq."
+        ],
+      },
+      {
+        id: "christ-redeemer",
+        name: "Christ the Redeemer",
+        country: "Brazil",
+        pronunciation: "KRYST the rih-DEE-mer",
+        overview: "An Art Deco statue of Jesus Christ in Rio de Janeiro, Brazil, created by French sculptor Paul Landowski and built by Brazilian engineer Heitor da Silva Costa.",
+        keyFacts: [
+          "Stands 30 meters (98 ft) tall, excluding its 8-meter pedestal.",
+          "Located at the peak of the 700-meter Corcovado mountain in the Tijuca Forest National Park.",
+          "Made of reinforced concrete and soapstone tiles."
+        ],
+      },
+      {
+        id: "machu-picchu",
+        name: "Machu Picchu",
+        country: "Peru",
+        pronunciation: "MAH-choo PEE-choo",
+        overview: "A 15th-century Inca citadel situated on a mountain ridge 2,430 meters (7,970 ft) above sea level in the Cusco Region of Peru.",
+        keyFacts: [
+          "Built around 1450 for the Inca emperor Pachacuti and abandoned during the Spanish Conquest.",
+          "Built with dry-stone walls using massive fitted blocks without mortar (Ashlar masonry).",
+          "Divided into an Agricultural Sector and an Urban Sector."
+        ],
+      },
+      {
+        id: "chichen-itza",
+        name: "Chichén Itzá",
+        country: "Mexico",
+        pronunciation: "chee-CHEN eet-ZAH",
+        overview: "A large pre-Columbian city built by the Maya people of the Terminal Classic period, located in Yucatán, Mexico.",
+        keyFacts: [
+          "Features the famous temple pyramid El Castillo (Temple of Kukulcán).",
+          "During the spring and autumn equinoxes, the afternoon sun creates a shadow mimicking a serpent crawling down the staircase.",
+          "Home to the Great Ball Court, the largest preserved ball court in ancient Mesoamerica."
+        ],
+      },
+      {
+        id: "colosseum",
+        name: "The Colosseum",
+        aliases: ["Colosseum"],
+        country: "Italy",
+        pronunciation: "The kah-luh-SEE-um",
+        overview: "An oval amphitheatre in the centre of the city of Rome, Italy, built of travertine limestone, tuff, and brick-faced concrete.",
+        keyFacts: [
+          "Built under the Flavian dynasty, begun by Emperor Vespasian in 72 AD.",
+          "Could hold an estimated 50,000 to 80,000 spectators for gladiatorial contests and public spectacles.",
+          "The hypogeum was an elaborate underground network of tunnels and lifts for animals and gladiators."
+        ],
+      },
+      {
+        id: "taj-mahal",
+        name: "Taj Mahal",
+        country: "India",
+        pronunciation: "TAHJ muh-HAHL",
+        overview: "An ivory-white marble mausoleum on the right bank of the Yamuna River in the Indian city of Agra.",
+        keyFacts: [
+          "Commissioned in 1631 by the Mughal emperor Shah Jahan to house the tomb of his favorite wife, Mumtaz Mahal.",
+          "Incorporates symmetrical Mughal architecture with semi-precious stones inlaid into white marble (Pietra Dura).",
+          "Appears to shift colors throughout the day depending on light and moonlight."
+        ],
+      }
+    ];
     const studyWonders = [
       {
         id: "taj-mahal", name: "Taj Mahal", location: "Agra, India", icon: "🕌",
@@ -3524,6 +3841,8 @@
         localStorage.setItem("pawport.guildStamps", String(appState.guildStamps));
         localStorage.setItem("pawport.petMood", String(appState.petMood));
         localStorage.setItem("pawport.dailyLog", appState.dailyLog);
+        localStorage.setItem("pawport.itineraryCompletedStops", JSON.stringify(appState.itineraryCompletedStops));
+        localStorage.setItem("pawport.itineraryNotes", JSON.stringify(appState.itineraryNotes));
         localStorage.setItem("pawport.sessionSteps", String(appState.sessionSteps));
         localStorage.setItem("pawport.sessionQuests", String(appState.sessionQuests));
       } catch (error) {
@@ -3608,7 +3927,10 @@
       const story = quests
         ? `${voice}, and ${appState.travelerName} made every discovery count.`
         : `${alternate}; next stop, a brand-new discovery!`;
-      return `Day 1 with ${appState.travelerName} in ${destination}: ${steps.toLocaleString()} adventure steps logged in our PawPort quest trail. ${moment} ${petName} says, “${story}”`;
+      const itineraryNote = appState.itineraryNotes.length
+        ? ` Field Notes: ${appState.itineraryNotes.slice(-3).join(" ")}`
+        : "";
+      return `Day 1 with ${appState.travelerName} in ${destination}: ${steps.toLocaleString()} adventure steps logged in our PawPort quest trail. ${moment} ${petName} says, “${story}”${itineraryNote}`;
     }
 
     function refreshTravelLog() {
@@ -3616,6 +3938,388 @@
       el("travel-log-entry").textContent = appState.dailyLog;
       el("log-date").textContent = new Date().toLocaleDateString(undefined, { month: "short", day: "numeric" });
       persistAdventureState();
+    }
+
+    function activeItineraryPet() {
+      if (currentPet && pets[currentPet]) return currentPet;
+      const selectedPetId = appState.selectedPetId;
+      return Object.keys(pets).find((name) => name.toLowerCase() === selectedPetId) || null;
+    }
+
+    function initializeItineraryBuilder() {
+      const petName = activeItineraryPet();
+      el("itinerary-pet-note").textContent = petName
+        ? `${petName} · ${itineraryPetProfiles[petName].summary}`
+        : "Choose a travel companion first to personalize your Wonders route.";
+      el("itinerary-generate").disabled = !petName;
+      el("itinerary-log-quest").hidden = !activeItinerary;
+      el("itinerary-log-quest").disabled = appState.completedHubs.includes("itinerary");
+      el("itinerary-log-quest").textContent = appState.completedHubs.includes("itinerary")
+        ? "Itinerary quest logged ✓"
+        : "Log itinerary to quest log · +25 XP";
+      if (activeItinerary) {
+        el("itinerary-destination").value = activeItinerary.wonderId;
+        el("itinerary-duration").value = String(activeItinerary.duration);
+        renderItinerary(activeItinerary);
+      }
+    }
+
+    function itineraryPlacesForWonder(wonder) {
+      const countryPlaces = itineraryCountryPlaces[wonder.id];
+      if (!Array.isArray(countryPlaces) || countryPlaces.length !== 6) {
+        console.error(`Missing in-country itinerary places for ${wonder.id}`);
+        return [];
+      }
+      return [
+        { id: wonder.id, name: wonder.name, location: wonder.location, stops: wonder.stops },
+        ...countryPlaces.map((place) => ({
+          id: place.id,
+          name: place.name,
+          location: `${place.name} · ${wonder.country}`,
+          stops: [
+            {
+              id: `${place.id}-sight`,
+              title: `Explore ${place.sight}`,
+              place: place.place,
+              detail: `Explore ${place.sight} at an unhurried pace and check current visitor guidance before you go.`,
+              tags: [...place.tags, "easy"],
+              checkpoint: `Explore ${place.sight}`,
+              backup: `Choose another visitor area or a nearby indoor stop in ${place.name}.`,
+              trivia: place.trivia,
+              safety: `Check local access and transport guidance for ${place.name}.`
+            },
+            {
+              id: `${place.id}-food`,
+              title: "Enjoy a local food stop",
+              place: place.food,
+              detail: `Take a relaxed meal break and try a local specialty in ${place.name}.`,
+              tags: ["food", "neighborhood", "quiet"],
+              checkpoint: `Enjoy a local food stop in ${place.name}`,
+              backup: `Choose a familiar café or take a quiet rest instead.`,
+              trivia: `${place.name} is one of the places to explore in ${wonder.country}.`,
+              safety: "Check opening hours and plan your return transport."
+            },
+            {
+              id: `${place.id}-market`,
+              title: "Browse local crafts and neighborhood life",
+              place: place.market,
+              detail: `Explore local makers and neighborhood details at your own pace in ${place.name}.`,
+              tags: ["market", "artisan", "neighborhood"],
+              checkpoint: `Explore local crafts in ${place.name}`,
+              backup: `Choose a nearby shop or a quiet seated break.`,
+              trivia: `Local markets and craft shops offer a window into everyday life in ${place.name}.`,
+              safety: "Agree on a meeting point and check the route back before browsing."
+            },
+            {
+              id: `${place.id}-city-walk`,
+              title: "Take a gentle city-centre walk",
+              place: `${place.name} city centre`,
+              detail: `Choose a short, comfortable walk and notice the local streets and public spaces.`,
+              tags: ["neighborhood", "easy", "quiet", "scenic"],
+              checkpoint: `Notice a neighborhood detail in ${place.name}`,
+              backup: `Rest at a nearby café or visitor area instead.`,
+              trivia: `${place.name} offers a different perspective on ${wonder.country}.`,
+              safety: "Follow local pedestrian guidance and use trusted transport."
+            }
+          ]
+        }))
+      ];
+    }
+
+    function selectItineraryStops(place, petName, dayIndex) {
+      const stops = place.stops;
+      if (petName === "Zuri") {
+        const preferred = [...stops].sort((a, b) =>
+          scoreItineraryStop(b, ["easy", "quiet", "scenic"]) - scoreItineraryStop(a, ["easy", "quiet", "scenic"])
+        );
+        return rotatingStops(preferred, dayIndex, 2);
+      }
+      if (petName === "Momo") {
+        const meals = stops.filter((stop) => stop.tags.includes("food"));
+        const attractions = stops.filter((stop) => !meals.includes(stop));
+        const meal = meals[dayIndex % Math.max(1, meals.length)] || stops[dayIndex % stops.length];
+        return [meal, ...rotatingStops(attractions.length ? attractions : stops.filter((stop) => stop !== meal), dayIndex, 2)];
+      }
+      if (petName === "Pudding") {
+        const preferred = [...stops].sort((a, b) =>
+          scoreItineraryStop(b, ["market", "artisan", "neighborhood"]) -
+          scoreItineraryStop(a, ["market", "artisan", "neighborhood"])
+        );
+        return rotatingStops(preferred, dayIndex, 3);
+      }
+      if (petName === "Hazel") {
+        const preferred = [...stops].sort((a, b) =>
+          scoreItineraryStop(b, ["garden", "scenic", "art", "photo"]) -
+          scoreItineraryStop(a, ["garden", "scenic", "art", "photo"])
+        );
+        return rotatingStops(preferred, dayIndex, 3);
+      }
+      if (petName === "Frosty") {
+        const preferred = [...stops].sort((a, b) =>
+          scoreItineraryStop(b, ["easy", "quiet"]) - scoreItineraryStop(a, ["easy", "quiet"])
+        );
+        return rotatingStops(preferred, dayIndex, 2);
+      }
+      return rotatingStops(stops, dayIndex, petName === "Skye" || petName === "Kiki" ? 4 : stops.length);
+    }
+
+    function rotatingStops(stops, dayIndex, count) {
+      if (!stops.length) return [];
+      const start = dayIndex % stops.length;
+      return Array.from({ length: Math.min(count, stops.length) }, (_, index) =>
+        stops[(start + index) % stops.length]
+      );
+    }
+
+    function scoreItineraryStop(stop, preferredTags) {
+      return stop.tags.reduce((score, tag) => score + (preferredTags.includes(tag) ? 1 : 0), 0);
+    }
+
+    function formatItineraryTime(minutes) {
+      const hours = Math.floor(minutes / 60) % 24;
+      const displayHour = hours % 12 || 12;
+      const minute = String(minutes % 60).padStart(2, "0");
+      return `${displayHour}:${minute} ${hours < 12 ? "AM" : "PM"}`;
+    }
+
+    function buildItinerary() {
+      const petName = activeItineraryPet();
+      if (!petName) {
+        el("itinerary-status").textContent = "Choose a travel companion before building an itinerary.";
+        return;
+      }
+      const wonderId = el("itinerary-destination").value;
+      const wonder = itineraryWonderDays.find((item) => item.id === wonderId);
+      const duration = Number(el("itinerary-duration").value);
+      if (!wonder) {
+        el("itinerary-status").textContent = "Choose one of the Seven Wonders as your destination.";
+        return;
+      }
+      if (!Number.isInteger(duration) || duration < 1 || duration > 7) {
+        el("itinerary-status").textContent = "Choose a trip duration between one and seven days.";
+        return;
+      }
+      if (!Array.isArray(itineraryCountryPlaces[wonderId]) || itineraryCountryPlaces[wonderId].length !== 6) {
+        console.error(`Missing in-country itinerary places for ${wonderId}`);
+        el("itinerary-status").textContent = "This country's itinerary stops are unavailable right now. Please choose another Wonder.";
+        return;
+      }
+
+      activeItinerary = {
+        pet: petName,
+        wonderId,
+        duration,
+        days: Array.from({ length: duration }, (_, dayIndex) => dayIndex)
+      };
+      el("itinerary-days").replaceChildren();
+      renderItinerary(activeItinerary);
+      el("itinerary-log-quest").hidden = false;
+      el("itinerary-log-quest").disabled = appState.completedHubs.includes("itinerary");
+      el("itinerary-log-quest").textContent = appState.completedHubs.includes("itinerary")
+        ? "Itinerary quest logged ✓"
+        : "Log itinerary to quest log · +25 XP";
+      el("itinerary-status").textContent = `Your ${duration}-day ${wonder.country} trip, starting near ${wonder.name}, is ready for ${petName}. Each day explores a different place in the country.`;
+      appState.itineraryNotes.push(`${petName} planned a ${duration}-day trip in ${wonder.country}, starting near ${wonder.name}.`);
+      appState.itineraryNotes = appState.itineraryNotes.slice(-10);
+      refreshTravelLog();
+    }
+
+    function itineraryDayNotes(petName, wonder) {
+      const notes = {
+        Zuri: [
+          "Safety check: use official visitor information and transport, keep valuables secure, and follow marked routes.",
+          "Zuri keeps the day light: each stop includes a built-in 30-minute buffer and a backup option."
+        ],
+        Momo: [
+          "Momo anchors the day around local food and café breaks.",
+          "Mandatory afternoon rest: 2:00–3:30 PM. No sightseeing scheduled during this recharge block."
+        ],
+        Skye: [
+          "Skye ordered stops along a clustered route to minimize backtracking; confirm the local route before heading out.",
+          `Field note: ${landmarkById[wonder.id].funFact}`
+        ],
+        Pudding: [
+          "Pudding prioritizes nearby markets, makers, and neighborhood hangouts.",
+          "Open discovery slot: 3:00–5:00 PM. Follow a local recommendation or simply take a slow detour."
+        ],
+        Hazel: [
+          "Hazel picked scenic, garden, and art moments for a relaxed photo-friendly day.",
+          "Golden-hour photo checkpoint: return to your favorite permitted viewpoint near sunset; confirm local sunset time."
+        ],
+        Kiki: [
+          "Daily quest: complete every location checkpoint. Each completed challenge earns +15 XP.",
+          "Checkpoint trail: follow the stops in order and collect a victory snapshot at each location."
+        ],
+        Frosty: [
+          "Brave step: try one small, optional new experience, at your own pace.",
+          "Comfort plan: pause at a quiet café or visitor rest area whenever you need a breather."
+        ]
+      };
+      return notes[petName] || [];
+    }
+
+    function renderItinerary(itinerary) {
+      const host = el("itinerary-days");
+      if (!host || !itinerary) return;
+      const petName = itinerary.pet;
+      const startTimes = { Zuri: 9 * 60, Momo: 8 * 60, Skye: 8 * 60, Pudding: 10 * 60, Hazel: 8 * 60, Kiki: 7 * 60 + 30, Frosty: 10 * 60 };
+      const intervals = { Zuri: 150, Momo: 120, Skye: 90, Pudding: 90, Hazel: 90, Kiki: 60, Frosty: 120 };
+      const xpPerStop = petName === "Kiki" ? 15 : 5;
+
+      const wonder = itineraryWonderDays.find((item) => item.id === itinerary.wonderId);
+      if (!wonder) {
+        host.replaceChildren();
+        return;
+      }
+      const places = itineraryPlacesForWonder(wonder);
+      if (!places.length) {
+        host.replaceChildren();
+        return;
+      }
+
+      host.replaceChildren(...itinerary.days.map((_, index) => {
+        const dayNumber = index + 1;
+        const place = places[index % places.length];
+        const card = document.createElement("article");
+        card.className = "itinerary-day";
+        const heading = document.createElement("h3");
+        heading.textContent = `DAY ${dayNumber} · ${place.name}`;
+        const location = document.createElement("p");
+        location.className = "itinerary-day-location";
+        location.textContent = place.location;
+        const stopHost = document.createElement("div");
+        stopHost.className = "itinerary-stops";
+        const selectedStops = selectItineraryStops(place, petName, index);
+        let mealAnchor = 0;
+        selectedStops.forEach((stop, stopIndex) => {
+          const item = document.createElement("article");
+          item.className = "itinerary-stop";
+          const time = document.createElement("p");
+          time.className = "itinerary-stop-time";
+          const label = petName === "Momo" && stop.tags.includes("food")
+            ? `${formatItineraryTime(mealAnchor++ === 0 ? 8 * 60 : 12 * 60)} · Local food/café anchor`
+            : `${formatItineraryTime(startTimes[petName] + intervals[petName] * stopIndex)} · ${petName === "Zuri" ? "60 min + 30-min buffer" : "Suggested stop"}`;
+          time.textContent = label;
+          const title = document.createElement("h4");
+          title.textContent = stop.title;
+          const place = document.createElement("p");
+          place.textContent = `📍 ${stop.place}`;
+          const detail = document.createElement("p");
+          detail.textContent = stop.detail;
+          item.append(time, title, place, detail);
+
+          if (petName === "Zuri") {
+            const backup = document.createElement("p");
+            backup.textContent = `Backup option: ${stop.backup}`;
+            const safety = document.createElement("p");
+            safety.textContent = `Safety reminder: ${stop.safety}`;
+            item.append(backup, safety);
+          }
+          if (petName === "Skye") {
+            const trivia = document.createElement("p");
+            trivia.textContent = `Deep-dive field fact: ${stop.trivia}`;
+            item.append(trivia);
+          }
+
+          const checkpoint = document.createElement("button");
+          checkpoint.type = "button";
+          checkpoint.className = "itinerary-checkpoint";
+          const checkpointId = `${petName.toLowerCase()}-${wonder.id}-day-${dayNumber}-${stop.id}`;
+          checkpoint.dataset.itineraryStop = checkpointId;
+          checkpoint.dataset.itineraryWonder = wonder.id;
+          checkpoint.dataset.itineraryName = place.location;
+          checkpoint.dataset.itineraryCheckpoint = stop.checkpoint;
+          checkpoint.dataset.itineraryPet = petName;
+          checkpoint.dataset.itineraryDay = String(dayNumber);
+          checkpoint.dataset.itineraryXp = String(xpPerStop);
+          const completed = appState.itineraryCompletedStops.includes(checkpointId);
+          checkpoint.disabled = completed;
+          const checkpointLabel = petName === "Kiki"
+            ? "Daily quest"
+            : petName === "Frosty" && stopIndex === 0
+              ? "Optional brave step"
+              : "Log checkpoint";
+          checkpoint.textContent = completed ? "Checkpoint logged ✓" : `${checkpointLabel} · +${xpPerStop} XP`;
+          item.append(checkpoint);
+          stopHost.append(item);
+        });
+
+        if (petName === "Momo" || petName === "Frosty") {
+          const rest = document.createElement("article");
+          rest.className = "itinerary-stop";
+          const time = document.createElement("p");
+          time.className = "itinerary-stop-time";
+          time.textContent = petName === "Momo" ? "2:00–3:30 PM · Mandatory rest block" : "Anytime · Quiet comfort stop";
+          const title = document.createElement("h4");
+          title.textContent = petName === "Momo" ? "Afternoon recharge" : "Take a breather";
+          const detail = document.createElement("p");
+          detail.textContent = petName === "Momo"
+            ? "Keep this break in the plan: find a calm café, shaded seat, or comfortable place to rest."
+            : "Pause at a quiet café, visitor rest area, or another comfortable spot whenever you need one.";
+          rest.append(time, title, detail);
+          stopHost.append(rest);
+        }
+
+        const dayNotes = itineraryDayNotes(petName, wonder);
+        if (petName === "Hazel") {
+          const goldenHour = document.createElement("article");
+          goldenHour.className = "itinerary-stop";
+          const time = document.createElement("p");
+          time.className = "itinerary-stop-time";
+          time.textContent = "Golden hour · confirm local sunset";
+          const title = document.createElement("h4");
+          title.textContent = "Golden-hour photo checkpoint";
+          const detail = document.createElement("p");
+          detail.textContent = `Choose a permitted scenic viewpoint around ${place.name} and capture the light at your own pace.`;
+          const checkpoint = document.createElement("button");
+          checkpoint.type = "button";
+          checkpoint.className = "itinerary-checkpoint";
+          const checkpointId = `${petName.toLowerCase()}-${wonder.id}-day-${dayNumber}-golden-hour`;
+          checkpoint.dataset.itineraryStop = checkpointId;
+          checkpoint.dataset.itineraryWonder = wonder.id;
+          checkpoint.dataset.itineraryName = place.location;
+          checkpoint.dataset.itineraryCheckpoint = "Capture a golden-hour travel photo";
+          checkpoint.dataset.itineraryPet = petName;
+          checkpoint.dataset.itineraryDay = String(dayNumber);
+          checkpoint.dataset.itineraryXp = String(xpPerStop);
+          const completed = appState.itineraryCompletedStops.includes(checkpointId);
+          checkpoint.disabled = completed;
+          checkpoint.textContent = completed ? "Photo checkpoint logged ✓" : `Log photo checkpoint · +${xpPerStop} XP`;
+          goldenHour.append(time, title, detail, checkpoint);
+          stopHost.append(goldenHour);
+        }
+
+        card.append(heading, location, stopHost, ...dayNotes.map((note) => {
+          const paragraph = document.createElement("p");
+          paragraph.className = "itinerary-day-note";
+          paragraph.textContent = note;
+          return paragraph;
+        }));
+        return card;
+      }));
+    }
+
+    function completeItineraryCheckpoint(button) {
+      const checkpointId = button.dataset.itineraryStop;
+      const wonderName = button.dataset.itineraryName;
+      const checkpoint = button.dataset.itineraryCheckpoint;
+      const petName = button.dataset.itineraryPet;
+      const dayNumber = Number(button.dataset.itineraryDay);
+      const xp = Number(button.dataset.itineraryXp);
+      if (!checkpointId || !wonderName || !checkpoint || !pets[petName] || !Number.isInteger(dayNumber) || dayNumber < 1 || !Number.isInteger(xp) ||
+          appState.itineraryCompletedStops.includes(checkpointId)) return;
+
+      appState.itineraryCompletedStops.push(checkpointId);
+      appState.xp += xp;
+      appState.itineraryNotes.push(`${petName} and ${appState.travelerName} logged ${checkpoint} on Day ${dayNumber} at ${wonderName} (+${xp} XP).`);
+      appState.itineraryNotes = appState.itineraryNotes.slice(-10);
+      button.disabled = true;
+      button.textContent = "Checkpoint logged ✓";
+      updateXPDisplay();
+      persistAdventureState();
+      refreshTravelLog();
+      if (petRig) petHopStart = performance.now();
+      showToast(`${checkpoint} · +${xp} XP added to your adventure!`);
     }
 
     function renderRadar() {
@@ -3757,7 +4461,8 @@
         el("lingo-log-quest").disabled = complete;
         el("lingo-log-quest").textContent = complete ? "Safety shield logged ✓" : "Add safety shield to quest log · +25 XP";
       }
-      el("generic-hub-content").hidden = hub === "lingo" || hub === "destination" || hub === "creative" || hub === "study";
+      el("generic-hub-content").hidden = hub === "lingo" || hub === "destination" || hub === "creative" || hub === "study" || hub === "itinerary";
+      el("itinerary-content").hidden = hub !== "itinerary";
       el("lingo-content").hidden = hub !== "lingo";
       el("creative-content").hidden = hub !== "creative";
       el("study-content").hidden = hub !== "study";
@@ -3769,9 +4474,11 @@
           : hub === "destination" ? "destination-quest-title"
             : hub === "creative" ? "creative-title"
               : hub === "study" ? "study-title"
-              : "hub-modal-title"
+                : hub === "itinerary" ? "itinerary-title"
+                : "hub-modal-title"
       );
       if (hub === "study") initializeEtiquette();
+      if (hub === "itinerary") initializeItineraryBuilder();
       if (hub === "lingo") {
         initializeLingo();
       }
@@ -5104,6 +5811,41 @@
       toastTimer = window.setTimeout(() => ui.toast.classList.remove("show"), 2800);
     }
 
+    function normalizeStudyLandmark(value) {
+      return value.trim().normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase();
+    }
+
+    function selectedStudyWonder() {
+      const value = normalizeStudyLandmark(el("study-guide-landmark").value);
+      return fieldGuideWonders.find((wonder) =>
+        normalizeStudyLandmark(wonder.name) === value ||
+        wonder.aliases?.some((alias) => normalizeStudyLandmark(alias) === value)
+      ) || null;
+    }
+
+    function openStudyGuide() {
+      const wonder = selectedStudyWonder();
+      const status = el("study-status");
+      if (!wonder) {
+        status.textContent = "Choose a landmark from the field guide list.";
+        el("study-guide-landmark").focus();
+        return;
+      }
+
+      el("study-summary").hidden = true;
+      el("study-summary-title").textContent = wonder.name;
+      el("study-country").textContent = `Country: ${wonder.country}`;
+      el("study-pronunciation").textContent = `Pronunciation: ${wonder.pronunciation}`;
+      el("study-summary-text").textContent = wonder.overview;
+      el("study-key-facts").replaceChildren(...wonder.keyFacts.map((fact) => {
+        const item = document.createElement("li");
+        item.textContent = fact;
+        return item;
+      }));
+      el("study-summary").hidden = false;
+      status.textContent = "Field guide ready. Explore the overview and key facts.";
+    }
+
     function currentEtiquettePet() {
       let petId = "zuri";
       try {
@@ -5226,19 +5968,26 @@
     }
 
     function setStudyTab(tab) {
-      activeStudyTab = tab === "readiness" ? "readiness" : "etiquette";
-      const isEtiquette = activeStudyTab === "etiquette";
-      el("study-etiquette-tab").setAttribute("aria-selected", String(isEtiquette));
-      el("study-etiquette-tab").tabIndex = isEtiquette ? 0 : -1;
-      el("study-readiness-tab").setAttribute("aria-selected", String(!isEtiquette));
-      el("study-readiness-tab").tabIndex = isEtiquette ? -1 : 0;
-      el("study-etiquette-panel").hidden = !isEtiquette;
-      el("study-readiness-panel").hidden = isEtiquette;
-      if (!isEtiquette) renderStudyReadinessLog();
+      activeStudyTab = ["etiquette", "readiness"].includes(tab) ? tab : "guide";
+      for (const id of ["guide", "etiquette", "readiness"]) {
+        const selected = id === activeStudyTab;
+        el(`study-${id}-tab`).setAttribute("aria-selected", String(selected));
+        el(`study-${id}-tab`).tabIndex = selected ? 0 : -1;
+        el(`study-${id}-panel`).hidden = !selected;
+      }
+      if (activeStudyTab === "readiness") renderStudyReadinessLog();
     }
 
     function initializeEtiquette() {
       if (!etiquetteLoaded) loadEtiquetteState();
+      const guideOptions = el("study-landmark-options");
+      if (!guideOptions.options.length) {
+        guideOptions.replaceChildren(...fieldGuideWonders.map((wonder) => {
+          const option = document.createElement("option");
+          option.value = wonder.name;
+          return option;
+        }));
+      }
       const selector = el("study-landmark");
       if (!selector.options.length) {
         selector.replaceChildren(...studyWonders.map((landmark) => {
@@ -5509,6 +6258,17 @@
       const card = event.target.closest("[data-hub]");
       if (card) openHub(card);
     });
+    el("itinerary-generate").addEventListener("click", buildItinerary);
+    el("itinerary-log-quest").addEventListener("click", completeActiveHub);
+    el("itinerary-days").addEventListener("click", (event) => {
+      const button = event.target.closest("[data-itinerary-stop]");
+      if (button) completeItineraryCheckpoint(button);
+    });
+    el("study-open-guide").addEventListener("click", openStudyGuide);
+    el("study-guide-landmark").addEventListener("input", () => {
+      el("study-summary").hidden = true;
+      el("study-status").textContent = "Open the field guide for the selected landmark.";
+    });
     el("study-landmark").addEventListener("change", (event) => {
       selectedEtiquetteLandmarkId = event.currentTarget.value;
       renderEtiquetteLessons();
@@ -5682,6 +6442,10 @@
       if (!activeHub || appState.completedHubs.includes(activeHub)) return;
       appState.completedHubs.push(activeHub);
       appState.xp += 25;
+      if (activeHub === "itinerary") {
+        appState.itineraryNotes.push(`${currentPet || "Your companion"} logged the Seven Wonders itinerary in the quest log (+25 XP).`);
+        appState.itineraryNotes = appState.itineraryNotes.slice(-10);
+      }
       let progressSaved = true;
       try {
         localStorage.setItem("pawport.xp", String(appState.xp));
@@ -5691,12 +6455,17 @@
         console.error("Could not save PawPort quest progress to browser storage.", error);
       }
       updateXPDisplay();
+      if (activeHub === "itinerary") refreshTravelLog();
       ui.hubAction.disabled = true;
       ui.hubAction.textContent = "Quest logged ✓";
       el("lingo-log-quest").disabled = true;
       el("lingo-log-quest").textContent = "Safety shield logged ✓";
       el("creative-log-quest").disabled = true;
       el("creative-log-quest").textContent = "Creative Quest logged ✓";
+      if (activeHub === "itinerary") {
+        el("itinerary-log-quest").disabled = true;
+        el("itinerary-log-quest").textContent = "Itinerary quest logged \u2713";
+      }
       showToast(progressSaved
         ? `${currentPet} added ${ui.hubTitle.textContent} to your quest log · +25 XP`
         : "Quest progress is saved for this visit; browser storage is unavailable.");
